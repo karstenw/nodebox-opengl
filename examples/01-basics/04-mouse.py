@@ -14,9 +14,9 @@ from nodeboxgl.graphics import *
 # - canvas.mouse.modifiers: a list of keyboard modifiers (CTRL | SHIFT | ALT),
 # - canvas.mouse.pressed: True when a button is pressed,
 # - canvas.mouse.dragged: True when the mouse is dragged.
-
+lastx, lasty = 0,0
 def draw(canvas):
-    
+    global lastx, lasty
     #canvas.clear()
     if canvas.frame == 1:
         background(1)
@@ -35,7 +35,12 @@ def draw(canvas):
         # (i.e. ellipse(m.x, m.y, 2, 2)), because the mouse can move faster
         # than the application can track. 
         # So each frame we draw a little line to the previous mouse position.
-        line(m.x, m.y, m.x - m.dx, m.y - m.dy)
-
+        #
+        # 2017-06-14 kw 
+        #   Changed from using m.dx, m.dy to manually updating lastx & lasty.
+        #   m.dx, m.dy has too many holes in path
+        
+        line(lastx, lasty, m.x, m.y ) #, m.x - m.dx, m.y - m.dy)
+    lastx, lasty = m.x, m.y
 canvas.size = 500, 500
 canvas.run(draw)
