@@ -11,11 +11,5 @@ __copyright__ = "Copyright (c) 2008-2012 City In A Bottle (cityinabottle.org)"
 __license__   = "BSD"
 
 import sys
-if sys.version_info < (2,7):
-    try: import psyco; psyco.profile()
-    except:
-        try: from ext import psyco; psyco.profile()
-        except:
-            pass
-    
-import nodebox
+
+import nodeboxgl

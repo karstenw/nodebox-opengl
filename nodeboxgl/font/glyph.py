@@ -6,7 +6,9 @@
 
 # Defines the characters to process.
 # By default, only standard ASCII characters are converted.
-characters = range(32, 127)
+from itertools import chain
+# characters = range(32, 127)
+characters = list(chain( range(32,127), range(160, 512)))
 
 # Defines which fonts to process.
 # By default, only the standard fonts in NodeBox for OpenGL
@@ -28,7 +30,42 @@ fonts = {
     "Arial": {
          "normal" : "ArialMT",
            "bold" : "Arial-BoldMT",  
-    }
+    },
+    'Verdana': {'bold': 'Verdana-Bold',
+             'bold italic': 'Verdana-BoldItalic',
+             'italic': 'Verdana-Italic',
+             'normal': 'Verdana'},
+    'Monaco': {'normal': 'Monaco'},
+    'Menlo': {'bold': 'Menlo-Bold',
+           'bold italic': 'Menlo-BoldItalic',
+           'italic': 'Menlo-Italic',
+           'normal': 'Menlo-Regular'},
+    'Herculanum': {'normal': 'Herculanum'},
+    # 'Acme': {'normal': 'Acme-Regular'},
+    'Gill Sans': {
+        'bold': 'GillSans-Bold',
+        'bold italic': 'GillSans-BoldItalic',
+        'italic': 'GillSans-Italic',
+        'light': 'GillSans-Light',
+        'light italic': 'GillSans-LightItalic',
+        'normal': u'GillSans'},
+    'FontAwesome': {'normal': 'FontAwesome'},
+    'Futura': {
+        'condensed extrabold': 'Futura-CondensedExtraBold',
+        'condensed medium': 'Futura-CondensedMedium',
+        'medium': 'Futura-Medium',
+        'medium italic': 'Futura-MediumItalic'},
+    'Eurostile': {
+        'bold': 'Eurostile-Bold',
+        'bold condensed': 'Eurostile-BoldCondensed',
+        'bold extended': 'Eurostile-BoldExtendedTwo',
+        'bold oblique': 'Eurostile-BoldOblique',
+        'condensed': 'Eurostile-Condensed',
+        'demi': 'Eurostile-Demi',
+        'demi oblique': 'Eurostile-DemiOblique',
+        'extended': 'Eurostile-ExtendedTwo',
+        'normal': 'Eurostile',
+        'oblique': 'Eurostile-Oblique'},
 }
 
 # How point size is measured (NodeBox for OpenGL uses 96dpi).

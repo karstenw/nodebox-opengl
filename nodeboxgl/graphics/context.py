@@ -29,6 +29,12 @@ from numbers      import Number
 
 import geometry
 
+def getscreenconf():
+    display = pyglet.canvas.get_display()
+    screen = display.get_default_screen()
+    config = screen.get_best_config()
+    return screen, config
+
 #import bezier
 # Do this at the end, when we have defined BezierPath, which is needed in the bezier module.
 
@@ -2258,8 +2264,15 @@ class Text(object):
             self._align = v
             self._label.set_style(k, self._label.width == geometry.INFINITE and LEFT or v)
         elif k == "fill":
-            self._fill = v 
-            self._label.color = [int(255*ch) for ch in self._fill or (0,0,0,0)]
+            self._fill = v
+            
+            try:
+                c = [int(255*ch) for ch in self._fill or (0,0,0,0)]
+                n = len(c)
+                self._label.color[:n] = c
+            except Exception, err:
+                pass
+                # self._label.color = (0,0,0)
         else:
             raise AttributeError, "'Text' object has no attribute '%s'" % k
     
@@ -3510,7 +3523,9 @@ def _configure(settings):
     """ Returns a pyglet.gl.Config object from the given dictionary of settings.
         If the settings are not supported, returns the default settings.
     """
-    screen = pyglet.window.get_platform().get_default_display().get_default_screen()
+    # screen = pyglet.window.get_platform().get_default_display().get_default_screen()
+    screen, conf = getscreenconf()
+
     c = pyglet.gl.Config(**settings)
     try:
         c = screen.get_best_config(c)
@@ -3648,7 +3663,10 @@ class Canvas(list, Prototype, EventHandler):
     
     @property
     def screen(self):
-        return pyglet.window.get_platform().get_default_display().get_default_screen()
+        #return pyglet.window.get_platform().get_default_display().get_default_screen()
+        screen, _ = getscreenconf()
+        return screen
+
 
     @property
     def frame(self):
