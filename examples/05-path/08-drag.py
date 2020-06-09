@@ -10,6 +10,8 @@ from math   import sin
  
 lines = []
 
+# seed(0)
+
 def draw(canvas):
     background(0.1, 0.0, 0.1, 0.25)
     nofill()
@@ -26,8 +28,8 @@ def draw(canvas):
         for i in range(5):
             seed(i) # Lock the seed for smooth animation.
             p = BezierPath()
-            for cmd, x, y, t in lines:
-                d = sin((canvas.frame - t) / 10.0) * 10.0 # Play with the numbers.
+            for cmd, x, y, atframe in lines:
+                d = sin((canvas.frame - atframe) / 5.0) * 5.0 # Play with the numbers.
                 x += random(-d, d) 
                 y += random(-d, d)
                 if cmd == MOVETO:

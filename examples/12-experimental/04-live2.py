@@ -4,6 +4,13 @@
 # If you edit and save this file, changes are automatically reflected,
 # while the canvas started in 04-live1.py keeps on running.
 
+import os
+import warnings
+
+from nodeboxgl.graphics import *
+
+# from random import random
+
 #canvas.clear()
 for i in range(10):
     x = random(canvas.width)

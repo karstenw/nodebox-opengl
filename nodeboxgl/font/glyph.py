@@ -7,6 +7,7 @@
 # Defines the characters to process.
 # By default, only standard ASCII characters are converted.
 from itertools import chain
+
 # characters = range(32, 127)
 characters = list(chain( range(32,127), range(160, 512)))
 
@@ -55,7 +56,15 @@ fonts = {
         'condensed medium': 'Futura-CondensedMedium',
         'medium': 'Futura-Medium',
         'medium italic': 'Futura-MediumItalic'},
-    'Eurostile': {
+    'Lato': {
+        'normal': 'Lato-Regular',
+        'light': 'Lato-Hairline',
+        'bold': 'Lato-Bold',
+        'bold italic': 'Lato-BoldItalic',
+    }
+
+}
+"""    'Eurostile': {
         'bold': 'Eurostile-Bold',
         'bold condensed': 'Eurostile-BoldCondensed',
         'bold extended': 'Eurostile-BoldExtendedTwo',
@@ -66,7 +75,7 @@ fonts = {
         'extended': 'Eurostile-ExtendedTwo',
         'normal': 'Eurostile',
         'oblique': 'Eurostile-Oblique'},
-}
+}"""
 
 # How point size is measured (NodeBox for OpenGL uses 96dpi).
 dpi = 96

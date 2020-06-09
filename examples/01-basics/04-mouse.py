@@ -17,19 +17,23 @@ from nodeboxgl.graphics import *
 lastx, lasty = 0,0
 def draw(canvas):
     global lastx, lasty
-    #canvas.clear()
     if canvas.frame == 1:
-        background(1)
+        canvas.clear()
+        # background( (0.6,0.2,0.2) )
+        background( (1.0,1.0,1.0) )
     
     m = canvas.mouse
+    x, y = m.x, m.y
+    p = m.pressed
 
     strokewidth(1)
-    stroke(0, 0.4)    
     if CTRL in m.modifiers:
         # If the CTRL key is held down, draw thinner lines.
         stroke(0, 0.2)
+    else:
+        stroke(0, 0.4)    
     
-    if m.pressed:
+    if p:
         # If the mouse is pressed, draw lines.
         # This is a better way than simply drawing a dot at the current mouse position
         # (i.e. ellipse(m.x, m.y, 2, 2)), because the mouse can move faster
@@ -40,7 +44,7 @@ def draw(canvas):
         #   Changed from using m.dx, m.dy to manually updating lastx & lasty.
         #   m.dx, m.dy has too many holes in path
         
-        line(lastx, lasty, m.x, m.y ) #, m.x - m.dx, m.y - m.dy)
-    lastx, lasty = m.x, m.y
-canvas.size = 500, 500
-canvas.run(draw)
+        line(lastx, lasty, x, y )
+    lastx, lasty = x, y
+canvas.size = 800, 600
+canvas.run( draw )
