@@ -16,3 +16,5 @@ Thumbs.db
 # Temporary editor files
 *.swp
 .idea
+
+*.mp4
