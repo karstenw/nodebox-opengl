@@ -140,5 +140,5 @@ def draw(canvas):
 
 canvas.fps = 20
 canvas.size = 800, 600
-canvas.fullscreen = True
+canvas.fullscreen = False
 canvas.run(draw)

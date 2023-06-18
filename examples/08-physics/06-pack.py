@@ -1,10 +1,13 @@
 import os
-from nodeboxgl.graphics import * 
+from nodeboxgl.graphics import *
 from nodeboxgl.graphics.geometry import distance, angle, smoothstep
 
 # Circle-packing algorithm.
 # This script was used to produce one of the panels in NANOPHYSICAL:
 # http://nodebox.net/code/index.php/Nanophysical
+
+W, H = 1280, 800
+
 
 class Circle:
     
@@ -75,12 +78,12 @@ def cell(t):
     # then we can put a preference on empty blue cells,
     # while still ensuring that some of each cell appear.
     if t < 0.4: 
-        img = choice([
-            "green-empty1.png", 
-            "green-empty2.png", 
-            "green-empty3.png"] + [
-            "green-block1.png", 
-            "green-block2.png"] * 2)
+        img = choice(
+            [ "green-empty1.png",
+              "green-empty2.png",
+              "green-empty3.png"]
+          + [ "green-block1.png",
+              "green-block2.png"] * 2)
     elif t < 0.5: 
         img = choice([
             "green-circle1.png", 
@@ -90,12 +93,12 @@ def cell(t):
             "green-star1.png", 
             "green-star2.png"])
     else: 
-        img = choice([
-            "blue-block.png",
-            "blue-circle.png",
-            "blue-star.png"] + [
-            "blue-empty1.png", 
-            "blue-empty2.png"] * 5)
+        img = choice(
+            [ "blue-block.png",
+              "blue-circle.png",
+              "blue-star.png"]
+          + [ "blue-empty1.png", 
+              "blue-empty2.png"] * 5)
     return Image(os.path.join("cells", img))
 
 circles = []
@@ -128,12 +131,13 @@ def draw(canvas):
     elif not dragged:
         for circle in circles:
             if circle.contains(canvas.mouse.x, canvas.mouse.y): 
-                dragged = circle; break
+                dragged = circle;
+                break
     
     for circle in circles:
         circle.draw()
     
-    pack(circles, 300, 300, exclude=[dragged])
+    pack(circles, W/2, H/2, exclude=[dragged])
      
-canvas.size = 600, 600
+canvas.size = W, H
 canvas.run(draw, setup)
