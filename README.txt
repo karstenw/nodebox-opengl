@@ -6,7 +6,7 @@ NodeBox for OpenGL (NOGL) is a Python module for creating 2D interactive visuals
 VERSION
 =======
 
-1.7
+1.8
 
 LICENSE
 =======
