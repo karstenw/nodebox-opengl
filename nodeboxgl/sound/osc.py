@@ -388,7 +388,7 @@ if __name__ == "__main__":
 
     bundlebinary = bundle.message
 
-    print "sending a bundle to the callback manager"
+    print( "sending a bundle to the callback manager" )
     c.handle(bundlebinary)
 
 
