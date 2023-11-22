@@ -3,6 +3,11 @@ from setuptools import setup
 from setuptools import find_packages
 from setuptools.extension import Extension
 
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+
 packages = find_packages()
 print("packages:", packages)
 
@@ -11,9 +16,6 @@ print("desc:", desc)
 
 # Utility function to read the README file.
 # From http://packages.python.org/an_example_pypi_project/setuptools.html.
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
 setup(      name = "nodeboxgl",
          version = "1.8",
      description = "NodeBox for OpenGL (NOGL) is a free, cross-platform library "
