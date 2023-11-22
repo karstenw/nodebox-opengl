@@ -3,21 +3,27 @@ from setuptools import setup
 from setuptools import find_packages
 from setuptools.extension import Extension
 
+packages = find_packages()
+print("packages:", packages)
+
+desc = read("README.txt")
+print("desc:", desc)
+
 # Utility function to read the README file.
 # From http://packages.python.org/an_example_pypi_project/setuptools.html.
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-setup(      name = "NodeBox for OpenGL",
-         version = "1.7",
+setup(      name = "nodeboxgl",
+         version = "1.8",
      description = "NodeBox for OpenGL (NOGL) is a free, cross-platform library "
                    "for generating 2D animations with Python programming code.",
-long_description = read("README.txt"),
+long_description = desc,
         keywords = "2d graphics sound physics games multimedia",
          license = "BSD",
           author = "Tom De Smedt",
-             url = "http://www.cityinabottle.org/nodebox/",
-        packages = find_packages(),
+             url = "https://cityinabottle.org/nodebox/",
+        packages = packages,
     package_data = {"nodeboxgl.gui": ["theme/*"], "nodeboxgl.font":["glyph.p"]},
 install_requires = ["pyglet",],
       py_modules = ["nodeboxgl", "nodeboxgl.graphics", "nodeboxgl.gui", "nodeboxgl.sound", "nodeboxgl.font"],

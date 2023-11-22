@@ -268,7 +268,7 @@ def shader(vertex=DEFAULT_VERTEX_SHADER, fragment=DEFAULT_FRAGMENT_SHADER, silen
         return Shader(vertex, fragment)
     try:
         return Shader(vertex, fragment)
-    except Exception, e:
+    except Exception as e:
         SUPPORTED = False
         return ShaderFacade()
 
@@ -976,7 +976,7 @@ class OffscreenBuffer(object):
         self.id = c_uint(_uid())
         try: glGenFramebuffersEXT(1, byref(self.id))
         except:
-            raise OffscreenBufferError, "offscreen buffer not supported."
+            raise OffscreenBufferError( "offscreen buffer not supported."  )
         self.texture   = None
         self._viewport = (None, None, None, None) # The canvas bounds, set in OffscreenBuffer.push().
         self._active   = False
@@ -1018,7 +1018,7 @@ class OffscreenBuffer(object):
         # Check after glBindFramebufferEXT() and glFramebufferTexture2DEXT().
         if glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE_EXT:
             msg = self.texture.width == self.texture.height == 0 and "width=0, height=0." or ""
-            raise OffscreenBufferError, msg            
+            raise OffscreenBufferError( msg )
         # Separate the offscreen from the onscreen transform state.
         # Separate the offscreen from the onscreen canvas size.
         self._viewport = glCurrentViewport()
@@ -1081,7 +1081,7 @@ class OffscreenBuffer(object):
             between OffscreenBuffer.push() and OffscreenBuffer.pop() is retained.
         """
         if self._active:
-            raise OffscreenBufferError, "can't reset offscreen buffer when active"
+            raise OffscreenBufferError( "can't reset offscreen buffer when active" )
         if width is None:
             width = self.width
         if height is None:

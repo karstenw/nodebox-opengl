@@ -91,7 +91,7 @@ def curvelength(x0, y0, x1, y1, x2, y2, x3, y3, n=20):
 try:
     from nglbezier import linepoint, linelength, curvepoint, curvelength
     #print "FAST BEZIER"
-except Exception, err:
+except Exception as err:
     #print err
     #print "SLOW BEZIER"
     pass
@@ -160,7 +160,7 @@ def _locate(path, t, segments=None):
     if segments == None:
         segments = segment_lengths(path, relative=True) 
     if len(segments) == 0:
-        raise PathError, "The given path is empty"
+        raise PathError( "The given path is empty" )
     for i, el in enumerate(path):
         if i == 0 or el.cmd == MOVETO:
             closeto = Point(el.x, el.y)
@@ -183,7 +183,7 @@ def point(path, t, segments=None):
         the length during each iteration.
     """
     if len(path) == 0:
-        raise PathError, "The given path is empty"
+        raise PathError( "The given path is empty" )
     i, t, closeto = _locate(path, t, segments=segments)
     x0, y0 = path[i].x, path[i].y
     p1 = path[i+1]
@@ -202,14 +202,14 @@ def point(path, t, segments=None):
         x, y, c1x, c1y, c2x, c2y = curvepoint(t, x0, y0, x1, y1, x2, y2, x3, y3)
         return DynamicPathElement(CURVETO, ((c1x, c1y), (c2x, c2y), (x, y)))
     else:
-        raise PathError, "Unknown cmd '%s' for p1 %s" % (p1.cmd, p1)
+        raise PathError( "Unknown cmd '%s' for p1 %s" % (p1.cmd, p1) )
         
 def points(path, amount=100, start=0.0, end=1.0, segments=None):
     """ Returns an iterator with a list of calculated points for the path.
         To omit the last point on closed paths: end=1-1.0/amount
     """
     if len(path) == 0:
-        raise PathError, "The given path is empty"
+        raise PathError( "The given path is empty" )
     n = end - start
     d = n
     if amount > 1: 
@@ -348,7 +348,7 @@ def insert_point(path, t):
         pt_x, pt_y, pt_c1x, pt_c1y, pt_c2x, pt_c2y, pt_h1x, pt_h1y, pt_h2x, pt_h2y = \
             curvepoint(t, x0, y0, x1, y1, x2, y2, x3, y3, True)
     else:
-        raise PathError, "Locate should not return a MOVETO"
+        raise PathError( "Locate should not return a MOVETO" )
 
     # NodeBox for OpenGL modifies the path in place,
     # NodeBox for Mac OS X returned a path copy (see inactive code below).
@@ -361,7 +361,7 @@ def insert_point(path, t):
     elif pt_cmd == LINETO:
         path.insert(i+1, PathElement(cmd=LINETO, pts=[(pt_x, pt_y)]))
     else:
-        raise PathError, "Didn't expect pt_cmd %s here" % pt_cmd
+        raise PathError( "Didn't expect pt_cmd %s here" % (pt_cmd,) )
     return path[i+1]
     
     #new_path = BezierPath(None)

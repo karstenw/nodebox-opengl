@@ -302,10 +302,10 @@ def glLineDash(style):
         glEnable(GL_LINE_STIPPLE); glLineStipple(1, 0x000F)
 
 def outputmode(mode=None):
-    raise NotImplementedError
+    raise NotImplementedError()
 
 def colormode(mode=None, range=1.0):
-    raise NotImplementedError
+    raise NotImplementedError()
 
 #--- COLOR SPACE -------------------------------------------------------------------------------------
 # Transformations between RGB, HSB, CIE XYZ and CIE LAB color spaces.
@@ -558,11 +558,11 @@ CORNER = "corner"
 CENTER = "center"
 def transform(mode=None):
     if mode == CENTER:
-        raise NotImplementedError, "no center-mode transform"
+        raise NotImplementedError( "no center-mode transform" )
     return CORNER
     
 def skew(x, y):
-    raise NotImplementedError
+    raise NotImplementedError()
 
 #=====================================================================================================
 
@@ -1057,7 +1057,7 @@ class BezierPath(list):
         closeto = None
         for pt in self:
             if (pt.cmd == LINETO or pt.cmd == CURVETO) and x0 == y0 is None:
-                raise NoCurrentPointForPath
+                raise NoCurrentPointForPath()
             elif pt.cmd == LINETO:
                 contours[-1].append((x0, y0))
                 contours[-1].append((pt.x, pt.y))
@@ -1261,14 +1261,14 @@ def moveto(x, y):
     """ Moves the current point in the current path to (x,y).
     """
     if _path is None: 
-        raise NoCurrentPath
+        raise NoCurrentPath()
     _path.moveto(x, y)
 
 def lineto(x, y):
     """ Draws a line from the current point in the current path to (x,y).
     """
     if _path is None: 
-        raise NoCurrentPath
+        raise NoCurrentPath()
     _path.lineto(x, y)
 
 def curveto(x1, y1, x2, y2, x3, y3):
@@ -1276,14 +1276,14 @@ def curveto(x1, y1, x2, y2, x3, y3):
         The curvature is determined by control handles x1, y1 and x2, y2.
     """
     if _path is None: 
-        raise NoCurrentPath
+        raise NoCurrentPath()
     _path.curveto(x1, y1, x2, y2, x3, y3)
 
 def closepath():
     """ Closes the current path with a straight line to the last MOVETO.
     """
     if _path is None: 
-        raise NoCurrentPath
+        raise NoCurrentPath()
     _path.closepath()
 
 def endpath(draw=True, **kwargs):
@@ -1292,7 +1292,7 @@ def endpath(draw=True, **kwargs):
     """
     global _path, _autoclosepath
     if _path is None: 
-        raise NoCurrentPath
+        raise NoCurrentPath()
     if _autoclosepath is True:
         _path.closepath()
     if draw:
@@ -1515,7 +1515,7 @@ def texture(img, data=None):
         try: 
             cache(img, pyglet.image.load(img).get_texture())
         except IOError:
-            raise ImageError, "can't load image from %s" % repr(img)
+            raise ImageError( "can't load image from %s" % (repr(img),) )
         return _texture_cache[img]
     # Image texture, return original.
     if isinstance(img, pyglet.image.Texture):
@@ -1534,7 +1534,7 @@ def texture(img, data=None):
     if isinstance(data, basestring):
         return pyglet.image.load("", file=StringIO(data)).get_texture()
     # Don't know how to handle this image.
-    raise ImageError, "unknown image type: %s" % repr(img.__class__)
+    raise ImageError( "unknown image type: %s" % (repr(img.__class__),) )
 
 def cache(id, texture):
     """ Store the given texture in cache, referenced by id (which can then be passed to image()).
@@ -1543,7 +1543,8 @@ def cache(id, texture):
     if isinstance(texture, (Image, Pixels)):
         texture = texture.texture
     if not isinstance(texture, pyglet.image.Texture):
-        raise ValueError, "can only cache texture, not %s" % repr(texture.__class__.__name__)
+        raise ValueError( "can only cache texture, not %s"
+                        % (repr(texture.__class__.__name__),) )
     _texture_cache[id] = texture
     _texture_cached[_texture_cache[id].id] = id
     
@@ -2238,7 +2239,7 @@ class Text(object):
             if not self._fill: self._fill = Color([ch/255.0 for ch in self._label.color])
             return self._fill
         else:
-            raise AttributeError, "'Text' object has no attribute '%s'" % k
+            raise AttributeError( "'Text' object has no attribute '%s'" % (k,) )
             
     def __setattr__(self, k, v):
         if k in self.__dict__:
@@ -2270,11 +2271,11 @@ class Text(object):
                 c = [int(255*ch) for ch in self._fill or (0,0,0,0)]
                 n = len(c)
                 self._label.color[:n] = c
-            except Exception, err:
+            except Exception as err:
                 pass
                 # self._label.color = (0,0,0)
         else:
-            raise AttributeError, "'Text' object has no attribute '%s'" % k
+            raise AttributeError( "'Text' object has no attribute '%s'" % (k,) )
     
     def _update(self):
         # Called from Text.draw(), Text.copy() and Text.metrics.
@@ -2289,7 +2290,7 @@ class Text(object):
     
     @property
     def path(self):
-        raise NotImplementedError
+        raise NotImplementedError()
     
     @property
     def metrics(self):
@@ -2469,7 +2470,7 @@ def textpath(string, x=0, y=0, **kwargs):
     for ch in string:
         try: glyph = glyphs[fontname][w][ch]
         except:
-            raise GlyphPathError, "no glyph path information for %s %s '%s'" % (w, fontname, ch)
+            raise GlyphPathError( "no glyph path information for %s %s '%s'" % (w, fontname, ch) )
         for pt in glyph:
             if pt[0] == MOVETO:
                 p.moveto(x+pt[1]*f, y-pt[2]*f)
@@ -2559,7 +2560,7 @@ class Prototype(object):
             return value
         else:
             # Biggest problem here is how to find/relink circular references.
-            raise TypeError, "Prototype can't bind %s." % str(value.__class__)
+            raise TypeError( "Prototype can't bind %s." % (str(value.__class__),) )
 
     def _bind(self, key, value):
         """ Adds a new method or property to the prototype.
@@ -2869,7 +2870,7 @@ class Layer(list, Prototype, EventHandler):
         for layer in self:
             if layer.name == key: 
                 return layer
-        raise AttributeError, "%s instance has no attribute '%s'" % (self.__class__.__name__, key)
+        raise AttributeError( "%s instance has no attribute '%s'" % (self.__class__.__name__, key) )
     
     def _set_container(self, key, value):
         # If Layer.canvas is set to None, the canvas should no longer contain the layer.
@@ -3138,7 +3139,7 @@ class Layer(list, Prototype, EventHandler):
         """
         b = self.bounds
         if geometry.INFINITE in (b.x, b.y, b.width, b.height):
-            raise LayerRenderError, "can't render layer of infinite size"
+            raise LayerRenderError( "can't render layer of infinite size" )
         return render(lambda: (translate(-b.x,-b.y), self._draw()), b.width, b.height)
             
     def layer_at(self, x, y, clipped=False, enabled=False, transformed=True, _covered=False):
@@ -3322,11 +3323,11 @@ class Group(Layer):
         
     @classmethod
     def from_image(*args, **kwargs):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @classmethod
     def from_function(*args, **kwargs):
-        raise NotImplementedError
+        raise NotImplementedError()
 
     @property
     def width(self):

@@ -1,4 +1,5 @@
 # Import the drawing commands from the NodeBox module.
+import os, sys; sys.path.insert(0, os.path.join("..",".."))
 from nodeboxgl.graphics import *
 # This includes:
 # - drawing primitives such as line(), rect(), ellipse(), triangle(),

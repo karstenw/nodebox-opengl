@@ -65,7 +65,7 @@ try:
     PerlinNoise._init = init
     PerlinNoise.generate = generate
     # print "FAST NOISE"
-except Exception, err:
+except Exception as err:
     # print err
     # print "SLOW NOISE"
     pass

@@ -957,7 +957,7 @@ def deepcopy(o):
         return o.__class__(deepcopy(v) for v in o)
     if isinstance(o, dict):
         return dict((deepcopy(k), deepcopy(v)) for k,v in o.iteritems())
-    raise Exception, "don't know how to copy %s" % o.__class__.__name__
+    raise Exception( "don't know how to copy %s" % (o.__class__.__name__,) )
 
 class Node(object):
     
@@ -1212,7 +1212,7 @@ class Graph(dict):
         try: 
             return dict.__getitem__(self, id)
         except KeyError:
-            raise KeyError, "no node with id '%s' in graph" % id
+            raise KeyError( "no node with id '%s' in graph" % (id,) )
     
     def append(self, base, *args, **kwargs):
         """ Appends a Node or Edge to the graph: Graph.append(Node, id="rabbit").
@@ -1714,7 +1714,7 @@ def floyd_warshall_all_pairs_distance(graph, heuristic=None, directed=False):
         each linking to a dictionary of node id's linking to path length.
     """
     from collections import defaultdict # Requires Python 2.5+.
-    g = graph.keys()
+    g = list( graph.keys() )
     d = defaultdict(lambda: defaultdict(lambda: 1e30)) # float('inf')
     p = defaultdict(dict) # Predecessors.
     for e in graph.edges:
@@ -1802,7 +1802,7 @@ def brandes_betweenness_centrality(graph, normalized=True, directed=False):
             if w != id: 
                 b[w] += d[w]
     # Normalize between 0.0 and 1.0.
-    m = normalized and max(b.values()) or 1
+    m = normalized and max( list( b.values() )) or 1
     b = dict((id, w/m) for id, w in b.iteritems())
     return b
 
@@ -1817,7 +1817,7 @@ def eigenvector_centrality(graph, normalized=True, reversed=True, rating={}, ite
     # http://python-networkx.sourcearchive.com/documentation/1.0.1/centrality_8py-source.html
     # Note: much faster than betweenness centrality (which grows exponentially).
     def normalize(vector):
-        w = 1.0 / (sum(vector.values()) or 1)
+        w = 1.0 / (sum( list(vector.values()) ) or 1)
         for node in vector: 
             vector[node] *= w
         return vector
@@ -1835,7 +1835,7 @@ def eigenvector_centrality(graph, normalized=True, reversed=True, rating={}, ite
         e = sum([abs(v[n]-v0[n]) for n in v]) # Check for convergence.
         if e < len(G) * tolerance:
             # Normalize between 0.0 and 1.0.
-            m = normalized and max(v.values()) or 1
+            m = normalized and max( list(v.values()) ) or 1
             v = dict((id, w/m) for id, w in v.iteritems())
             return v
     warn("node weight is 0 because eigenvector_centrality() did not converge.", Warning)

@@ -155,7 +155,7 @@ class Control(Layer):
         ctrl = nested(self, k)
         if ctrl is not None:
             return ctrl
-        raise AttributeError, "'%s' object has no attribute '%s'" % (self.__class__.__name__, k)
+        raise AttributeError( "'%s' object has no attribute '%s'" % (self.__class__.__name__, k) )
         
     def __repr__(self):
         return "%s(id=%s%s)" % (
@@ -1091,7 +1091,7 @@ class Layout(Layer):
         ctrl = nested(self, k)
         if ctrl is not None:
             return ctrl
-        raise AttributeError, "'%s' object has no attribute '%s'" % (self.__class__.__name__, k)
+        raise AttributeError( "'%s' object has no attribute '%s'" % (self.__class__.__name__, k) )
 
     def apply(self):
         """ Adjusts the position and size of the controls to match the layout.

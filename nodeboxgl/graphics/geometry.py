@@ -46,7 +46,7 @@ def reflect(x, y, x0, y0, d=1.0, a=180):
 try:
     from nglgeometry import angle, distance, coordinates, rotate
     #print "FAST GEOMETRY"
-except Exception, err:
+except Exception as err:
     #print err
     #print "SLOW GEOMETRY"
     pass
@@ -83,7 +83,7 @@ def clamp(v, a, b):
 try:
     from nglgeometry import smoothstep
     # print "FAST GEOMETRY"
-except Exception, err:
+except Exception as err:
     # print err
     # print "SLOW GEOMETRY"
     pass
@@ -189,7 +189,7 @@ def superformula(m, n1, n2, n3, phi):
 try:
     from nglgeometry import superformula
     # print "FAST GEOMETRY"
-except Exception, err:
+except Exception as err:
     # print err
     # print "SLOW GEOMETRY"
     pass
@@ -574,7 +574,7 @@ def _tessellate_error(code):
     while e[i]: 
         s += chr(e[i])
         i += 1
-    raise TessellationError, s
+    raise TessellationError( s )
 
 _cache = {}
 
