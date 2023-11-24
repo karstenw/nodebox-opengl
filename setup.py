@@ -29,10 +29,13 @@ long_description = desc,
     package_data = {"nodeboxgl.gui": ["theme/*"], "nodeboxgl.font":["glyph.p"]},
 install_requires = ["pyglet",],
       py_modules = ["nodeboxgl", "nodeboxgl.graphics", "nodeboxgl.gui", "nodeboxgl.sound", "nodeboxgl.font"],
+
      ext_modules = [
-        Extension("nglbezier",   sources=["nodeboxgl/ext/nglbezier.c"]),
-        Extension("nglgeometry", sources=["nodeboxgl/ext/nglgeometry.c"]),
-        Extension("nglnoise",    sources=["nodeboxgl/ext/nglnoise.c"]) ],
+        Extension("nglbezier",   ["nodeboxgl/ext/nglbezier.c"]),
+        Extension("nglgeometry", ["nodeboxgl/ext/nglgeometry.c"]),
+        Extension("nglnoise",    ["nodeboxgl/ext/nglnoise.c"])
+    ],
+
      classifiers = [
         "Development Status :: 4 - Beta",
         "Environment :: MacOS X",
