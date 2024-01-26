@@ -1,25 +1,26 @@
-NodeBox for OpenGL
-==================
+<!-- $theme: default -->
+
+### NodeBox for OpenGL
+
 
 NodeBox for OpenGL (NOGL) is a Python module for creating 2D interactive visuals using OpenGL. It is based on the command set of the classic NodeBox for Mac OS X (http://nodebox.net). It has support for Bezier paths, text, image filters (blur, bloom, ...), offscreen rendering, animation & motion tweening, and simple 2D physics. Its purpose is to implement a small game engine for "City In A Bottle" (http://cityinabottle.org).
 
-VERSION
-=======
+#### VERSION
 
 1.8
 
-LICENSE
-=======
+#### LICENSE
 
 BSD, see LICENSE.txt for further details.
 
-REQUIREMENTS
-============
+#### REQUIREMENTS
 
 NodeBox for OpenGL is built on the excellent Pyglet module. It works on all platforms if you have Python and Pyglet installed. Note: on Mac OS 10.5, Python is already installed. On Mac OS X 10.6+ (Snow Leopard), you need to install a 32-bit version of Python (Pyglet won't work as expected with the preinstalled 64-bit version).
 
-- Python 2.5-6 : an installer can be downloaded from http://www.python.org/download/
-- Pyglet 1.4+  : an installer can be downloaded from http://www.pyglet.org/
+
+- Python 3.11 : an installer can be downloaded from http://www.python.org/download/
+- Pyglet 1.5  : an installer can be downloaded from http://www.pyglet.org/
+	- It must be exactly version 1.5!
 
 Your video hardware needs support for OpenGL 2.0.
 If this is not the case, try updating to a new driver.
@@ -27,10 +28,8 @@ If this is not the case, try updating to a new driver.
 INSTALLATION
 ============
 
-If you have pip, you can automatically download and install from the PyPi repository:
-> pip install nodebox-opengl
 
-If that doesn't work, download the latest version manually. To be able to import NodeBox in your scripts, Python needs to know where the module is located. There are three basic ways to accomplish this:
+Download the latest version manually. To be able to import NodeBox in your scripts, Python needs to know where the module is located. There are three basic ways to accomplish this:
 
 - Put the nodebox/ folder in the same folder as your script.
 - Put the nodebox/ folder in the standard location for modules so it is available to all scripts.
