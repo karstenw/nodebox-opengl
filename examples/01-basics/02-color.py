@@ -1,3 +1,5 @@
+import os, sys; sys.path.insert(0, os.path.join("..",".."))
+
 from nodeboxgl.graphics import *
 
 # When you run a script, NodeBox reads the code from top to bottom, like a recipe. 

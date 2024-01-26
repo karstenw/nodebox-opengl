@@ -1,3 +1,5 @@
+import os, sys; sys.path.insert(0, os.path.join("..",".."))
+
 from nodeboxgl.graphics import *
 
 # Here is the "Hypnoval", a classic example in NodeBox for Mac OS X.

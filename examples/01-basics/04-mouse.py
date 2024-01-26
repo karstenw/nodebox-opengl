@@ -1,3 +1,5 @@
+import os, sys; sys.path.insert(0, os.path.join("..",".."))
+
 from nodeboxgl.graphics import *
 
 # A freehand drawing application!

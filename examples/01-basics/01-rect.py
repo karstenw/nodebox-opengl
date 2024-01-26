@@ -1,5 +1,6 @@
 # Import the drawing commands from the NodeBox module.
 import os, sys; sys.path.insert(0, os.path.join("..",".."))
+
 from nodeboxgl.graphics import *
 # This includes:
 # - drawing primitives such as line(), rect(), ellipse(), triangle(),
@@ -29,6 +30,6 @@ def draw(canvas):
     # The rectangle's height is 100 minimum, and grows when you move the mouse up.
     # Change some numbers to observe their impact.
     rect(x=100, y=10, width=300, height=max(100, canvas.mouse.y))
-	
+
 canvas.size = 500, 500 # Set the size of the canvas.
 canvas.run(draw)       # Register the draw function and start the application.
