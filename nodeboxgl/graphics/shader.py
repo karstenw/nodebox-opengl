@@ -13,11 +13,13 @@ from math         import radians
 from ctypes       import byref, cast, pointer, POINTER
 from ctypes       import c_char, c_char_p, c_uint, c_int
 
-def next(generator, default=None):
-    try: 
-        return generator.next()
-    except StopIteration:
-        return default
+
+#def next(generator, default=None):
+#    try: 
+#        return generator.next()
+#    except StopIteration:
+#        return default
+
 
 #=====================================================================================================
 

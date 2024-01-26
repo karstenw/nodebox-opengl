@@ -14,6 +14,7 @@ p = Pixels(solid(200, 200, Color(1)))
 # The smaller the difference between steps, the smoother the noise sequence. 
 # Steps between 0.005 and 0.1 usually work best.
 zoom = 4
+
 for i in range(p.width):
     for j in range(p.height):
         t = noise(

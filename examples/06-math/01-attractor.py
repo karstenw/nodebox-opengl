@@ -42,7 +42,7 @@ def draw(canvas):
         for i in range(1000):
             # Get the next x and y coordinates in the attractor.
             # Draw a pixel at the current x and y coordinates.
-            x, y = a.next()
+            x, y = next(a)
             rect(x, y, 1, 1)
     except StopIteration:
         pass

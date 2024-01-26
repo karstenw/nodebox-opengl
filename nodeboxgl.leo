@@ -26,7 +26,7 @@
 <v t="karstenw.20240123172554.3"><vh>textpath_from_glyphs</vh></v>
 </v>
 </v>
-<v t="karstenw.20231124170943.1"><vh>graphics</vh>
+<v t="karstenw.20231124170943.1" a="E"><vh>graphics</vh>
 <v t="karstenw.20240123172657.1"><vh>@clean nodeboxgl/graphics/__init__.py</vh>
 <v t="karstenw.20240123172922.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172922.2"><vh>size</vh></v>
@@ -866,7 +866,7 @@
 <v t="karstenw.20240123172908.227"><vh>cut</vh></v>
 <v t="karstenw.20240123172908.228"><vh>insert</vh></v>
 </v>
-<v t="karstenw.20240123172755.1"><vh>@clean nodeboxgl/graphics/shader.py</vh>
+<v t="karstenw.20240123172755.1" a="E"><vh>@clean nodeboxgl/graphics/shader.py</vh>
 <v t="karstenw.20240123172852.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172852.2"><vh>next</vh></v>
 <v t="karstenw.20240123172852.3"><vh>ceil2</vh></v>
@@ -3005,6 +3005,12 @@ from math     import sin, cos, atan2, degrees, radians, pi
 from random   import random
 from heapq    import heappush, heappop
 from warnings import warn
+
+
+try:
+    basestring
+except NameError:
+    basestring = str
 
 # float("inf") doesn't work on windows.
 INFINITE = 1e20
@@ -6025,6 +6031,10 @@ from numbers      import Number
 
 from . import geometry
 
+try:
+    basestring
+except NameError:
+    basestring = str
 </t>
 <t tx="karstenw.20240123172917.10">def _get_g(self): return self[1]
 </t>

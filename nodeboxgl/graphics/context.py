@@ -36,6 +36,12 @@ from numbers      import Number
 
 from . import geometry
 
+try:
+    basestring
+except NameError:
+    basestring = str
+
+
 def getscreenconf():
     display = pyglet.canvas.get_display()
     screen = display.get_default_screen()
@@ -4189,4 +4195,5 @@ def ximport(library):
 #-----------------------------------------------------------------------------------------------------
 # Linear interpolation math for BezierPath.point() etc.
 
-import nglbezier as bezier
+from . import bezier
+

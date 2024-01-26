@@ -7,7 +7,7 @@
 
 # Thanks to Prof. F. De Smedt at the Vrije Universiteit Brussel.
 
-from context import BezierPath, PathElement, PathError, Point, MOVETO, LINETO, CURVETO, CLOSE
+from .context import BezierPath, PathElement, PathError, Point, MOVETO, LINETO, CURVETO, CLOSE
 from math import sqrt, pow
 
 class DynamicPathElement(PathElement):
@@ -90,10 +90,10 @@ def curvelength(x0, y0, x1, y1, x2, y2, x3, y3, n=20):
 # Fast C implementations:
 try:
     from nglbezier import linepoint, linelength, curvepoint, curvelength
-    #print "FAST BEZIER"
+    print( "FAST BEZIER" )
 except Exception as err:
-    #print err
-    #print "SLOW BEZIER"
+    print( err )
+    print( "SLOW BEZIER" )
     pass
 
 #--- BEZIER PATH LENGTH ------------------------------------------------------------------------------
