@@ -1,11 +1,13 @@
-import bezier
-import context
-import geometry
-import physics
-import shader
+from . import context
+from . import physics
+from . import shader
 
-from noise   import noise
-from context import *
+import nglbezier
+import nglgeometry
+
+import nglnoise as noise
+
+from .context import *
 
 physics.line    = context.line
 physics.ellipse = context.ellipse

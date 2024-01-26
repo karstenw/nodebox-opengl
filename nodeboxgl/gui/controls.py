@@ -668,8 +668,8 @@ class Editable(Control):
             self._editor.set_selection(i, i+1)
         if i == len(self.value) and self.value != "" and delimiter(self.value[i-1]):
             self._editor.set_selection(i-1, i)
-        a = _find(lambda (i,ch): delimiter(ch), enumerate(reversed(self.value[:i])))
-        b = _find(lambda (i,ch): delimiter(ch), enumerate(self.value[i:]))
+        a = _find(lambda i,ch: delimiter(ch), enumerate(reversed(self.value[:i])))
+        b = _find(lambda i,ch: delimiter(ch), enumerate(self.value[i:]))
         a = a and i-a[0] or 0
         b = b and i+b[0] or len(self.value)
         self._editor.set_selection(a, b)

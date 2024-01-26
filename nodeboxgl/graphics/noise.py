@@ -64,11 +64,11 @@ try:
     from nglnoise import init, generate
     PerlinNoise._init = init
     PerlinNoise.generate = generate
-    # print "FAST NOISE"
+    print( "FAST NOISE" )
 except Exception as err:
-    # print err
-    # print "SLOW NOISE"
-    pass
+    print( err )
+    print( "SLOW NOISE" )
+    # pass
 
 _generator = PerlinNoise()
 def noise(x, y=0, z=0):

@@ -9,25 +9,32 @@
 # No scenegraph is kept for obvious performance reasons (therefore, no canvas._grobs as in NodeBox).
 
 # Debugging must be switched on or of before other modules are imported.
+
+import pickle
+
 import pyglet
 pyglet.options['debug_gl'] = False
 
-from pyglet.gl    import *
+from pyglet.gl      import *
+
 from pyglet.image import Texture
 from math         import cos, sin, radians, pi, floor
 from time         import time
 from random       import seed, choice, shuffle, random as rnd
-from new          import instancemethod
+
+# from new          import instancemethod
+from types        import MethodType as instancemethod
+
 from glob         import glob
 from os           import path, remove
 from sys          import getrefcount
-from StringIO     import StringIO
+from io           import StringIO
 from hashlib      import md5
 from types        import FunctionType
 from datetime     import datetime
 from numbers      import Number
 
-import geometry
+from . import geometry
 
 def getscreenconf():
     display = pyglet.canvas.get_display()
@@ -124,7 +131,7 @@ class Color(list):
         # Transform to base 1:
         base = float(kwargs.get("base", 1.0))
         if base != 1:
-            r, g, b, a = [ch/base for ch in r, g, b, a]
+            r, g, b, a = [ch/base for ch in (r, g, b, a)]
         # Transform to color space RGB:
         colorspace = kwargs.get("colorspace")
         if colorspace and colorspace != RGB:
@@ -142,29 +149,34 @@ class Color(list):
     def _get_g(self): return self[1]
     def _get_b(self): return self[2]
     def _get_a(self): return self[3]
-    
+
     def _set_r(self, v): self[0] = v
     def _set_g(self, v): self[1] = v
     def _set_b(self, v): self[2] = v
     def _set_a(self, v): self[3] = v
-    
+
     r = red   = property(_get_r, _set_r)
     g = green = property(_get_g, _set_g)
     b = blue  = property(_get_b, _set_b)
     a = alpha = property(_get_a, _set_a)
-    
+
     def _get_rgb(self):
         return self[0], self[1], self[2]
-    def _set_rgb(self, (r,g,b)):
+    # (r,g,b)
+    def _set_rgb(self, triplet):
+        r,g,b = triplet
         self[0] = r
         self[1] = g
         self[2] = b
         
     rgb = property(_get_rgb, _set_rgb)
-    
+
     def _get_rgba(self):
         return self[0], self[1], self[2], self[3]
-    def _set_rgba(self, (r,g,b,a)):
+
+    # (r,g,b,a)
+    def _set_rgba(self, quadruplet):
+        r,g,b,a = quadruplet
         self[0] = r
         self[1] = g
         self[2] = b
@@ -188,10 +200,10 @@ class Color(list):
            and self[1] == clr[1] \
            and self[2] == clr[2] \
            and self[3] == clr[3]
-    
+
     def __ne__(self, clr):
         return not self.__eq__(clr)
-    
+
     def map(self, base=1.0, colorspace=RGB):
         """ Returns a list of R,G,B,A values mapped to the given base,
             e.g. from 0-255 instead of 0.0-1.0 which is useful for setting image pixels.
@@ -203,11 +215,11 @@ class Color(list):
             if colorspace == XYZ: r, g, b = rgb_to_xyz(r, g, b)
             if colorspace == LAB: r, g, b = rgb_to_lab(r, g, b)
         if base != 1:
-            r, g, b, a = [ch*base for ch in r, g, b, a]
+            r, g, b, a = [ch*base for ch in (r, g, b, a)]
         if base != 1 and isinstance(base, int):
-            r, g, b, a = [int(ch) for ch in r, g, b, a]
+            r, g, b, a = [int(ch) for ch in (r, g, b, a)]
         return r, g, b, a
-    
+
     def blend(self, clr, t=0.5, colorspace=RGB):
         """ Returns a new color between the two colors.
             Parameter t is the amount to interpolate between the two colors 
@@ -343,8 +355,8 @@ def hsb_to_rgb(h, s, v):
 def rgb_to_xyz(r, g, b):
     """ Converts the given R,G,B values to CIE X,Y,Z (between 0.0-1.0).
     """
-    r, g, b = [ch > 0.04045 and ((ch+0.055) / 1.055) ** 2.4 or ch / 12.92 for ch in r, g, b]
-    r, g, b = [ch * 100.0 for ch in r, g, b]
+    r, g, b = [ch > 0.04045 and ((ch+0.055) / 1.055) ** 2.4 or ch / 12.92 for ch in (r, g, b)]
+    r, g, b = [ch * 100.0 for ch in (r, g, b)]
     r, g, b = ( # Observer = 2, Illuminant = D65
         r * 0.4124 + g * 0.3576 + b * 0.1805,
         r * 0.2126 + g * 0.7152 + b * 0.0722,
@@ -355,18 +367,18 @@ def xyz_to_rgb(x, y, z):
     """ Converts the given CIE X,Y,Z color values to R,G,B (between 0.0-1.0).
     """
     x, y, z = x*95.047, y*100.0, z*108.883
-    x, y, z = [ch / 100.0 for ch in x, y, z]
+    x, y, z = [ch / 100.0 for ch in (x, y, z)]
     r = x *  3.2406 + y * -1.5372 + z * -0.4986
     g = x * -0.9689 + y *  1.8758 + z *  0.0415
     b = x * -0.0557 + y * -0.2040 + z *  1.0570
-    r, g, b = [ch > 0.0031308 and 1.055 * ch**(1/2.4) - 0.055 or ch * 12.92 for ch in r, g, b]
+    r, g, b = [ch > 0.0031308 and 1.055 * ch**(1/2.4) - 0.055 or ch * 12.92 for ch in (r, g, b)]
     return r, g, b
 
 def rgb_to_lab(r, g, b):
     """ Converts the given R,G,B values to CIE L,A,B (between 0.0-1.0).
     """
     x, y, z = rgb_to_xyz(r, g, b)
-    x, y, z = [ch > 0.008856 and ch**(1/3.0) or (ch*7.787) + (16/116.0) for ch in x, y, z]
+    x, y, z = [ch > 0.008856 and ch**(1/3.0) or (ch*7.787) + (16/116.0) for ch in (x, y, z)]
     l, a, b = y*116-16, 500*(x-y), 200*(y-z)
     l, a, b = l/100.0, (a+86)/(86+98), (b+108)/(108+94)
     return l, a, b
@@ -378,7 +390,7 @@ def lab_to_rgb(l, a, b):
     y = (l+16)/116.0
     x = y + a/500.0
     z = y - b/200.0
-    x, y, z = [ch**3 > 0.008856 and ch**3 or (ch-16/116.0)/7.787 for ch in x, y, z]
+    x, y, z = [ch**3 > 0.008856 and ch**3 or (ch-16/116.0)/7.787 for ch in (x, y, z)]
     return xyz_to_rgb(x, y, z)
 
 def luminance(r, g, b):
@@ -784,7 +796,7 @@ class PathPoint(Point):
         self._x = x
         self._y = y
         self._dirty = False
-    
+
     def _get_x(self): return self._x
     def _set_x(self, v): 
         self._x = v
@@ -797,7 +809,7 @@ class PathPoint(Point):
         
     x = property(_get_x, _set_x)
     y = property(_get_y, _set_y)
-    
+
     def copy(self, parent=None):
         return PathPoint(self._x, self._y)
 
@@ -855,7 +867,9 @@ class PathElement(object):
 
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    # (x,y)
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = x
         self.y = y
         
@@ -872,10 +886,10 @@ class PathElement(object):
     def _set_ctrl2(self, v):
         self._ctrl2 = PathPoint(v.x, v.y)
         self.__dirty = True
-    
+
     ctrl1 = property(_get_ctrl1, _set_ctrl1)
     ctrl2 = property(_get_ctrl2, _set_ctrl2)
-    
+
     def __eq__(self, pt):
         if not isinstance(pt, PathElement): return False
         return self.cmd == pt.cmd \
@@ -920,7 +934,7 @@ class BezierPath(list):
 
     def copy(self):
         return BezierPath(self, **self._kwargs)
-    
+
     def append(self, pt):
         self._dirty = True; list.append(self, pt)
     def extend(self, points):
@@ -941,7 +955,7 @@ class BezierPath(list):
         self._dirty = True; self._index={}; list.reverse(self)
     def index(self, pt):
         return self._index.setdefault(pt, list.index(self, pt))
-    
+
     def _update(self):
         # Called from BezierPath.draw().
         # If points were added or removed, clear the cache.
@@ -953,12 +967,12 @@ class BezierPath(list):
                 if self._cache[1]: flush(self._cache[1])
             self._cache = self._segments = self._bounds = self._polygon = None
             self._dirty = False
-    
+
     def moveto(self, x, y):
         """ Adds a new point to the path at x, y.
         """
         self.append(PathElement(MOVETO, ((x, y),)))
-    
+
     def lineto(self, x, y):
         """ Adds a line from the previous point to x, y.
         """
@@ -969,7 +983,7 @@ class BezierPath(list):
             The curvature is determined by control handles x1, y1 and x2, y2.
         """
         self.append(PathElement(CURVETO, ((x1, y1), (x2, y2), (x3, y3))))
-    
+
     def arcto(self, x, y, radius=1, clockwise=True, short=False):
         """ Adds a number of Bezier-curves that draw an arc with the given radius to (x,y).
             The short parameter selects either the "long way" around or the "shortcut".
@@ -979,7 +993,7 @@ class BezierPath(list):
         for p in bezier.arcto(x0, y0, radius, radius, phi, short, not clockwise, x, y):
             f = len(p) == 2 and self.lineto or self.curveto
             f(*p)
-    
+
     def closepath(self):
         """ Adds a line from the previous point to the last MOVETO.
         """
@@ -1010,7 +1024,7 @@ class BezierPath(list):
             self.arcto(x, y+height-r, radius=r, clockwise=False)
             self.lineto(x, y+r)
             self.arcto(x+r, y, radius=r, clockwise=False)
-    
+
     def ellipse(self, x, y, width, height):
         """ Adds an ellipse to the path.
         """
@@ -1024,7 +1038,7 @@ class BezierPath(list):
         self.closepath()
         
     oval = ellipse
-    
+
     def arc(self, x, y, width, height, start=0, stop=90):
         """ Adds an arc to the path.
             The arc follows the ellipse defined by (x, y, width, height),
@@ -1148,7 +1162,7 @@ class BezierPath(list):
         if self._segments is None:
             self._segments = bezier.length(self, segmented=True, n=10)
         return bezier.point(self, t, segments=self._segments)
-    
+
     def points(self, amount=2, start=0.0, end=1.0):
         """ Returns a list of PathElements along the path.
             To omit the last point on closed paths: end=1-1.0/amount
@@ -1156,7 +1170,7 @@ class BezierPath(list):
         if self._segments is None:
             self._segments = bezier.length(self, segmented=True, n=10)
         return bezier.points(self, amount, start, end, segments=self._segments)
-    
+
     def addpoint(self, t):
         """ Inserts a new PathElement at time t (0.0-1.0) on the path.
         """
@@ -1165,13 +1179,13 @@ class BezierPath(list):
         return bezier.insert_point(self, t)
         
     split = addpoint
-    
+
     @property 
     def length(self, precision=10):
         """ Returns an approximation of the total length of the path.
         """
         return bezier.length(self, segmented=False, n=precision)
-    
+
     @property
     def contours(self):
         """ Returns a list of contours (i.e. segments separated by a MOVETO) in the path.
@@ -1221,10 +1235,10 @@ class BezierPath(list):
         id = str(id)
         id = md5(id).hexdigest()
         return id
-    
+
     def __repr__(self):
         return "BezierPath(%s)" % repr(list(self))
-    
+
     def __del__(self):
         # Note: it is important that __del__() is called since it unloads the cache from GPU.
         # BezierPath and PathElement should contain no circular references, e.g. no PathElement.parent.
@@ -1320,7 +1334,7 @@ class BezierEditor:
     def _nextpoint(self, pt):
         i = self.path.index(pt) # BezierPath caches this operation.
         return i < len(self.path)-1 and self.path[i+1] or None
-    
+
     def translate(self, pt, x=0, y=0, h1=(0,0), h2=(0,0)):
         """ Translates the point and its control handles by (x,y).
             Translates the incoming handle by h1 and the outgoing handle by h2.
@@ -1586,14 +1600,14 @@ class Quad(list):
         """
         list.__init__(self, (dx1, dy1, dx2, dy2, dx3, dy3, dx4, dy4))
         self._dirty = True # Image objects poll Quad._dirty to check if the image cache is outdated.
-    
+
     def copy(self):
         return Quad(*self)
-    
+
     def reset(self):
         list.__init__(self, (0,0,0,0,0,0,0,0))
         self._dirty = True
-    
+
     def __setitem__(self, i, v):
         list.__setitem__(self, i, v)
         self._dirty = True
@@ -1615,7 +1629,7 @@ class Quad(list):
     def _set_dy3(self, v): self[5] = v
     def _set_dx4(self, v): self[6] = v
     def _set_dy4(self, v): self[7] = v
-    
+
     dx1 = property(_get_dx1, _set_dx1)
     dy1 = property(_get_dy1, _set_dy1)
     dx2 = property(_get_dx2, _set_dx2)
@@ -1641,7 +1655,7 @@ class Image(object):
         self.height   = height or self._texture.height # Scaled height, Image.texture.height yields original height.
         self.quad     = Quad()
         self.color    = Color(1.0, 1.0, 1.0, alpha)
-    
+
     def copy(self, texture=None, width=None, height=None):
         img = texture is None \
           and self.__class__(self._src[0], data=self._src[1]) \
@@ -1657,18 +1671,20 @@ class Image(object):
         if height is not None: 
             img.height = height
         return img
-    
+
     @property
     def id(self):
         return self._texture.id
-    
+
     @property
     def texture(self):
         return self._texture
 
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    # (x,y)
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = x
         self.y = y
         
@@ -1676,12 +1692,14 @@ class Image(object):
 
     def _get_size(self):
         return (self.width, self.height)
-    def _set_size(self, (w,h)):
+    # (w,h)
+    def _set_size(self, doublet):
+        w,h = doublet
         self.width  = w
         self.height = h
         
     size = property(_get_size, _set_size)
-    
+
     def _get_alpha(self):
         return self.color[3]
     def _set_alpha(self, v):
@@ -1750,16 +1768,16 @@ class Image(object):
         glPopMatrix() 
         if filter:
             filter.pop()
-    
+
     def save(self, path):
         """ Exports the image as a PNG-file.
         """
         self._texture.save(path)
-    
+
     def __repr__(self):
         return "%s(x=%.1f, y=%.1f, width=%.1f, height=%.1f, alpha=%.2f)" % (
             self.__class__.__name__, self.x, self.y, self.width, self.height, self.alpha)
-    
+
     def __del__(self):
         try:
             if hasattr(self, "_cache") and self._cache is not None and flush:
@@ -1840,7 +1858,7 @@ class Pixels(list):
         data = [(256+v)%256 for v in data]
         self.array = data
         self._texture  = None
-    
+
     @property
     def width(self):
         return self._img.width
@@ -1855,11 +1873,11 @@ class Pixels(list):
 
     def __len__(self):
         return len(self.array) / 4
-    
+
     def __iter__(self):
         for i in xrange(len(self)):
             yield self[i]
-    
+
     def __getitem__(self, i):
         """ Returns a list of R,G,B,A channel values between 0-255 from pixel i.
             Users need to wrap the list in a Color themselves for performance.
@@ -1867,7 +1885,7 @@ class Pixels(list):
             - clr = color(Pixels[i], base=255)
         """
         return self.array[i*4:i*4+4]
-    
+
     def __setitem__(self, i, v):
         """ Sets pixel i to the given R,G,B,A values.
             Users need to unpack a Color themselves for performance,
@@ -1878,10 +1896,10 @@ class Pixels(list):
         """
         for j in range(4):
             self.array[i*4+j] = v[j]
-    
+
     def __getslice__(self, i, j):
         return [self[i+n] for n in xrange(j-i)]
-    
+
     def __setslice__(self, i, j, seq):
         for n in xrange(j-i):
             self[i+n] = seq[n]
@@ -1898,13 +1916,13 @@ class Pixels(list):
         """
         if 0 <= i < self.width and 0 <= j < self.height:
             return color(self[i+j*self.width], base=255)
-    
+
     def set(self, i, j, clr):
         """ Sets the pixel at row i, column j from a Color object.
         """
         if 0 <= i < self.width and 0 <= j < self.height:
             self[i+j*self.width] = clr.map(base=255)
-    
+
     def update(self):
         """ Pixels.update() must be called to refresh the image.
         """
@@ -1945,13 +1963,13 @@ class Animation(list):
         self.loop     = loop     # Loop from last frame to first frame?
         self._i       = -1       # Frame counter.
         self._t = Transition(0, interpolation=kwargs.get("interpolation", LINEAR))
-    
+
     def copy(self, **kwargs):
         return Animation(self, 
               duration = kwargs.get("duration", self.duration), 
                   loop = kwargs.get("loop", self.loop), 
          interpolation = self._t._interpolation)
-    
+
     def update(self):
         if self.duration is not None:
             # With a duration,
@@ -1968,7 +1986,7 @@ class Animation(list):
             if self._i < 0 or self.loop and self._i == len(self)-1:
                 self._i = -1
             self._i = min(self._i+1, len(self)-1)
-    
+
     @property
     def frames(self):
         return self
@@ -1984,7 +2002,7 @@ class Animation(list):
     def done(self):
         # Yields True when the animation has stopped (or hasn't started).
         return self.loop is False and self._i == len(self)-1
-    
+
     def draw(self, *args, **kwargs):
         if not self.done:
             image(self.frame, *args, **kwargs)
@@ -2017,7 +2035,7 @@ animation = Animation
 # The less you change about an offscreen buffer, the faster it runs.
 # This includes switching it on and off and changing its size.
 
-from shader import *
+from .shader import *
 
 #=====================================================================================================
 
@@ -2201,20 +2219,24 @@ class Text(object):
 
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    # (x,y )
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = x
         self.y = y
         
     xy = property(_get_xy, _set_xy)
-    
+
     def _get_size(self):
         return (self.width, self.height)
-    def _set_size(self, (w,h)):
+    # ( w,h )
+    def _set_size(self, doublet):
+        w,h = doublet
         self.width  = w
         self.height = h
         
     size = property(_get_size, _set_size)
-    
+
     def __getattr__(self, k):
         if k in self.__dict__:
             return self.__dict__[k]
@@ -2276,7 +2298,7 @@ class Text(object):
                 # self._label.color = (0,0,0)
         else:
             raise AttributeError( "'Text' object has no attribute '%s'" % (k,) )
-    
+
     def _update(self):
         # Called from Text.draw(), Text.copy() and Text.metrics.
         # Ensures that all the color changes have been reflected in Text._label.
@@ -2287,11 +2309,11 @@ class Text(object):
         if self._dirty:
             self._label.end_update()
             self._dirty = False
-    
+
     @property
     def path(self):
         raise NotImplementedError()
-    
+
     @property
     def metrics(self):
         """ Yields a (width, height)-tuple of the actual text content.
@@ -2315,7 +2337,7 @@ class Text(object):
             self._update()
             self._label.draw()
             glPopMatrix()
-    
+
     def copy(self):
         self._update()
         txt = Text(self.text, self.x, self.y, self.width, self.height, 
@@ -2446,13 +2468,13 @@ def textmetrics(txt, width=None, **kwargs):
 class GlyphPathError(Exception):
     pass
 
-import cPickle
+
 glyphs = {}
 try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
     # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
     glyphs = path.join(path.dirname(__file__), "..", "font", "glyph.p")
-    glyphs = cPickle.load(open(glyphs))
+    glyphs = pickle.load(open(glyphs))
 except:
     pass
 
@@ -2590,13 +2612,13 @@ class Prototype(object):
         if not name: 
             name = function.__name__
         self._bind(name, function)
-    
+
     def set_property(self, key, value):
         """ Adds a property to the prototype.
             Using this method ensures that dynamic properties are copied correctly - see inherit().
         """
         self._bind(key, value)
-    
+
     def inherit(self, prototype):
         """ Inherit all the dynamic properties and methods of another prototype.
         """
@@ -2631,12 +2653,12 @@ class EventHandler:
         pass
     def on_mouse_scroll(self, mouse):
         pass
-    
+
     def on_key_press(self, keys):
         pass
     def on_key_release(self, keys):
         pass
-    
+
     # Instead of calling an event directly it could be queued,
     # e.g. layer.queue_event(layer.on_mouse_press, canvas.mouse).
     # layer.process_events() can then be called whenever desired,
@@ -2647,7 +2669,7 @@ class EventHandler:
         for event, args in self._queue:
             event(*args)
         self._queue = []
-    
+
     # Note: there is no event propagation.
     # Event propagation means that, for example, if a layer is pressed
     # all its child (or parent) layers receive an on_mouse_press() event as well.
@@ -2673,7 +2695,7 @@ class Transition(object):
         self._t0 = TIME  # Start time.
         self._t1 = TIME  # End time.
         self._interpolation = interpolation
-    
+
     def copy(self):
         t = Transition(None)
         t._v0 = self._v0
@@ -2683,7 +2705,7 @@ class Transition(object):
         t._t1 = self._t1
         t._interpolation = self._interpolation
         return t
-    
+
     def get(self):
         """ Returns the transition stop value.
         """
@@ -2710,11 +2732,11 @@ class Transition(object):
     @property 
     def current(self): 
         return self._vi
-    
+
     @property
     def done(self):
         return TIME >= self._t1
-    
+
     def update(self):
         """ Calculates the new current value. Returns True when done.
             The transition approaches the desired value according to the interpolation:
@@ -2801,7 +2823,7 @@ class Layer(list, Prototype, EventHandler):
         self._transform_cache = None           # Cache of the local transformation matrix.
         self._transform_stack = None           # Cache of the cumulative transformation matrix.
         self._clipping_mask   = LayerClippingMask(self)
-    
+
     @classmethod
     def from_image(self, img, *args, **kwargs):
         """ Returns a new layer that renders the given image, and with the same size as the image.
@@ -2871,7 +2893,7 @@ class Layer(list, Prototype, EventHandler):
             if layer.name == key: 
                 return layer
         raise AttributeError( "%s instance has no attribute '%s'" % (self.__class__.__name__, key) )
-    
+
     def _set_container(self, key, value):
         # If Layer.canvas is set to None, the canvas should no longer contain the layer.
         # If Layer.canvas is set to Canvas, this canvas should contain the layer.
@@ -2967,12 +2989,14 @@ class Layer(list, Prototype, EventHandler):
 
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    # (x,y)
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = x
         self.y = y
         
     xy = property(_get_xy, _set_xy)
-    
+
     def _get_origin(self, relative=False):
         """ Returns the point (x,y) from which all layer transformations originate.
             When relative=True, x and y are defined percentually (0.0-1.0) in terms of width and height.
@@ -2997,7 +3021,7 @@ class Layer(list, Prototype, EventHandler):
             dx = w is not None and dx*w or 0
             dy = h is not None and dy*h or 0
         return dx, dy
-    
+
     def _set_origin(self, x, y, relative=False):
         """ Sets the transformation origin point in either absolute or relative coordinates.
             For example, if a layer is 400x200 pixels, setting the origin point to (200,100)
@@ -3007,7 +3031,7 @@ class Layer(list, Prototype, EventHandler):
         self._dx.set(x, self.duration)
         self._dy.set(y, self.duration)
         self._origin = relative and RELATIVE or ABSOLUTE
-    
+
     def origin(self, x=None, y=None, relative=False):
         """ Sets or returns the point (x,y) from which all layer transformations originate.
         """
@@ -3017,14 +3041,14 @@ class Layer(list, Prototype, EventHandler):
             if y is not None: 
                 self._set_origin(x, y, relative)
         return self._get_origin(relative)
-    
+
     def _get_relative_origin(self):
         return self.origin(relative=True)
     def _set_relative_origin(self, xy):
         self._set_origin(xy[0], xy[1], relative=True)
         
     relative_origin = property(_get_relative_origin, _set_relative_origin)
-    
+
     def _get_absolute_origin(self):
         return self.origin(relative=False)
     def _set_absolute_origin(self, xy):
@@ -3038,7 +3062,7 @@ class Layer(list, Prototype, EventHandler):
         self.hidden = not b
         
     visible = property(_get_visible, _set_visible)
-    
+
     def translate(self, x, y):
         self.x += x
         self.y += y
@@ -3051,7 +3075,7 @@ class Layer(list, Prototype, EventHandler):
         
     def flip(self):
         self.flipped = not self.flipped
-    
+
     def _update(self):
         """ Called each frame from canvas._update() to update the layer transitions.
         """
@@ -3074,7 +3098,7 @@ class Layer(list, Prototype, EventHandler):
         """Override this method to provide custom updating code.
         """
         pass
-    
+
     @property
     def done(self):
         """ Returns True when all transitions have finished.
@@ -3284,7 +3308,7 @@ class Layer(list, Prototype, EventHandler):
             y += layer.y
             layer = layer.parent
         return x, y
-    
+
     def traverse(self, visit=lambda layer: None):
         """ Recurses the layer structure and calls visit() on each child layer.
         """
@@ -3408,7 +3432,7 @@ class Mouse(Point):
                 self._cursor))
         
     cursor = property(_get_cursor, _set_cursor)
-    
+
     def _get_button(self):
         return self._button
     def _set_button(self, button):
@@ -3464,7 +3488,7 @@ class Keys(list):
             self.modifiers.append(code)
         list.append(self, code)
         self.code = self[-1]
-    
+
     def remove(self, code):
         code = self._decode(code)
         if code in MODIFIERS:
@@ -3631,7 +3655,9 @@ class Canvas(list, Prototype, EventHandler):
         self._window.set_location(self.x, v)
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    # (x,y)
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = x
         self.y = y
     def _get_width(self):
@@ -3644,10 +3670,12 @@ class Canvas(list, Prototype, EventHandler):
         self._window.width = v
     def _set_height(self, v):
         self._window.height = v
-    def _set_size(self, (w,h)):
+    # (w,h)
+    def _set_size(self, doublet):
+        w,h = doublet
         self.width  = w
         self.height = h
-    
+
     x      = property(_get_x, _set_x)
     y      = property(_get_y, _set_y)
     xy     = property(_get_xy, _set_xy)
@@ -3661,7 +3689,7 @@ class Canvas(list, Prototype, EventHandler):
         self._window.set_fullscreen(mode)
         
     fullscreen = property(_get_fullscreen, _set_fullscreen)
-    
+
     @property
     def screen(self):
         #return pyglet.window.get_platform().get_default_display().get_default_screen()
@@ -3688,7 +3716,7 @@ class Canvas(list, Prototype, EventHandler):
         """ Yields a Point(x, y) with the mouse position on the canvas.
         """
         return self._mouse
-    
+
     @property
     def keys(self):
         return self._keys
@@ -3703,7 +3731,7 @@ class Canvas(list, Prototype, EventHandler):
         
     #--- Event dispatchers ------------------------------
     # First events are dispatched, then update() and draw() are called.
-    
+
     def layer_at(self, x, y, **kwargs):
         """ Find the topmost layer at the specified coordinates.
             This method returns None if no layer was found.
@@ -3753,7 +3781,7 @@ class Canvas(list, Prototype, EventHandler):
         # Propagate mouse motion to layer with the focus.
         if self._focus is not None:
             self._focus.on_mouse_motion(self._mouse)
-    
+
     def _on_mouse_press(self, x, y, button, modifiers):
         self._mouse.pressed   = True
         self._mouse.button    = button
@@ -3848,7 +3876,7 @@ class Canvas(list, Prototype, EventHandler):
         
     def _on_move(self, x, y):
         self.on_move()
-    
+
     def _on_resize(self, width, height):
         pyglet.window.Window.on_resize(self._window, width, height)
         self.on_resize()
@@ -3866,7 +3894,7 @@ class Canvas(list, Prototype, EventHandler):
             self.paused = not self.paused
         if keys.code == "s" and CTRL in keys.modifiers:
             self.save("nodebox-%s.png" % str(datetime.now()).split(".")[0].replace(" ","-").replace(":","-"))
-    
+
     def on_move(self):
         pass
 
@@ -3902,17 +3930,27 @@ class Canvas(list, Prototype, EventHandler):
             glClearColor(VERY_LIGHT_GREY, VERY_LIGHT_GREY, VERY_LIGHT_GREY, 0)
             # Reset the transformation state.
             # Most of this is already taken care of in Pyglet.
-            #glMatrixMode(GL_PROJECTION)
-            #glLoadIdentity()
-            #glOrtho(0, self.width, 0, self.height, -1, 1)
-            #glMatrixMode(GL_MODELVIEW)
-            glLoadIdentity()
+            
+            if 0:
+                glMatrixMode( GL_PROJECTION )
+                glLoadIdentity()
+                
+                glOrtho(0, self.width, 0, self.height, -1, 1)
+                glMatrixMode(GL_MODELVIEW)
+            else:
+                glLoadIdentity()
+                # pass
+            
             # Enable line anti-aliasing.
             glEnable(GL_LINE_SMOOTH)
+            
             # Enable alpha transparency.
             glEnable(GL_BLEND)
-            glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
-            #glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            glBlendFuncSeparate( GL_SRC_ALPHA,
+                                 GL_ONE_MINUS_SRC_ALPHA,
+                                 GL_ONE,
+                                 GL_ONE_MINUS_SRC_ALPHA)
+            # glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
             self._window.dispatch_events()
             self._window.set_visible(True)
             self._active = True
@@ -3978,7 +4016,7 @@ class Canvas(list, Prototype, EventHandler):
         glClear(GL_COLOR_BUFFER_BIT)
         glClear(GL_DEPTH_BUFFER_BIT)
         glClear(GL_STENCIL_BUFFER_BIT)
-    
+
     def run(self, draw=None, setup=None, update=None, stop=None):
         """ Opens the application windows and starts drawing the canvas.
             Canvas.setup() will be called once during initialization.
@@ -3988,6 +4026,7 @@ class Canvas(list, Prototype, EventHandler):
             If the given setup, draw or update parameter is a function,
             it overrides that canvas method.
         """
+
         if isinstance(setup, FunctionType):
             self.set_method(setup, name="setup")
         if isinstance(draw, FunctionType):
@@ -4003,7 +4042,7 @@ class Canvas(list, Prototype, EventHandler):
     @property
     def active(self):
         return self._active
-    
+
     def _get_fps(self):
         return self._fps
     def _set_fps(self, v):
@@ -4031,7 +4070,7 @@ class Canvas(list, Prototype, EventHandler):
         return pyglet.image.get_buffer_manager().get_color_buffer().get_texture()
         
     buffer = screenshot = render
-    
+
     @property
     def texture(self):
         return pyglet.image.get_buffer_manager().get_color_buffer().get_texture()
@@ -4092,11 +4131,11 @@ class Profiler:
     
     def __init__(self, canvas):
         self.canvas  = canvas
-    
+
     @property
     def framerate(self):
         return pyglet.clock.get_fps()
-    
+
     def run(self, draw=None, setup=None, update=None, frames=100, sort=CUMULATIVE, top=30):
         """ Runs cProfile on the canvas for the given number of frames.
             The performance statistics are returned as a string, sorted by SLOWEST or CUMULATIVE.
@@ -4150,4 +4189,4 @@ def ximport(library):
 #-----------------------------------------------------------------------------------------------------
 # Linear interpolation math for BezierPath.point() etc.
 
-import bezier
+import nglbezier as bezier

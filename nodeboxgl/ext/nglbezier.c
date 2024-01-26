@@ -1,14 +1,38 @@
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
+
+#include <stdio.h>
 #include <math.h>
 
+
+void _linepoint(double, double, double, double, double, double *, double *);
+void _linelength(double, double, double, double, double *);
+void _curvepoint(double, double, double, double, double, 
+                 double, double, double, double,
+                 double *, double *, 
+                 double *, double *, double *, double *);
+void _curvepoint_handles(double, double, double, double, double, 
+                 double, double, double, double,
+                 double *, double *, 
+                 double *, double *, double *, double *,
+                 double *, double *, double *, double *);
+void _curvelength(double, double, double, double, 
+                  double, double, double, double, int, 
+                  double *);
+
+
+
 // --- LINEPOINT ----------------------------------------------------------------
+
 void _linepoint(double t, double x0, double y0, double x1, double y1,
                 double *out_x, double *out_y) {
     *out_x = x0 + t * (x1-x0);
     *out_y = y0 + t * (y1-y0);
 }
 
+
 // ---- LINELENGTH --------------------------------------------------------------
+
 void _linelength(double x0, double y0, double x1, double y1,
                 double *out_length) {
     double a, b;
@@ -17,7 +41,9 @@ void _linelength(double x0, double y0, double x1, double y1,
     *out_length = sqrt(a + b);
 }
 
+
 // --- CURVEPOINT ---------------------------------------------------------------
+
 void _curvepoint(double t, double x0, double y0, double x1, double y1, 
                  double x2, double y2, double x3, double y3,
                  double *out_x, double *out_y, 
@@ -38,7 +64,9 @@ void _curvepoint(double t, double x0, double y0, double x1, double y1,
     *out_y = *out_c1y * mint + *out_c2y * t;
 }
 
+
 // --- CURVEPOINT HANDLES -------------------------------------------------------
+
 void _curvepoint_handles(double t, double x0, double y0, double x1, double y1, 
                  double x2, double y2, double x3, double y3,
                  double *out_x, double *out_y, 
@@ -64,7 +92,9 @@ void _curvepoint_handles(double t, double x0, double y0, double x1, double y1,
     *out_h2y = y23;
 }
 
+
 // --- CURVELENGTH --------------------------------------------------------------
+
 void _curvelength(double x0, double y0, double x1, double y1, 
                   double x2, double y2, double x3, double y3, int n, 
                   double *out_length) {
@@ -85,6 +115,7 @@ void _curvelength(double x0, double y0, double x1, double y1,
     }
     *out_length = length;
 }
+
 
 // ------------------------------------------------------------------------------
 
@@ -140,7 +171,8 @@ curvelength(PyObject *self, PyObject *args) {
 
 // ------------------------------------------------------------------------------
 
-static PyObject *BezierMathError;
+// yet unused
+// static PyObject *BezierMathError;
 
 static PyMethodDef bezier_methods[] = {
     { "linepoint", linepoint, METH_VARARGS, "linepoint(t, x0, y0, x1, y1)." },
@@ -150,18 +182,24 @@ static PyMethodDef bezier_methods[] = {
     { NULL, NULL, 0, NULL }
 };
 
+char nglbeziermod_docs[] = "Noise functions.";
+
+
+PyModuleDef nglbezier_mod = {
+	PyModuleDef_HEAD_INIT,
+	"nglbezier",
+	nglbeziermod_docs,
+	-1,
+	bezier_methods,
+	NULL,
+	NULL,
+	NULL,
+	NULL
+};
+
 PyMODINIT_FUNC
-initnglbezier(void) {
-    PyObject *m;
-    m = Py_InitModule("nglbezier", bezier_methods);
-    BezierMathError = PyErr_NewException("nglbezier.error", NULL, NULL);
-    Py_INCREF(BezierMathError);
-    PyModule_AddObject(m, "error", BezierMathError);
+PyInit_nglbezier( void ) { 
+	return PyModule_Create( &nglbezier_mod );
 }
 
-int main(int argc, char *argv[]) {
-    Py_SetProgramName(argv[0]);
-    Py_Initialize();
-    initnglbezier();
-    return 0;
-}
+

@@ -7,8 +7,8 @@
 
 from pyglet.gl    import *
 from pyglet.image import Texture, SolidColorImagePattern
-from context      import Image, texture
-from geometry     import lerp, clamp
+from .context      import Image, texture
+from .geometry     import lerp, clamp
 from math         import radians
 from ctypes       import byref, cast, pointer, POINTER
 from ctypes       import c_char, c_char_p, c_uint, c_int

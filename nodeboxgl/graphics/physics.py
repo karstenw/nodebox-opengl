@@ -66,7 +66,10 @@ class Vector(object):
             
     def _get_xyz(self):
         return (self.x, self.y, self.z)
-    def _set_xyz(self, (x,y,z)):
+
+    # (x,y,z) in def ???
+    def _set_xyz(self, triplet):
+        x,y,z = triplet
         self.x = float(x)
         self.y = float(y)
         self.z = float(z)
@@ -74,7 +77,10 @@ class Vector(object):
         
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    
+    # (x,y) in def ???
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = float(x)
         self.y = float(y)
     xy = property(_get_xy, _set_xy)
@@ -223,7 +229,7 @@ class Vector(object):
                       self.x*v.y - self.y*v.x)
 
     def __neg__(self):
-		return Vector(-self.x, -self.y, -self.z)
+        return Vector(-self.x, -self.y, -self.z)
 
     def __eq__(self, v):
         return isinstance(v, Vector) and self.x == v.x and self.y == v.y and self.z == v.z

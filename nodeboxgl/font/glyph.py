@@ -8,6 +8,8 @@
 # By default, only standard ASCII characters are converted.
 from itertools import chain
 
+import io
+
 # characters = range(32, 127)
 characters = list(chain( range(32,127), range(160, 512)))
 
@@ -109,7 +111,8 @@ for fontname in fonts:
         _ctx.lineheight(1.0)
         dy = baseline and descent(fontname, _ctx.fontsize()) or 0
         for i in characters:
-            ch = unichr(i)
+            # ch = unichr(i)
+            ch = chr(i)
             glyphs[fontname][fontweight][ch] = []
             for pt in _ctx.textpath(ch, 0, 0):
                 if pt.cmd == 0:
@@ -125,16 +128,16 @@ for fontname in fonts:
                     pt = [commands[pt.cmd]]
                 glyphs[fontname][fontweight][ch].append(pt)
 
-import cPickle
-f = open("glyph.p","w")
-cPickle.dump(glyphs, f)
+import pickle
+f = open("glyph.p","wb")
+pickle.dump(glyphs, f)
 f.close()
 
 #=====================================================================================================
 # For testing purposes:
 
 def textpath_from_glyphs(string, x=0, y=0, fontname="Droid Sans", fontweight="normal"):
-    glyphs = cPickle.load(open("glyph.p"))
+    glyphs = pickle.load(open("glyph.p", 'rb'))
     p = _ctx.BezierPath()
     f = _ctx.fontsize() / 1000.0 * 72 / dpi
     y += textheight(" ", lineheight()) - textheight(" ", lineheight=1)

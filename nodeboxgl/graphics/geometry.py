@@ -45,11 +45,11 @@ def reflect(x, y, x0, y0, d=1.0, a=180):
 # Fast C implementations:
 try:
     from nglgeometry import angle, distance, coordinates, rotate
-    #print "FAST GEOMETRY"
+    print( "FAST GEOMETRY" )
 except Exception as err:
-    #print err
-    #print "SLOW GEOMETRY"
-    pass
+    print( err )
+    print( "SLOW GEOMETRY" )
+    # pass
 
 #--- INTERPOLATION -----------------------------------------------------------------------------------
     
@@ -57,8 +57,10 @@ def lerp(a, b, t):
     """ Returns the linear interpolation between a and b for time t between 0.0-1.0.
         For example: lerp(100, 200, 0.5) => 150.
     """
-    if t < 0.0: return a
-    if t > 1.0: return b
+    if t < 0.0:
+        return a
+    if t > 1.0:
+        return b
     return a + (b-a)*t
     
 def smoothstep(a, b, x):
@@ -66,8 +68,10 @@ def smoothstep(a, b, x):
         where x is a number between a and b. The return value will ease (slow down) as x nears a or b.
         For x smaller than a, returns 0.0. For x bigger than b, returns 1.0.
     """
-    if x < a: return 0.0
-    if x >=b: return 1.0
+    if x < a:
+        return 0.0
+    if x >=b:
+        return 1.0
     x = float(x-a) / (b-a)
     return x*x * (3-2*x)
 
@@ -82,11 +86,11 @@ def clamp(v, a, b):
 # Fast C implementations:
 try:
     from nglgeometry import smoothstep
-    # print "FAST GEOMETRY"
+    print( "FAST SMOOTHSTEP" )
 except Exception as err:
-    # print err
-    # print "SLOW GEOMETRY"
-    pass
+    print( err )
+    print( "SLOW SMOOTHSTEP" )
+    # pass
 
 #--- INTERSECTION ------------------------------------------------------------------------------------
 
@@ -251,7 +255,7 @@ class AffineTransform:
             -(m[0]*m[7]-m[1]*m[6])/d, 
              1
         ]
-    
+
     @property
     def inverse(self):
         m = self.copy(); m.invert(); return m;
@@ -267,16 +271,16 @@ class AffineTransform:
     def scale(self, x, y=None):
         if y==None: y = x
         self.matrix = self._mmult([x,0,0, 0,y,0, 0,0,1], self.matrix)
-    
+
     def translate(self, x, y):
         self.matrix = self._mmult([1,0,0, 0,1,0, x,y,1], self.matrix)
-    
+
     def rotate(self, degrees=0, radians=0):
         radians = degrees and degrees*pi/180 or radians
         c = cos(radians)
         s = sin(radians)
         self.matrix = self._mmult([c,s,0, -s,c,0, 0,0,1], self.matrix)
-    
+
     def transform_point(self, x, y):
         """ Returns the new coordinates of (x,y) after transformation.
         """
@@ -284,7 +288,7 @@ class AffineTransform:
         return (x*m[0]+y*m[3]+m[6], x*m[1]+y*m[4]+m[7])
         
     apply = transform_point
-    
+
     def transform_path(self, path):
         """ Returns a BezierPath object with the transformation applied.
         """
@@ -302,11 +306,11 @@ class AffineTransform:
                 x, y = self.apply(pt.x, pt.y)
                 p.curveto(vx1, vy1, vx2, vy2, x, y)
         return p
-    
+
     # Compatibility with NodeBox.
     transformPoint = transform_point
     transformBezierPath = transform_path
-    
+
     def map(self, points):
         return [self.apply(*pt) for pt in points]
 
@@ -324,7 +328,9 @@ class Point(object):
 
     def _get_xy(self):
         return (self.x, self.y)
-    def _set_xy(self, (x,y)):
+    # (x,y)
+    def _set_xy(self, doublet):
+        x,y = doublet
         self.x = x
         self.y = y
         
@@ -340,7 +346,7 @@ class Point(object):
         if not isinstance(pt, Point): return False
         return self.x == pt.x \
            and self.y == pt.y
-    
+
     def __ne__(self, pt):
         return not self.__eq__(pt)
 
@@ -362,10 +368,10 @@ class Bounds:
         self.y = y
         self.width = width 
         self.height = height
-    
+
     def copy(self):
         return Bounds(self.x, self.y, self.width, self.height)
-    
+
     def __iter__(self):
         """ You can conveniently unpack bounds: x,y,w,h = Bounds(0,0,100,100)
         """
@@ -376,7 +382,7 @@ class Bounds:
         """
         return max(self.x, b.x) < min(self.x+self.width, b.x+b.width) \
            and max(self.y, b.y) < min(self.y+self.height, b.y+b.height)
-    
+
     def intersection(self, b):
         """ Returns bounds that encompass the intersection of the two.
             If there is no overlap between the two, None is returned.
@@ -387,7 +393,7 @@ class Bounds:
         return Bounds(mx, my, 
             min(self.x+self.width, b.x+b.width) - mx, 
             min(self.y+self.height, b.y+b.height) - my)
-    
+
     def union(self, b):
         """ Returns bounds that encompass the union of the two.
         """
@@ -414,14 +420,14 @@ class Bounds:
     def __eq__(self, b):
         if not isinstance(b, Bounds): 
             return False
-        return self.x == b.x \
-           and self.y == b.y \
-           and self.width == b.width \
-           and self.height == b.height
-    
+        return (    self.x == b.x
+                and self.y == b.y
+                and self.width == b.width
+                and self.height == b.height )
+
     def __ne__(self, b):
         return not self.__eq__(b)
-    
+
     def __repr__(self):
         return "Bounds(%.1f, %.1f, %.1f, %.1f)" % (self.x, self.y, self.width, self.height)
 
@@ -463,6 +469,7 @@ class Bounds:
 from sys import platform
 from ctypes import CFUNCTYPE, POINTER, byref, cast, pointer
 from ctypes import CFUNCTYPE as _CFUNCTYPE
+
 from pyglet.gl import \
     GLdouble, GLvoid, GLenum, GLfloat, \
     gluNewTess, gluTessProperty, gluTessNormal, gluTessCallback, gluTessVertex, \

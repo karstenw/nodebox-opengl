@@ -1,5 +1,22 @@
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
+
+#include <stdio.h>
 #include <math.h>
+
+
+// protos
+float _fast_inverse_sqrt(float);
+void _angle(double, double, double, double, double *);
+void _distance(double, double, double, double, double *);
+void _coordinates(double, double, double, double, double *, double *);
+void _rotate(double, double, double, double, double, double *, double *);
+void _smoothstep(double, double, double, double *);
+void _superformula(double, double, double, double, double, double *, double *);
+void _mmult(double, double, double, double, double, double, double, double, double,
+			double, double, double, double, double, double, double, double, double,
+			double *, double *, double *, double *, double *, double *, double *, double *, double *);
+
 
 // --- FAST INVERSE SQRT --------------------------------------------------------
 // Chris Lomont, http://www.math.purdue.edu/~clomont/Math/Papers/2003/InvSqrt.pdf
@@ -166,25 +183,53 @@ mmult(PyObject *self, PyObject *args) {
 
 // ------------------------------------------------------------------------------
 
-static PyMethodDef geometry_methods[]={
-    { "fast_inverse_sqrt", fast_inverse_sqrt, METH_VARARGS, "Fast inverse square root." },
-    { "angle", angle, METH_VARARGS, "angle(x1,y1,x2,y2)." },
-    { "distance", distance, METH_VARARGS, "distance(x1,y1,x2,y2)." },
-    { "coordinates", coordinates, METH_VARARGS, "coordinates(x0, y0, d, a, x1, y1)." }, 
-    { "rotate", rotate, METH_VARARGS, "rotate( x, y, x0, y0, a, x1, y1)." },
-    { "smoothstep", smoothstep, METH_VARARGS, "smoothstep(a, b, x, t)." },
-    { "superformula", superformula, METH_VARARGS, "superformula(m, n1, n2, n3, phi)." },
-    { "mmult", mmult, METH_VARARGS, "mmult(a0, a1, a2, a3, a4, a5, a6, a7, a8, b0, b1, b2, b3, b4, b5, b6, b7, b8)." }, 
-    { NULL, NULL, 0, NULL }
+PyMethodDef nglgeometry_methods[]={
+    { "fast_inverse_sqrt", (PyCFunction)fast_inverse_sqrt, METH_VARARGS, "Fast inverse square root." },
+    { "angle", (PyCFunction)angle, METH_VARARGS, "angle(x1,y1,x2,y2)." },
+    { "distance", (PyCFunction)distance, METH_VARARGS, "distance(x1,y1,x2,y2)." },
+    { "coordinates", (PyCFunction)coordinates, METH_VARARGS, "coordinates(x0, y0, d, a, x1, y1)." }, 
+    { "rotate", (PyCFunction)rotate, METH_VARARGS, "rotate( x, y, x0, y0, a, x1, y1)." },
+    { "smoothstep", (PyCFunction)smoothstep, METH_VARARGS, "smoothstep(a, b, x, t)." },
+    { "superformula", (PyCFunction)superformula, METH_VARARGS, "superformula(m, n1, n2, n3, phi)." },
+    { "mmult", (PyCFunction)mmult, METH_VARARGS, "mmult(a0, a1, a2, a3, a4, a5, a6, a7, a8, b0, b1, b2, b3, b4, b5, b6, b7, b8)." }, 
+    { NULL }
 };
 
-PyMODINIT_FUNC initnglgeometry(void){
-    Py_InitModule("nglgeometry", geometry_methods);
+static PyObject *NglGeometryError;
+
+char nglgeometrymod_docs[] = "fast_inverse_sqrt, angle, distance, coordinates, rotate, smoothstep, superformula & mmult.";
+
+PyModuleDef nglgeometry_mod = {
+	PyModuleDef_HEAD_INIT,
+	"nglgeometry",
+	nglgeometrymod_docs,
+	-1,
+	nglgeometry_methods,
+	NULL,
+	NULL,
+	NULL,
+	NULL
+};
+
+
+
+
+PyMODINIT_FUNC
+PyInit_nglgeometry(void) {
+	PyObject *m;
+	
+	m = PyModule_Create( &nglgeometry_mod );
+	if (m == NULL)
+		return NULL;
+	
+	NglGeometryError = PyErr_NewException("nglgeometry.error", NULL, NULL);
+	Py_XINCREF(NglGeometryError);
+	if (PyModule_AddObject(m, "error", NglGeometryError) < 0) {
+		Py_XDECREF(NglGeometryError);
+		Py_CLEAR(NglGeometryError);
+		Py_DECREF(m);
+		return NULL;
+	}
+    return m;
 }
 
-int main(int argc, char *argv[]) {
-    Py_SetProgramName(argv[0]);
-    Py_Initialize();
-    initnglgeometry();
-    return 0;
-}
