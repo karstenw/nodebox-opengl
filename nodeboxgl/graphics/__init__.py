@@ -5,7 +5,10 @@ from . import shader
 import nglbezier
 import nglgeometry
 
-import nglnoise as noise
+import nglnoise # import nglnoise as noise
+# noise = nglnoise.noise
+from . import noise
+
 
 from .context import *
 
