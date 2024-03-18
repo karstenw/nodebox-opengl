@@ -1,3 +1,6 @@
+
+__ALL__=["noise"]
+
 from random import random
 from math   import floor
 
