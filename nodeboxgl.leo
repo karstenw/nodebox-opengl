@@ -11,23 +11,23 @@
 <vnodes>
 <v t="karstenw.20231124170756.2" a="E"><vh>nodeboxgl</vh>
 <v t="karstenw.20231124170851.1" a="E"><vh>library</vh>
-<v t="karstenw.20231124170956.1"><vh>@clean nodeboxgl/__init__.py</vh>
+<v t="karstenw.20231124170956.1" a="E"><vh>@clean nodeboxgl/__init__.py</vh>
 <v t="karstenw.20231124171037.1"><vh>Declarations</vh></v>
 </v>
-<v t="karstenw.20231124170856.1"><vh>ext</vh>
-<v t="karstenw.20231124171143.1" a="E"><vh>@clean nodeboxgl/ext/setup.py</vh>
+<v t="karstenw.20231124170856.1" a="E"><vh>ext</vh>
+<v t="karstenw.20231124171143.1"><vh>@clean nodeboxgl/ext/setup.py</vh>
 <v t="karstenw.20231124171244.1"><vh>Declarations</vh></v>
 </v>
 </v>
 <v t="karstenw.20231124170908.1"><vh>font</vh>
-<v t="karstenw.20240123172532.1" a="E"><vh>@clean nodeboxgl/font/glyph.py</vh>
+<v t="karstenw.20240123172532.1"><vh>@clean nodeboxgl/font/glyph.py</vh>
 <v t="karstenw.20240123172554.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172554.2"><vh>descent</vh></v>
 <v t="karstenw.20240123172554.3"><vh>textpath_from_glyphs</vh></v>
 </v>
 </v>
 <v t="karstenw.20231124170943.1" a="E"><vh>graphics</vh>
-<v t="karstenw.20240123172657.1"><vh>@clean nodeboxgl/graphics/__init__.py</vh>
+<v t="karstenw.20240123172657.1" a="E"><vh>@clean nodeboxgl/graphics/__init__.py</vh>
 <v t="karstenw.20240123172922.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172922.2"><vh>size</vh></v>
 <v t="karstenw.20240123172922.3"><vh>speed</vh></v>
@@ -37,27 +37,44 @@
 <v t="karstenw.20240123172734.1"><vh>@clean nodeboxgl/graphics/bezier.py</vh>
 <v t="karstenw.20240123172920.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172920.2"><vh>class DynamicPathElement</vh></v>
+<v t="karstenw.20240126154716.1"><vh>+ BEZIERMATH +</vh>
 <v t="karstenw.20240123172920.3"><vh>linepoint</vh></v>
 <v t="karstenw.20240123172920.4"><vh>linelength</vh></v>
 <v t="karstenw.20240123172920.5"><vh>curvepoint</vh></v>
+</v>
+<v t="karstenw.20240126154749.1"><vh>+ BEZIER PATH LENGTH +</vh>
 <v t="karstenw.20240123172920.6"><vh>curvelength</vh></v>
 <v t="karstenw.20240123172920.7"><vh>segment_lengths</vh></v>
 <v t="karstenw.20240123172920.8"><vh>length</vh></v>
+</v>
+<v t="karstenw.20240126154832.1"><vh>+ BEZIER PATH POINT +</vh>
 <v t="karstenw.20240123172920.9"><vh>_locate</vh></v>
 <v t="karstenw.20240123172920.10"><vh>point</vh></v>
 <v t="karstenw.20240123172920.11"><vh>points</vh></v>
+</v>
+<v t="karstenw.20240126154916.1"><vh>+ BEZIER PATH CONTOURS +</vh>
 <v t="karstenw.20240123172920.12"><vh>contours</vh></v>
+</v>
+<v t="karstenw.20240126154940.1"><vh>+ BEZIER PATH FROM POINTS +</vh>
 <v t="karstenw.20240123172920.13"><vh>findpath</vh></v>
+</v>
+<v t="karstenw.20240126155025.1"><vh>+ BEZIER PATH INSERT POINT +</vh>
 <v t="karstenw.20240123172920.14"><vh>insert_point</vh></v>
+</v>
+<v t="karstenw.20240126155058.1"><vh>+ BEZIER ARC +</vh>
 <v t="karstenw.20240123172920.15"><vh>arc</vh></v>
 <v t="karstenw.20240123172920.16"><vh>arcto</vh></v>
+</v>
 </v>
 <v t="karstenw.20240123172753.1"><vh>@clean nodeboxgl/graphics/context.py</vh>
 <v t="karstenw.20240123172917.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172917.2"><vh>getscreenconf</vh></v>
+<v t="karstenw.20240126155307.1" a="E"><vh>+ CACHING +</vh>
 <v t="karstenw.20240123172917.3"><vh>precompile</vh></v>
 <v t="karstenw.20240123172917.4"><vh>precompiled</vh></v>
+</v>
 <v t="karstenw.20240123172917.5"><vh>flush</vh></v>
+<v t="karstenw.20240126155339.1"><vh>+ COLOR +</vh>
 <v t="karstenw.20240123172917.6"><vh>class Color</vh>
 <v t="karstenw.20240123172917.7"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.8"><vh>__setitem__</vh></v>
@@ -91,7 +108,9 @@
 <v t="karstenw.20240123172917.35"><vh>strokestyle</vh></v>
 <v t="karstenw.20240123172917.36"><vh>glLineDash</vh></v>
 <v t="karstenw.20240123172917.37"><vh>outputmode</vh></v>
+</v>
 <v t="karstenw.20240123172917.38"><vh>colormode</vh></v>
+<v t="karstenw.20240126155445.1"><vh>+ COLOR SPACE +</vh>
 <v t="karstenw.20240123172917.39"><vh>rgb_to_hsb</vh></v>
 <v t="karstenw.20240123172917.40"><vh>hsb_to_rgb</vh></v>
 <v t="karstenw.20240123172917.41"><vh>rgb_to_xyz</vh></v>
@@ -101,11 +120,19 @@
 <v t="karstenw.20240123172917.45"><vh>luminance</vh></v>
 <v t="karstenw.20240123172917.46"><vh>darker</vh></v>
 <v t="karstenw.20240123172917.47"><vh>lighter</vh></v>
+</v>
+<v t="karstenw.20240126155525.1"><vh>+ COLOR ROTATION +</vh>
 <v t="karstenw.20240123172917.48"><vh>rotate_ryb</vh></v>
 <v t="karstenw.20240123172917.49"><vh>complement</vh></v>
 <v t="karstenw.20240123172917.50"><vh>analog</vh></v>
+</v>
+<v t="karstenw.20240126155550.1"><vh>+ COLOR MIXIN +</vh>
 <v t="karstenw.20240123172917.51"><vh>color_mixin</vh></v>
+</v>
+<v t="karstenw.20240126155609.1"><vh>+ COLOR PLANE +</vh>
 <v t="karstenw.20240123172917.52"><vh>colorplane</vh></v>
+</v>
+<v t="karstenw.20240126155632.1"><vh>+ TRANSFORMATIONS +</vh>
 <v t="karstenw.20240123172917.53"><vh>push</vh></v>
 <v t="karstenw.20240123172917.54"><vh>pop</vh></v>
 <v t="karstenw.20240123172917.55"><vh>translate</vh></v>
@@ -114,6 +141,8 @@
 <v t="karstenw.20240123172917.58"><vh>reset</vh></v>
 <v t="karstenw.20240123172917.59"><vh>transform</vh></v>
 <v t="karstenw.20240123172917.60"><vh>skew</vh></v>
+</v>
+<v t="karstenw.20240126155731.1"><vh>+ DRAWING PRIMITIVES +</vh>
 <v t="karstenw.20240123172917.61"><vh>line</vh></v>
 <v t="karstenw.20240123172917.62"><vh>rect</vh></v>
 <v t="karstenw.20240123172917.63"><vh>triangle</vh></v>
@@ -122,6 +151,8 @@
 <v t="karstenw.20240123172917.66"><vh>gcd</vh></v>
 <v t="karstenw.20240123172917.67"><vh>fast_star</vh></v>
 <v t="karstenw.20240123172917.68"><vh>star</vh></v>
+</v>
+<v t="karstenw.20240126155903.1" a="E"><vh>BEZIER PATH</vh>
 <v t="karstenw.20240123172917.69"><vh>class PathError</vh></v>
 <v t="karstenw.20240123172917.70"><vh>class NoCurrentPointForPath</vh></v>
 <v t="karstenw.20240123172917.71"><vh>class NoCurrentPath</vh></v>
@@ -153,7 +184,7 @@
 <v t="karstenw.20240123172917.96"><vh>__repr__</vh></v>
 <v t="karstenw.20240123172917.97"><vh>copy</vh></v>
 </v>
-<v t="karstenw.20240123172917.98"><vh>class BezierPath</vh>
+<v t="karstenw.20240123172917.98" a="E"><vh>class BezierPath</vh>
 <v t="karstenw.20240123172917.99"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.100"><vh>copy</vh></v>
 <v t="karstenw.20240123172917.101"><vh>append</vh></v>
@@ -198,7 +229,9 @@
 <v t="karstenw.20240123172917.139"><vh>curveto</vh></v>
 <v t="karstenw.20240123172917.140"><vh>closepath</vh></v>
 <v t="karstenw.20240123172917.141"><vh>endpath</vh></v>
+</v>
 <v t="karstenw.20240123172917.142"><vh>findpath</vh></v>
+<v t="karstenw.20240126155952.1"><vh>+ BEZIER EDITOR +</vh>
 <v t="karstenw.20240123172917.143"><vh>class BezierEditor</vh>
 <v t="karstenw.20240123172917.144"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.145"><vh>_nextpoint</vh></v>
@@ -207,13 +240,21 @@
 <v t="karstenw.20240123172917.148"><vh>scale</vh></v>
 <v t="karstenw.20240123172917.149"><vh>smooth</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160010.1"><vh>+ POINT ANGLES +</vh>
 <v t="karstenw.20240123172917.150"><vh>directed</vh></v>
+</v>
+<v t="karstenw.20240126160022.1"><vh>+ CLIPPING PATH +</vh>
 <v t="karstenw.20240123172917.151"><vh>class ClippingMask</vh>
 <v t="karstenw.20240123172917.152"><vh>draw</vh></v>
 </v>
 <v t="karstenw.20240123172917.153"><vh>beginclip</vh></v>
 <v t="karstenw.20240123172917.154"><vh>endclip</vh></v>
+</v>
+<v t="karstenw.20240126160104.1"><vh>+ SUPERSHAPE +</vh>
 <v t="karstenw.20240123172917.155"><vh>supershape</vh></v>
+</v>
+<v t="karstenw.20240126160123.1" a="E"><vh>+ IMAGE +</vh>
 <v t="karstenw.20240123172917.156"><vh>ceil2</vh></v>
 <v t="karstenw.20240123172917.157"><vh>class ImageError</vh></v>
 <v t="karstenw.20240123172917.158"><vh>texture</vh></v>
@@ -263,7 +304,9 @@
 <v t="karstenw.20240123172917.200"><vh>image</vh></v>
 <v t="karstenw.20240123172917.201"><vh>imagesize</vh></v>
 <v t="karstenw.20240123172917.202"><vh>crop</vh></v>
-<v t="karstenw.20240123172917.203"><vh>class Pixels</vh>
+</v>
+<v t="karstenw.20240126160327.1" a="E"><vh>+ PIXELS +</vh>
+<v t="karstenw.20240123172917.203" a="E"><vh>class Pixels</vh>
 <v t="karstenw.20240123172917.204"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.205"><vh>width</vh></v>
 <v t="karstenw.20240123172917.206"><vh>height</vh></v>
@@ -292,6 +335,9 @@
 <v t="karstenw.20240123172917.228"><vh>draw</vh></v>
 <v t="karstenw.20240123172917.229"><vh>__repr__</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160358.1"><vh>+ OFFSCREEN RENDERING +</vh></v>
+<v t="karstenw.20240126160433.1"><vh>+ FONT +</vh>
 <v t="karstenw.20240123172917.230"><vh>install_font</vh></v>
 <v t="karstenw.20240123172917.231"><vh>font</vh></v>
 <v t="karstenw.20240123172917.232"><vh>fontname</vh></v>
@@ -299,9 +345,13 @@
 <v t="karstenw.20240123172917.234"><vh>fontweight</vh></v>
 <v t="karstenw.20240123172917.235"><vh>lineheight</vh></v>
 <v t="karstenw.20240123172917.236"><vh>align</vh></v>
+</v>
+<v t="karstenw.20240126160534.1"><vh>+ FONT MIXIN +</vh>
 <v t="karstenw.20240123172917.237"><vh>font_mixin</vh></v>
+</v>
+<v t="karstenw.20240126160602.1" a="E"><vh>+ TEXT +</vh>
 <v t="karstenw.20240123172917.238"><vh>label</vh></v>
-<v t="karstenw.20240123172917.239"><vh>class Text</vh>
+<v t="karstenw.20240123172917.239" a="E"><vh>class Text</vh>
 <v t="karstenw.20240123172917.240"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.241"><vh>_get_xy</vh></v>
 <v t="karstenw.20240123172917.242"><vh>_set_xy</vh></v>
@@ -322,13 +372,19 @@
 <v t="karstenw.20240123172917.256"><vh>textwidth</vh></v>
 <v t="karstenw.20240123172917.257"><vh>textheight</vh></v>
 <v t="karstenw.20240123172917.258"><vh>textmetrics</vh></v>
+</v>
+<v t="karstenw.20240126160625.1" a="E"><vh>+ TEXTPATH +</vh>
 <v t="karstenw.20240123172917.259"><vh>class GlyphPathError</vh></v>
 <v t="karstenw.20240123172917.260"><vh>textpath</vh></v>
+</v>
+<v t="karstenw.20240126160653.1"><vh> + UTILITIES +</vh>
 <v t="karstenw.20240123172917.261"><vh>_rnd_exp</vh></v>
 <v t="karstenw.20240123172917.262"><vh>random</vh></v>
 <v t="karstenw.20240123172917.263"><vh>grid</vh></v>
 <v t="karstenw.20240123172917.264"><vh>files</vh></v>
-<v t="karstenw.20240123172917.265"><vh>class Prototype</vh>
+</v>
+<v t="karstenw.20240126160719.1" a="E"><vh>+ PROTOTYPE +</vh>
+<v t="karstenw.20240123172917.265" a="E"><vh>class Prototype</vh>
 <v t="karstenw.20240123172917.266"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.267"><vh>_deepcopy</vh></v>
 <v t="karstenw.20240123172917.268"><vh>_bind</vh></v>
@@ -350,6 +406,8 @@
 <v t="karstenw.20240123172917.283"><vh>queue_event</vh></v>
 <v t="karstenw.20240123172917.284"><vh>process_events</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160737.1"><vh>+ TRANSITION +</vh>
 <v t="karstenw.20240123172917.285"><vh>class Transition</vh>
 <v t="karstenw.20240123172917.286"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.287"><vh>copy</vh></v>
@@ -361,6 +419,8 @@
 <v t="karstenw.20240123172917.293"><vh>done</vh></v>
 <v t="karstenw.20240123172917.294"><vh>update</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160803.1"><vh>+ LAYER +</vh>
 <v t="karstenw.20240123172917.295"><vh>_uid</vh></v>
 <v t="karstenw.20240123172917.296"><vh>class LayerRenderError</vh></v>
 <v t="karstenw.20240123172917.297"><vh>class LayerClippingMask</vh>
@@ -432,6 +492,8 @@
 <v t="karstenw.20240123172917.362"><vh>__eq__</vh></v>
 <v t="karstenw.20240123172917.363"><vh>__ne__</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160845.1"><vh>+ GROUP +</vh>
 <v t="karstenw.20240123172917.364"><vh>class Group</vh>
 <v t="karstenw.20240123172917.365"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.366"><vh>from_image</vh></v>
@@ -440,6 +502,8 @@
 <v t="karstenw.20240123172917.369"><vh>height</vh></v>
 <v t="karstenw.20240123172917.370"><vh>layer_at</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160906.1"><vh>+ MOUSE +</vh>
 <v t="karstenw.20240123172917.371"><vh>class Mouse</vh>
 <v t="karstenw.20240123172917.372"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.373"><vh>vx</vh></v>
@@ -459,8 +523,10 @@
 <v t="karstenw.20240123172917.386"><vh>_decode</vh></v>
 <v t="karstenw.20240123172917.387"><vh>__repr__</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126160950.1" a="E"><vh>+ CANVAS +</vh>
 <v t="karstenw.20240123172917.388"><vh>_configure</vh></v>
-<v t="karstenw.20240123172917.389"><vh>class Canvas</vh>
+<v t="karstenw.20240123172917.389" a="E"><vh>class Canvas</vh>
 <v t="karstenw.20240123172917.390"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.391"><vh>_get_name</vh></v>
 <v t="karstenw.20240123172917.392"><vh>_set_name</vh></v>
@@ -530,13 +596,19 @@
 <v t="karstenw.20240123172917.456"><vh>set_method</vh></v>
 <v t="karstenw.20240123172917.457"><vh>__repr__</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126161010.1" a="E"><vh>+ PROFILER +</vh>
 <v t="karstenw.20240123172917.458"><vh>profile_run</vh></v>
-<v t="karstenw.20240123172917.459"><vh>class Profiler</vh>
+<v t="karstenw.20240123172917.459" a="E"><vh>class Profiler</vh>
 <v t="karstenw.20240123172917.460"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.461"><vh>framerate</vh></v>
 <v t="karstenw.20240123172917.462"><vh>run</vh></v>
 </v>
+</v>
+<v t="karstenw.20240126161026.1"><vh>+ LIBRARIES +</vh>
 <v t="karstenw.20240123172917.463"><vh>ximport</vh></v>
+</v>
+<v t="karstenw.20240126161053.1"><vh>+ BEZIER IMPORT +</vh></v>
 </v>
 <v t="karstenw.20240123172754.1"><vh>@clean nodeboxgl/graphics/geometry.py</vh>
 <v t="karstenw.20240123172914.1"><vh>Declarations</vh></v>
@@ -618,11 +690,11 @@
 </v>
 <v t="karstenw.20240123172911.9"><vh>noise</vh></v>
 </v>
-<v t="karstenw.20240123172826.1"><vh>@clean nodeboxgl/graphics/physics.py</vh>
+<v t="karstenw.20240123172826.1" a="E"><vh>@clean nodeboxgl/graphics/physics.py</vh>
 <v t="karstenw.20240123172908.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172908.2"><vh>line</vh></v>
 <v t="karstenw.20240123172908.3"><vh>ellipse</vh></v>
-<v t="karstenw.20240123172908.4"><vh>class Text</vh>
+<v t="karstenw.20240123172908.4" a="E"><vh>class Text</vh>
 <v t="karstenw.20240123172908.5"><vh>__init__</vh></v>
 <v t="karstenw.20240123172908.6"><vh>copy</vh></v>
 <v t="karstenw.20240123172908.7"><vh>draw</vh></v>
@@ -777,6 +849,7 @@
 <v t="karstenw.20240123172908.145"><vh>__repr__</vh></v>
 <v t="karstenw.20240123172908.146"><vh>__eq__</vh></v>
 <v t="karstenw.20240123172908.147"><vh>__ne__</vh></v>
+<v t="karstenw.20240317204938.1"><vh>__hash__</vh></v>
 </v>
 <v t="karstenw.20240123172908.148"><vh>class Links</vh>
 <v t="karstenw.20240123172908.149"><vh>__init__</vh></v>
@@ -792,14 +865,16 @@
 <v t="karstenw.20240123172908.158"><vh>draw_arrow</vh></v>
 <v t="karstenw.20240123172908.159"><vh>__repr__</vh></v>
 </v>
-<v t="karstenw.20240123172908.160"><vh>class nodedict</vh>
+<v t="karstenw.20240317203023.1" a="E"><vh>++ GRAPH ++</vh>
+<v t="karstenw.20240123172908.160" a="E"><vh>class nodedict</vh>
 <v t="karstenw.20240123172908.161"><vh>__init__</vh></v>
 <v t="karstenw.20240123172908.162"><vh>__contains__</vh></v>
 <v t="karstenw.20240123172908.163"><vh>__getitem__</vh></v>
 <v t="karstenw.20240123172908.164"><vh>get</vh></v>
 </v>
 <v t="karstenw.20240123172908.165"><vh>unique</vh></v>
-<v t="karstenw.20240123172908.166"><vh>class Graph</vh>
+</v>
+<v t="karstenw.20240123172908.166" a="E"><vh>class Graph</vh>
 <v t="karstenw.20240123172908.167"><vh>__init__</vh></v>
 <v t="karstenw.20240123172908.168"><vh>__getitem__</vh></v>
 <v t="karstenw.20240123172908.169"><vh>append</vh></v>
@@ -843,10 +918,13 @@
 <v t="karstenw.20240123172908.205"><vh>update</vh></v>
 <v t="karstenw.20240123172908.206"><vh>copy</vh></v>
 </v>
+<v t="karstenw.20240317203143.1"><vh>++ GRAPH TRAVERSAL ++</vh>
 <v t="karstenw.20240123172908.207"><vh>depth_first_search</vh></v>
 <v t="karstenw.20240123172908.208"><vh>breadth_first_search</vh></v>
 <v t="karstenw.20240123172908.209"><vh>paths</vh></v>
 <v t="karstenw.20240123172908.210"><vh>edges</vh></v>
+</v>
+<v t="karstenw.20240317203210.1"><vh>++ GRAPH THEORY ++</vh>
 <v t="karstenw.20240123172908.211"><vh>adjacency</vh></v>
 <v t="karstenw.20240123172908.212"><vh>dijkstra_shortest_path</vh></v>
 <v t="karstenw.20240123172908.213"><vh>dijkstra_shortest_paths</vh></v>
@@ -858,15 +936,20 @@
 <v t="karstenw.20240123172908.219"><vh>intersection</vh></v>
 <v t="karstenw.20240123172908.220"><vh>difference</vh></v>
 <v t="karstenw.20240123172908.221"><vh>partition</vh></v>
+</v>
+<v t="karstenw.20240317203259.1"><vh>++ GRAPH THEORY | CLIQUE ++</vh>
 <v t="karstenw.20240123172908.222"><vh>is_clique</vh></v>
 <v t="karstenw.20240123172908.223"><vh>clique</vh></v>
 <v t="karstenw.20240123172908.224"><vh>cliques</vh></v>
+</v>
+<v t="karstenw.20240317203331.1"><vh>++ GRAPH MAINTENANCE ++</vh>
 <v t="karstenw.20240123172908.225"><vh>unlink</vh></v>
 <v t="karstenw.20240123172908.226"><vh>redirect</vh></v>
 <v t="karstenw.20240123172908.227"><vh>cut</vh></v>
 <v t="karstenw.20240123172908.228"><vh>insert</vh></v>
 </v>
-<v t="karstenw.20240123172755.1" a="E"><vh>@clean nodeboxgl/graphics/shader.py</vh>
+</v>
+<v t="karstenw.20240123172755.1"><vh>@clean nodeboxgl/graphics/shader.py</vh>
 <v t="karstenw.20240123172852.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172852.2"><vh>next</vh></v>
 <v t="karstenw.20240123172852.3"><vh>ceil2</vh></v>
@@ -1176,10 +1259,10 @@ fonts = {
         'light': 'Lato-Hairline',
         'bold': 'Lato-Bold',
         'bold italic': 'Lato-BoldItalic',
-    }
-
+    },
 }
-"""    'Eurostile': {
+"""
+    'Eurostile': {
         'bold': 'Eurostile-Bold',
         'bold condensed': 'Eurostile-BoldCondensed',
         'bold extended': 'Eurostile-BoldExtendedTwo',
@@ -1190,7 +1273,8 @@ fonts = {
         'extended': 'Eurostile-ExtendedTwo',
         'normal': 'Eurostile',
         'oblique': 'Eurostile-Oblique'},
-}"""
+}
+"""
 
 # How point size is measured (NodeBox for OpenGL uses 96dpi).
 dpi = 96
@@ -1216,7 +1300,9 @@ from AppKit import NSFont
     
 for fontname in fonts:
     glyphs[fontname] = {}
+    print(fontname)
     for fontweight in fonts[fontname]:
+        print("   "+fontweight)
         glyphs[fontname][fontweight] = {}
         # Render the font at a large size so we can round the path points.
         # This saves disk space and decreases the loading time.
@@ -1227,6 +1313,7 @@ for fontname in fonts:
         for i in characters:
             # ch = unichr(i)
             ch = chr(i)
+            # print( i, ch )
             glyphs[fontname][fontweight][ch] = []
             for pt in _ctx.textpath(ch, 0, 0):
                 if pt.cmd == 0:
@@ -1270,6 +1357,7 @@ f.close()
                 p.closepath()
         x += _ctx.textwidth(ch)
     return p
+textpath_from_glyphs("Hello World!", 100,100 )
 </t>
 <t tx="karstenw.20240123172657.1">@others
 @language python
@@ -1448,11 +1536,13 @@ from ctypes       import c_char, c_char_p, c_uint, c_int
         ShaderError, "don't know how to handle variable %s" % value.__class__
 
 </t>
-<t tx="karstenw.20240123172852.2">def next(generator, default=None):
-    try: 
-        return generator.next()
-    except StopIteration:
-        return default
+<t tx="karstenw.20240123172852.2">
+#def next(generator, default=None):
+#    try: 
+#        return generator.next()
+#    except StopIteration:
+#        return default
+
 
 #=====================================================================================================
 
@@ -3006,6 +3096,7 @@ from random   import random
 from heapq    import heappush, heappop
 from warnings import warn
 
+import pdb
 
 try:
     basestring
@@ -3330,7 +3421,7 @@ strength = length = magnitude = property(_get_strength, _set_strength)
     if isinstance(o, (list, tuple, set)):
         return o.__class__(deepcopy(v) for v in o)
     if isinstance(o, dict):
-        return dict((deepcopy(k), deepcopy(v)) for k,v in o.iteritems())
+        return dict((deepcopy(k), deepcopy(v)) for k,v in o.items())
     raise Exception( "don't know how to copy %s" % (o.__class__.__name__,) )
 
 </t>
@@ -3355,7 +3446,7 @@ strength = length = magnitude = property(_get_strength, _set_strength)
     self.stroke      = kwargs.pop("stroke", (0,0,0,1))
     self.strokewidth = kwargs.pop("strokewidth", 1)
     self.text        = kwargs.get("text", True) and \
-        Text(isinstance(id, unicode) and id or str(id).decode("utf-8", "ignore"), 
+        Text(isinstance(id, str) and id or str(id).decode("utf-8", "ignore"), 
                width = 85,
                 fill = kwargs.pop("text", (0,0,0,1)), 
             fontsize = kwargs.pop("fontsize", 11), **kwargs) or None
@@ -3471,11 +3562,13 @@ def centrality(self):
            
 </t>
 <t tx="karstenw.20240123172908.145">def __repr__(self):
-    return "%s(id=%s)" % (self.__class__.__name__, repr(self.id))
+    return "%s(id=%s, _weight=%s)" % (self.__class__.__name__, str(self.id), str(self._weight))
 
 </t>
 <t tx="karstenw.20240123172908.146">def __eq__(self, node):
-    return isinstance(node, Node) and self.id == node.id
+    # return isinstance(node, Node) and self.id == node.id
+    return self.id == node.id
+
 </t>
 <t tx="karstenw.20240123172908.147">def __ne__(self, node):
     return not self.__eq__(node)
@@ -3519,10 +3612,8 @@ coordinates = lambda x, y, d, a: (x + d*cos(radians(a)), y + d*sin(radians(a)))
 <t tx="karstenw.20240123172908.153">class Edge(object):
 
     @others
-#--- GRAPH -------------------------------------------------------------------------------------------
 
-# Return value of Graph.shortest_paths().
-# Dictionary values can be accessed by Node as well as by node id.
+
 </t>
 <t tx="karstenw.20240123172908.154">def __init__(self, node1, node2, weight=0.0, length=1.0, type=None, stroke=(0,0,0,1), strokewidth=1):
     """ A connection between two nodes.
@@ -3614,10 +3705,12 @@ xy = property(_get_xy, _set_xy)
     return dict.get(self, self.graph.get(node, node), default)
 
 </t>
-<t tx="karstenw.20240123172908.165">def unique(list):
+<t tx="karstenw.20240123172908.165">def unique( thelist ):
     u, b = [], {}
-    for item in list: 
-        if item not in b: u.append(item); b[item]=True
+    for item in thelist: 
+        if item not in b:
+            u.append(item)
+            b[item]=True
     return u
 
 # Graph layouts:
@@ -3632,10 +3725,6 @@ ALL = "all"
 <t tx="karstenw.20240123172908.166">class Graph(dict):
     
     @others
-#--- GRAPH LAYOUT ------------------------------------------------------------------------------------
-# Graph drawing or graph layout, as a branch of graph theory, 
-# applies topology and geometry to derive two-dimensional representations of graphs.
-
 </t>
 <t tx="karstenw.20240123172908.167">def __init__(self, layout=SPRING, distance=10.0):
     """ A network of nodes connected by edges that can be drawn with a given layout.
@@ -3771,7 +3860,7 @@ ALL = "all"
     if not isinstance(node, Node): 
         node = self[node]
     p = nodedict(self)
-    for id, path in dijkstra_shortest_paths(self, node.id, heuristic, directed).iteritems():
+    for id, path in dijkstra_shortest_paths(self, node.id, heuristic, directed).items():
         p[self[id]] = path and [self[id] for id in path] or None
     return p 
         
@@ -3781,12 +3870,15 @@ ALL = "all"
         Node.weight is updated in the process.
         Node.weight is higher for nodes with a lot of (indirect) incoming traffic.
     """
-    ec = eigenvector_centrality(self, normalized, reversed, rating, iterations, tolerance)
-    ec = nodedict(self, ((self[id], w) for id, w in ec.iteritems()))
-    for n, w in ec.iteritems(): 
+    ec1 = eigenvector_centrality(self, normalized, reversed, rating, iterations, tolerance)
+    idweights = list((self[_id], w) for _id, w in ec1.items())
+    pdb.set_trace()
+    # ec2 = nodedict(self, ( (self[_id], w) for _id, w in ec1.items()) )
+    ec2 = nodedict(self, idweights )
+    for n, w in ec2.items(): 
         n._weight = w
-    return ec
-        
+    return ec2
+
 </t>
 <t tx="karstenw.20240123172908.179">def betweenness_centrality(self, normalized=True, directed=False):
     """ Calculates betweenness centrality and returns a node =&gt; weight dictionary.
@@ -3794,8 +3886,8 @@ ALL = "all"
         Node.centrality is higher for nodes with a lot of passing traffic.
     """
     bc = brandes_betweenness_centrality(self, normalized, directed)
-    bc = nodedict(self, ((self[id], w) for id, w in bc.iteritems()))
-    for n, w in bc.iteritems(): 
+    bc = nodedict(self, ((self[id], w) for id, w in bc.items()))
+    for n, w in bc.items(): 
         n._centrality = w
     return bc
     
@@ -3902,7 +3994,7 @@ def is_sparse(self):
     except TypeError:
         new = self.add_node(n.id, root=kwargs.get("root",False))
     new.__class__ = n.__class__
-    new.__dict__.update((k, deepcopy(v)) for k,v in n.__dict__.iteritems() 
+    new.__dict__.update((k, deepcopy(v)) for k,v in n.__dict__.items() 
         if k not in ("graph", "links", "_x", "_y", "force", "_weight", "_centrality"))
 
 </t>
@@ -3914,7 +4006,7 @@ def is_sparse(self):
         kwargs.get("node1", self[e.node1.id]), 
         kwargs.get("node2", self[e.node2.id]))
     new.__class__ = e.__class__
-    new.__dict__.update((k, deepcopy(v)) for k,v in e.__dict__.iteritems()
+    new.__dict__.update((k, deepcopy(v)) for k,v in e.__dict__.items()
         if k not in ("node1", "node2"))
 
 </t>
@@ -3931,7 +4023,11 @@ def is_sparse(self):
     return g
 
 </t>
-<t tx="karstenw.20240123172908.194">class GraphLayout:
+<t tx="karstenw.20240123172908.194">#--- GRAPH LAYOUT ------------------------------------------------------------------------------------
+# Graph drawing or graph layout, as a branch of graph theory, 
+# applies topology and geometry to derive two-dimensional representations of graphs.
+
+class GraphLayout:
     
     @others
 </t>
@@ -3983,7 +4079,6 @@ def bounds(self):
 <t tx="karstenw.20240123172908.200">class GraphSpringLayout(GraphLayout):
     
     @others
-#--- GRAPH TRAVERSAL ---------------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172908.201">def __init__(self, graph):
@@ -4138,8 +4233,6 @@ bfs = breadth_first_search;
     # sum(e.weight for e in edges(path))
     return len(path) &gt; 1 and (n.links.edge(path[i+1]) for i,n in enumerate(path[:-1])) or iter(())
     
-#--- GRAPH THEORY ------------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172908.211">def adjacency(graph, directed=False, reversed=False, stochastic=False, heuristic=None):
     """ Returns a dictionary indexed by node id1's,
@@ -4195,7 +4288,7 @@ bfs = breadth_first_search;
         if n1 == id2:
             return list(flatten(path))[::-1] + [n1]
         path = (n1, path)
-        for (n2, cost2) in G[n1].iteritems():
+        for (n2, cost2) in G[n1].items():
             if n2 not in visited:
                 heappush(q, (cost1 + cost2, n2, path))
 
@@ -4219,7 +4312,7 @@ bfs = breadth_first_search;
         (dist, v) = heappop(Q)
         if v in D: continue
         D[v] = dist
-        for w in W[v].iterkeys():
+        for w in W[v].keys():
             vw_dist = D[v] + W[v][w]
             if w not in D and (w not in seen or vw_dist &lt; seen[w]):
                 seen[w] = vw_dist
@@ -4264,7 +4357,7 @@ bfs = breadth_first_search;
         def __init__(self, predecessors, *args, **kwargs):
             dict.__init__(self, *args, **kwargs)
             self.predecessors = predecessors
-    return pdict(p, ((u, dict((v, w) for v,w in d[u].iteritems() if w &lt; 1e30)) for u in d))
+    return pdict(p, ((u, dict((v, w) for v,w in d[u].items() if w &lt; 1e30)) for u in d))
 
 </t>
 <t tx="karstenw.20240123172908.215">def predecessor_path(tree, u, v):
@@ -4327,7 +4420,7 @@ bfs = breadth_first_search;
                 b[w] += d[w]
     # Normalize between 0.0 and 1.0.
     m = normalized and max( list( b.values() )) or 1
-    b = dict((id, w/m) for id, w in b.iteritems())
+    b = dict((id, w/m) for id, w in b.items())
     return b
 
 </t>
@@ -4352,7 +4445,7 @@ bfs = breadth_first_search;
     # It has no guarantee of convergence.
     for i in range(iterations):
         v0 = v
-        v  = dict.fromkeys(v0.iterkeys(), 0)
+        v  = dict.fromkeys(v0.keys(), 0)
         for n1 in v:
             for n2 in G[n1]:
                 v[n1] += 0.01 + v0[n2] * G[n1][n2] * rating.get(n1, 1)
@@ -4361,7 +4454,7 @@ bfs = breadth_first_search;
         if e &lt; len(G) * tolerance:
             # Normalize between 0.0 and 1.0.
             m = normalized and max( list(v.values()) ) or 1
-            v = dict((id, w/m) for id, w in v.iteritems())
+            v = dict((id, w/m) for id, w in v.items())
             return v
     warn("node weight is 0 because eigenvector_centrality() did not converge.", Warning)
     return dict((n, 0) for n in G)
@@ -4407,8 +4500,6 @@ normalized = unit = property(_normalized)
     g.sort(lambda a, b: len(b) - len(a))
     return g
 
-#--- GRAPH THEORY | CLIQUE ---------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172908.222">def is_clique(graph):
     """ A clique is a set of nodes in which each node is connected to all other nodes.
@@ -4445,10 +4536,6 @@ normalized = unit = property(_normalized)
             c.sort()
             if c not in a: a.append(c)
     return a
-
-#--- GRAPH MAINTENANCE -------------------------------------------------------------------------------
-# Utility commands for safe linking and unlinking of nodes,
-# with respect for the surrounding nodes.
 
 </t>
 <t tx="karstenw.20240123172908.225">def unlink(graph, node1, node2=None):
@@ -5225,7 +5312,10 @@ def age(self):
     self.system._dynamics.setdefault(force.particle1._id, []).append(force)
     self.system._dynamics.setdefault(force.particle2._id, []).append(force)
 </t>
-<t tx="karstenw.20240123172911.1">from random import random
+<t tx="karstenw.20240123172911.1">
+__ALL__=["noise"]
+
+from random import random
 from math   import floor
 
 </t>
@@ -6035,6 +6125,8 @@ try:
     basestring
 except NameError:
     basestring = str
+
+
 </t>
 <t tx="karstenw.20240123172917.10">def _get_g(self): return self[1]
 </t>
@@ -6478,16 +6570,10 @@ _path = None
 
 Path = BezierPath
 
-#--- BEZIER EDITOR -----------------------------------------------------------------------------------
-
-EQUIDISTANT = "equidistant"
-IN, OUT, BOTH = "in", "out", "both" # Drag pt1.ctrl2, pt2.ctrl1 or both simultaneously?
-
 </t>
 <t tx="karstenw.20240123172917.143">class BezierEditor:
     
     @others
-#--- POINT ANGLES ------------------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172917.144">def __init__(self, path):
@@ -6616,8 +6702,6 @@ IN, OUT, BOTH = "in", "out", "both" # Drag pt1.ctrl2, pt2.ctrl1 or both simultan
             angle = 0
         yield angle, pt
 
-#--- CLIPPING PATH -----------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172917.151">class ClippingMask:
     @others
@@ -6647,8 +6731,6 @@ IN, OUT, BOTH = "in", "out", "both" # Drag pt1.ctrl2, pt2.ctrl1 or both simultan
 <t tx="karstenw.20240123172917.154">def endclip():
     glDisable(GL_STENCIL_TEST)
 
-#--- SUPERSHAPE --------------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172917.155">def supershape(x, y, width, height, m, n1, n2, n3, points=100, percentage=1.0, range=2*pi, **kwargs):
     """ Returns a BezierPath constructed using the superformula,
@@ -6656,7 +6738,7 @@ IN, OUT, BOTH = "in", "out", "both" # Drag pt1.ctrl2, pt2.ctrl1 or both simultan
     """
     path = BezierPath()
     first = True
-    for i in xrange(points):
+    for i in range(points):
         if i &lt;= points * percentage: 
             dx, dy = geometry.superformula(m, n1, n2, n3, i*range/points)
             dx, dy = dx*width/2 + x, dy*height/2 + y
@@ -6669,23 +6751,13 @@ IN, OUT, BOTH = "in", "out", "both" # Drag pt1.ctrl2, pt2.ctrl1 or both simultan
         path.draw(**kwargs)
     return path
 
-#=====================================================================================================
-
-#--- IMAGE -------------------------------------------------------------------------------------------
-# Textures and quad vertices are cached for performance.
-# Textures remain in cache for the duration of the program.
-# Quad vertices are cached as Display Lists and destroyed when the Image object is deleted.
-# For optimal performance, images should be created once (not every frame) and its quads left unmodified.
-# Performance should be comparable to (moving) pyglet.Sprites drawn in a batch.
-
-pow2 = [2**n for n in range(20)] # [1, 2, 4, 8, 16, 32, 64, ...]
-
 </t>
 <t tx="karstenw.20240123172917.156">def ceil2(x):
     """ Returns the nearest power of 2 that is higher than x, e.g. 700 =&gt; 1024.
     """
     for y in pow2:
-        if y &gt;= x: return y
+        if y &gt;= x:
+            return y
 
 </t>
 <t tx="karstenw.20240123172917.157">class ImageError(Exception): 
@@ -6701,6 +6773,7 @@ _texture_cached = {} # pyglet.Texture.id is in keys once the image has been cach
     # Image texture stored in cache, referenced by file path (or a custom id defined with cache()).
     if isinstance(img, (basestring, int)) and img in _texture_cache:
         return _texture_cache[img]
+
     # Image file path, load it, cache it, return texture.
     if isinstance(img, basestring):
         try: 
@@ -6708,22 +6781,28 @@ _texture_cached = {} # pyglet.Texture.id is in keys once the image has been cach
         except IOError:
             raise ImageError( "can't load image from %s" % (repr(img),) )
         return _texture_cache[img]
+
     # Image texture, return original.
     if isinstance(img, pyglet.image.Texture):
         return img
+
     # Image object, return image texture.
     # (if you use this to create a new image, the new image will do expensive caching as well).
     if isinstance(img, Image):
         return img.texture
+
     # Pixels object, return pixel texture.
     if isinstance(img, Pixels):
         return img.texture
+
     # Pyglet image data.
     if isinstance(img, pyglet.image.ImageData):
         return img.texture
+
     # Image data as byte string, load it, return texture.
     if isinstance(data, basestring):
         return pyglet.image.load("", file=StringIO(data)).get_texture()
+
     # Don't know how to handle this image.
     raise ImageError( "unknown image type: %s" % (repr(img.__class__),) )
 
@@ -7050,12 +7129,6 @@ alpha = property(_get_alpha, _set_alpha)
 # OpenGL version, e.g. "2.0 NVIDIA-1.5.48".
 OPENGL = pyglet.gl.gl_info.get_version()
 
-#=====================================================================================================
-
-#--- CACHING -----------------------------------------------------------------------------------------
-# OpenGL Display Lists offer a simple way to precompile batches of OpenGL commands.
-# The drawback is that the commands, once compiled, can't be modified.
-
 </t>
 <t tx="karstenw.20240123172917.20">def _set_rgba(self, quadruplet):
     r,g,b,a = quadruplet
@@ -7119,8 +7192,6 @@ rgba = property(_get_rgba, _set_rgba)
         return t
     return Image(t)
 
-#--- PIXELS ------------------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172917.203">class Pixels(list):
     
@@ -7170,7 +7241,7 @@ def size(self):
 
 </t>
 <t tx="karstenw.20240123172917.209">def __iter__(self):
-    for i in xrange(len(self)):
+    for i in range(len(self)):
         yield self[i]
 
 </t>
@@ -7200,11 +7271,11 @@ def size(self):
 
 </t>
 <t tx="karstenw.20240123172917.212">def __getslice__(self, i, j):
-    return [self[i+n] for n in xrange(j-i)]
+    return [self[i+n] for n in range(j-i)]
 
 </t>
 <t tx="karstenw.20240123172917.213">def __setslice__(self, i, j, seq):
-    for n in xrange(j-i):
+    for n in range(j-i):
         self[i+n] = seq[n]
         
 </t>
@@ -7212,7 +7283,7 @@ def size(self):
     """ Applies a function to each pixel.
         Function takes a list of R,G,B,A channel values and must return a similar list.
     """
-    for i in xrange(len(self)):
+    for i in range(len(self)):
         self[i] = function(self[i])
         
 </t>
@@ -7263,34 +7334,6 @@ def texture(self):
     
     @others
 animation = Animation
-
-#--- OFFSCREEN RENDERING -----------------------------------------------------------------------------
-# Offscreen buffers can be used to render images from paths etc. 
-# or to apply filters on images before drawing them to the screen.
-# There are several ways to draw offscreen:
-# - render(img, filter): applies the given filter to the image and returns it.
-# - procedural(function, width, height): execute the drawing commands in function inside an image.
-# - Create your own subclass of OffscreenBuffer with a draw() method:
-#   class MyBuffer(OffscreenBuffer):
-#       def draw(self): pass
-# - Define drawing commands between OffscreenBuffer.push() and pop():
-#   b = MyBuffer()
-#   b.push()
-#   # drawing commands
-#   b.pop()
-#   img = Image(b.render())
-#
-# The shader.py module already defines several filters that use an offscreen buffer, for example:
-# blur(), adjust(), multiply(), twirl(), ...
-#
-# The less you change about an offscreen buffer, the faster it runs.
-# This includes switching it on and off and changing its size.
-
-from .shader import *
-
-#=====================================================================================================
-
-#--- FONT --------------------------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172917.222">def __init__(self, images=[], duration=None, loop=False, **kwargs):
@@ -7473,9 +7516,6 @@ _fontweight_ = fontweight
         _align = mode
     return _align
 
-#--- FONT MIXIN --------------------------------------------------------------------------------------
-# The text() command has optional parameters font, fontsize, fontweight, bold, italic, lineheight and align.
-
 </t>
 <t tx="karstenw.20240123172917.237">def font_mixin(**kwargs):
     fontname   = kwargs.get("fontname", kwargs.get("font", _fontname))
@@ -7486,18 +7526,8 @@ _fontweight_ = fontweight
     align      = kwargs.get("align", _align)
     return (fontname, fontsize, bold, italic, lineheight, align) 
 
-#--- TEXT --------------------------------------------------------------------------------------------
-# Text is cached for performance.
-# For optimal performance, texts should be created once (not every frame) and left unmodified.
-# Dynamic texts use a cache of recycled Text objects.
-
-# pyglet.text.Label leaks memory when deleted, because its old batch continues to reference
-# loaded font/fontsize/bold/italic glyphs.
-# Adding all labels to our own batch remedies this.
-_label_batch = pyglet.graphics.Batch()
-
 </t>
-<t tx="karstenw.20240123172917.238">def label(str="", width=None, height=None, **kwargs):
+<t tx="karstenw.20240123172917.238">def label(string="", width=None, height=None, **kwargs):
     """ Returns a drawable pyglet.text.Label object from the given string.
         Optional arguments include: font, fontsize, bold, italic, align, lineheight, fill.
         If these are omitted the current state is used.
@@ -7509,7 +7539,7 @@ _label_batch = pyglet.graphics.Batch()
     # FormattedDocument allows individual styling of characters - see Text.style().
     label = pyglet.text.Label(batch=_label_batch)
     label.begin_update()
-    label.document = pyglet.text.document.FormattedDocument(str or " ")
+    label.document = pyglet.text.document.FormattedDocument(string or " ")
     label.width     = width    
     label.height    = height
     label.font_name = fontname
@@ -7521,9 +7551,9 @@ _label_batch = pyglet.graphics.Batch()
     label.set_style("align", align)
     label.set_style("line_spacing", lineheight * fontsize)
     label.color     = [int(ch*255) for ch in fill]
-    if str == "":
+    if string == "":
         # Empty string "" does not set properties so we used " " first.
-        label.text = str
+        label.text = string
     label.end_update()
     return label
 
@@ -7543,7 +7573,7 @@ _text_queue = []
        and self[3] == clr[3]
 
 </t>
-<t tx="karstenw.20240123172917.240">def __init__(self, str, x=0, y=0, width=None, height=None, **kwargs):
+<t tx="karstenw.20240123172917.240">def __init__(self, string, x=0, y=0, width=None, height=None, **kwargs):
     """ A formatted string of text that can be drawn at a given position.
         Text has the following properties: 
         text, x, y, width, height, font, fontsize, bold, italic, lineheight, align, fill.
@@ -7558,7 +7588,7 @@ _text_queue = []
         a = None
     self.__dict__["x"]      = x
     self.__dict__["y"]      = y
-    self.__dict__["_label"] = label(str, width, height, **kwargs)
+    self.__dict__["_label"] = label(string, width, height, **kwargs)
     self.__dict__["_dirty"] = False
     self.__dict__["_align"] = a
     self.__dict__["_fill"]  = None
@@ -7566,9 +7596,9 @@ _text_queue = []
 </t>
 <t tx="karstenw.20240123172917.241">def _get_xy(self):
     return (self.x, self.y)
-# (x,y )
 </t>
-<t tx="karstenw.20240123172917.242">def _set_xy(self, doublet):
+<t tx="karstenw.20240123172917.242"># (x,y )
+def _set_xy(self, doublet):
     x,y = doublet
     self.x = x
     self.y = y
@@ -7578,9 +7608,9 @@ xy = property(_get_xy, _set_xy)
 </t>
 <t tx="karstenw.20240123172917.243">def _get_size(self):
     return (self.width, self.height)
-# ( w,h )
 </t>
-<t tx="karstenw.20240123172917.244">def _set_size(self, doublet):
+<t tx="karstenw.20240123172917.244"># ( w,h )
+def _set_size(self, doublet):
     w,h = doublet
     self.width  = w
     self.height = h
@@ -7756,14 +7786,14 @@ def metrics(self):
         self._label.delete()
 
 </t>
-<t tx="karstenw.20240123172917.255">def text(str, x=None, y=None, width=None, height=None, draw=True, **kwargs):
+<t tx="karstenw.20240123172917.255">def text(string, x=None, y=None, width=None, height=None, draw=True, **kwargs):
     """ Draws the string at the given position, with the current font().
         Lines of text will span the given width before breaking to the next line.
         The text will be displayed with the current state font(), fontsize(), fontweight(), etc.
         When the given text is a Text object, the state will not be applied.
     """
-    if isinstance(str, Text) and width is None and height is None and len(kwargs) == 0:
-        txt = str
+    if isinstance(string, Text) and width is None and height is None and len(kwargs) == 0:
+        txt = string
     else:
         # If the given text is not a Text object, create one on the fly.
         # Dynamic Text objects are cached by (font, fontsize, bold, italic),
@@ -7779,7 +7809,7 @@ def metrics(self):
                 # Reference count 3 =&gt; Python, _text_cache[id], txt.
                 # No other variables are referencing the text, so we can recycle it.
                 if getrefcount(txt) == 3:
-                    txt.text = str
+                    txt.text = string
                     txt.x = x or 0
                     txt.y = y or 0
                     txt.width = width
@@ -7790,7 +7820,7 @@ def metrics(self):
                     recycled = True
                     break
         if not recycled:
-            txt = Text(str, x or 0, y or 0, width, height, **kwargs)
+            txt = Text(string, x or 0, y or 0, width, height, **kwargs)
             _text_cache.setdefault(id, [])
             _text_cache[id].append(txt)
             _text_queue.insert(0, id)
@@ -7828,8 +7858,6 @@ def metrics(self):
         txt = text(txt, 0, 0, width=width, **kwargs)
     return txt.metrics
 
-#--- TEXTPATH ----------------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172917.259">class GlyphPathError(Exception):
     pass
@@ -7839,10 +7867,11 @@ glyphs = {}
 try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
     # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
-    glyphs = path.join(path.dirname(__file__), "..", "font", "glyph.p")
-    glyphs = pickle.load(open(glyphs))
-except:
-    pass
+    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
+    glyphs = pickle.load(open(glyphpath, 'rb'))
+except Exception as err:
+    print("ERROR loading glyphs pickle.")
+    print( err )
 
 </t>
 <t tx="karstenw.20240123172917.26">def map(self, base=1.0, colorspace=RGB):
@@ -7869,7 +7898,9 @@ except:
         Only works with ASCII characters in the default fonts (Droid Sans, Droid Sans Mono, Droid Serif, Arial).
         See nodebox/font/glyph.py on how to activate other fonts.
     """
+    
     fontname, fontsize, bold, italic, lineheight, align = font_mixin(**kwargs)
+    
     w = bold and italic and "bold italic" or bold and "bold" or italic and "italic" or "normal"
     p = BezierPath()
     f = fontsize / 1000.0
@@ -7889,11 +7920,6 @@ except:
         x += textwidth(ch, font=fontname, fontsize=fontsize, bold=bold, italic=italic)
     return p
 
-#=====================================================================================================
-
-#--- UTILITIES ---------------------------------------------------------------------------------------
-
-_RANDOM_MAP = [90.0, 9.00, 4.00, 2.33, 1.50, 1.00, 0.66, 0.43, 0.25, 0.11, 0.01]
 </t>
 <t tx="karstenw.20240123172917.261">def _rnd_exp(bias=0.5): 
     bias = max(0, min(bias, 1)) * 10
@@ -7939,10 +7965,6 @@ _RANDOM_MAP = [90.0, 9.00, 4.00, 2.33, 1.50, 1.00, 0.66, 0.43, 0.25, 0.11, 0.01]
     """
     return glob(path)
 
-#=====================================================================================================
-
-#--- PROTOTYPE ----------------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172917.265">class Prototype(object):
     
@@ -7974,7 +7996,7 @@ _RANDOM_MAP = [90.0, 9.00, 4.00, 2.33, 1.50, 1.00, 0.66, 0.43, 0.25, 0.11, 0.01]
         return [self._deepcopy(x) for x in value]
     elif isinstance(value, dict):
         return dict([(k, self._deepcopy(v)) for k,v in value.items()])
-    elif isinstance(value, (str, unicode, int, long, float, bool)):
+    elif isinstance(value, (str, bytes, int, long, float, bool)):
         return value
     else:
         # Biggest problem here is how to find/relink circular references.
@@ -8041,17 +8063,6 @@ _RANDOM_MAP = [90.0, 9.00, 4.00, 2.33, 1.50, 1.00, 0.66, 0.43, 0.25, 0.11, 0.01]
 <t tx="karstenw.20240123172917.272">class EventHandler:
     
     @others
-#=====================================================================================================
-
-#--- TRANSITION --------------------------------------------------------------------------------------
-# Transition.update() will tween from the last value to transition.set() new value in the given time.
-# Transitions are used as attributes (e.g. position, rotation) for the Layer class.
-
-TIME = 0 # the current time in this frame changes when the canvas is updated
-    
-LINEAR = "linear"
-SMOOTH = "smooth"
-
 </t>
 <t tx="karstenw.20240123172917.273">def __init__(self):
     # Use __dict__ directly so we can do multiple inheritance in combination with Prototype:
@@ -8120,14 +8131,6 @@ SMOOTH = "smooth"
 <t tx="karstenw.20240123172917.285">class Transition(object):
 
     @others
-#--- LAYER -------------------------------------------------------------------------------------------
-# The Layer class is responsible for the following:
-# - it has a draw() method to override; all sorts of NodeBox drawing commands can be put here,
-# - it has a transformation origin point and rotates/scales its drawn items as a group,
-# - it has child layers that transform relative to this layer,
-# - when its attributes (position, scale, angle, ...) change, they will tween smoothly over time. 
-
-_UID = 0
 </t>
 <t tx="karstenw.20240123172917.286">def __init__(self, value, interpolation=SMOOTH):
     self._v0 = value # Previous value =&gt; Transition.start.
@@ -8226,10 +8229,10 @@ ABSOLUTE = "absolute" # Origin point is stored as int, e.g. (100, 100).
 <t tx="karstenw.20240123172917.296">class LayerRenderError(Exception):
     pass
 
-# When Layer.clipped=True, children are clipped to the bounds of the layer.
-# The layer clipping masks lazily changes size with the layer.
 </t>
-<t tx="karstenw.20240123172917.297">class LayerClippingMask(ClippingMask):
+<t tx="karstenw.20240123172917.297"># When Layer.clipped=True, children are clipped to the bounds of the layer.
+# The layer clipping masks lazily changes size with the layer.
+class LayerClippingMask(ClippingMask):
     @others
 </t>
 <t tx="karstenw.20240123172917.298">def __init__(self, layer):
@@ -8268,8 +8271,6 @@ fill(0) # The default fill is black.
 
     @others
 layer = Layer
-
-#--- GROUP -------------------------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172917.301">def __init__(self, x=0, y=0, width=None, height=None, origin=(0,0), 
@@ -8946,23 +8947,6 @@ hit_test = contains
     @others
 group = Group
 
-#=====================================================================================================
-
-#--- MOUSE -------------------------------------------------------------------------------------------
-
-# Mouse cursors:
-DEFAULT = "default"
-HIDDEN  = "hidden"
-CROSS   = pyglet.window.Window.CURSOR_CROSSHAIR
-HAND    = pyglet.window.Window.CURSOR_HAND
-TEXT    = pyglet.window.Window.CURSOR_TEXT
-WAIT    = pyglet.window.Window.CURSOR_WAIT
-
-# Mouse buttons:
-LEFT    = "left"
-RIGHT   = "right"
-MIDDLE  = "middle"
-
 </t>
 <t tx="karstenw.20240123172917.365">def __init__(self, *args, **kwargs):
     """ A layer that serves as a container for other layers.
@@ -9089,10 +9073,6 @@ cursor = property(_get_cursor, _set_cursor)
 <t tx="karstenw.20240123172917.38">def colormode(mode=None, range=1.0):
     raise NotImplementedError()
 
-#--- COLOR SPACE -------------------------------------------------------------------------------------
-# Transformations between RGB, HSB, CIE XYZ and CIE LAB color spaces.
-# http://www.easyrgb.com/math.php
-
 </t>
 <t tx="karstenw.20240123172917.380">def _set_button(self, button):
     self._button = \
@@ -9111,35 +9091,6 @@ button = property(_get_button, _set_button)
 <t tx="karstenw.20240123172917.382">class Keys(list):
     
     @others
-#=====================================================================================================
-
-#--- CANVAS ------------------------------------------------------------------------------------------
-
-VERY_LIGHT_GREY = 0.95
-
-FRAME = 0
-
-# Window styles.
-WINDOW_DEFAULT    = pyglet.window.Window.WINDOW_STYLE_DEFAULT
-WINDOW_BORDERLESS = pyglet.window.Window.WINDOW_STYLE_BORDERLESS
-
-# Configuration settings for the canvas.
-# http://www.pyglet.org/doc/programming_guide/opengl_configuration_options.html
-# The stencil buffer is enabled (we need it to do clipping masks).
-# Multisampling will be enabled (if possible) to do anti-aliasing.
-settings = OPTIMAL = dict(
-#      buffer_size = 32, # Let Pyglet decide automatically.
-#         red_size = 8,
-#       green_size = 8,
-#        blue_size = 8,
-        depth_size = 24,
-      stencil_size = 1,
-        alpha_size = 8, 
-     double_buffer = 1,
-    sample_buffers = 1, 
-           samples = 4
-)
-
 </t>
 <t tx="karstenw.20240123172917.383">def __init__(self, canvas):
     """ Keeps track of the keys pressed and any modifiers (e.g. shift or control key).
@@ -9210,13 +9161,6 @@ settings = OPTIMAL = dict(
 <t tx="karstenw.20240123172917.389">class Canvas(list, Prototype, EventHandler):
 
     @others
-#--- PROFILER ----------------------------------------------------------------------------------------
-
-CUMULATIVE = "cumulative"
-SLOWEST    = "slowest"
-
-_profile_canvas = None
-_profile_frames = 100
 </t>
 <t tx="karstenw.20240123172917.39">def rgb_to_hsb(r, g, b):
     """ Converts the given R,G,B values to H,S,B (between 0.0-1.0).
@@ -9284,8 +9228,8 @@ _profile_frames = 100
 <t tx="karstenw.20240123172917.391">def _get_name(self):
     return self._window.caption
 </t>
-<t tx="karstenw.20240123172917.392">def _set_name(self, str):
-    self._window.set_caption(str)
+<t tx="karstenw.20240123172917.392">def _set_name(self, string):
+    self._window.set_caption(string)
     
 name = property(_get_name, _set_name)
 
@@ -9935,10 +9879,6 @@ def texture(self):
 <t tx="karstenw.20240123172917.459">class Profiler:
     
     @others
-#--- LIBRARIES ---------------------------------------------------------------------------------------
-# Import the library and assign it a _ctx variable containing the current context.
-# This mimics the behavior in NodeBox for Mac OS X.
-
 </t>
 <t tx="karstenw.20240123172917.46">def darker(clr, step=0.2):
     """ Returns a copy of the color with a darker brightness.
@@ -10004,10 +9944,8 @@ def framerate(self):
     library._ctx = modules[__name__]
     return library
 
-#-----------------------------------------------------------------------------------------------------
-# Linear interpolation math for BezierPath.point() etc.
+from . import bezier
 
-import nglbezier as bezier
 </t>
 <t tx="karstenw.20240123172917.47">def lighter(clr, step=0.2):
     """ Returns a copy of the color with a lighter brightness.
@@ -10017,21 +9955,6 @@ import nglbezier as bezier
     return Color(r, g, b, len(clr)==4 and clr[3] or 1)
     
 darken, lighten = darker, lighter
-
-#--- COLOR ROTATION ----------------------------------------------------------------------------------
-
-# Approximation of the RYB color wheel.
-# In HSB, colors hues range from 0 to 360, 
-# but on the color wheel these values are not evenly distributed. 
-# The second tuple value contains the actual value on the wheel (angle).
-_colorwheel = [
-    (  0,   0), ( 15,   8), ( 30,  17), ( 45,  26),
-    ( 60,  34), ( 75,  41), ( 90,  48), (105,  54),
-    (120,  60), (135,  81), (150, 103), (165, 123),
-    (180, 138), (195, 155), (210, 171), (225, 187),
-    (240, 204), (255, 219), (270, 234), (285, 251),
-    (300, 267), (315, 282), (330, 298), (345, 329), (360, 360)
-]
 
 </t>
 <t tx="karstenw.20240123172917.48">def rotate_ryb(h, s, b, angle=180):
@@ -10071,22 +9994,6 @@ _colorwheel = [
     if id is not None:
         glDeleteLists(id, 1)
 
-#=====================================================================================================
-
-#--- COLOR -------------------------------------------------------------------------------------------
-
-RGB = "RGB"
-HSB = "HSB"
-XYZ = "XYZ"
-LAB = "LAB"
-
-_background  = None    # Current state background color.
-_fill        = None    # Current state fill color.
-_stroke      = None    # Current state stroke color.
-_strokewidth = 1       # Current state strokewidth.
-_strokestyle = "solid" # Current state strokestyle.
-_alpha       = 1       # Current state alpha transparency.
-
 </t>
 <t tx="karstenw.20240123172917.50">def analog(clr, angle=20, d=0.1):
     """ Returns a random adjacent color on the color wheel.
@@ -10098,9 +10005,6 @@ _alpha       = 1       # Current state alpha transparency.
     b *= 1 - random(-d,d)
     return Color(h, s, b, len(clr)==4 and clr[3] or 1, colorspace=HSB)
 
-#--- COLOR MIXIN -------------------------------------------------------------------------------------
-# Drawing commands like rect() have optional parameters fill and stroke to set the color directly.
-
 </t>
 <t tx="karstenw.20240123172917.51">def color_mixin(**kwargs):
     fill        = kwargs.get("fill", _fill)
@@ -10108,9 +10012,6 @@ _alpha       = 1       # Current state alpha transparency.
     strokewidth = kwargs.get("strokewidth", _strokewidth)
     strokestyle = kwargs.get("strokestyle", _strokestyle)
     return (fill, stroke, strokewidth, strokestyle)
-
-#--- COLOR PLANE -------------------------------------------------------------------------------------
-# Not part of the standard API but too convenient to leave out.
 
 </t>
 <t tx="karstenw.20240123172917.52">def colorplane(x, y, width, height, *a):
@@ -10144,20 +10045,6 @@ _alpha       = 1       # Current state alpha transparency.
     glColor4f(clr4[0], clr4[1], clr4[2], clr4[3] * _alpha); glVertex2f(-0.0, -0.0)
     glEnd()
     glPopMatrix()
-
-#=====================================================================================================
-
-#--- TRANSFORMATIONS ---------------------------------------------------------------------------------
-# Unlike NodeBox, all transformations are CORNER-mode and originate from the bottom-left corner.
-
-# Example: using Transform to get a transformed path.
-# t = Transform()
-# t.rotate(45)
-# p = BezierPath()
-# p.rect(10,10,100,70)
-# p = t.transform_path(p)
-# p.contains(x,y) # now we can check if the mouse is in the transformed shape.
-Transform = geometry.AffineTransform
 
 </t>
 <t tx="karstenw.20240123172917.53">def push():
@@ -10221,14 +10108,6 @@ color = Color
 </t>
 <t tx="karstenw.20240123172917.60">def skew(x, y):
     raise NotImplementedError()
-
-#=====================================================================================================
-
-#--- DRAWING PRIMITIVES ------------------------------------------------------------------------------
-# Drawing primitives: Point, line, rect, ellipse, arrow. star.
-# The fill and stroke are two different shapes put on top of each other.
-
-Point = geometry.Point
 
 </t>
 <t tx="karstenw.20240123172917.61">def line(x0, y0, x1, y1, **kwargs):
@@ -10413,27 +10292,6 @@ _stars = {} #TODO: LRU?
     if kwargs.get("draw", True):
         p.draw(**kwargs)
     return p
-
-#=====================================================================================================
-
-#--- BEZIER PATH -------------------------------------------------------------------------------------
-# A BezierPath class with lineto(), curveto() and moveto() commands.
-# It has all the path math functionality from NodeBox and a ray casting algorithm for contains().
-# A number of caching mechanisms are used for performance:
-# drawn vertices, segment lengths, path bounds, and a hit test area for BezierPath.contains().
-# For optimal performance, the path should be created once (not every frame) and left unmodified.
-# When points in the path are added, removed or modified, a _dirty flag is set.
-# When dirty, the cache will be cleared and the new path recalculated.
-# If the path is being drawn with a fill color, this means doing tessellation
-# (i.e. additional math for finding out if parts overlap and punch a hole in the shape).
-
-MOVETO  = "moveto"
-LINETO  = "lineto"
-CURVETO = "curveto"
-CLOSE   = "close"
-
-RELATIVE = "relative" # Number of straight lines to represent a curve = 20% of curve length.
-RELATIVE_PRECISION = 0.2
 
 </t>
 <t tx="karstenw.20240123172917.69">class PathError(Exception): 
@@ -10682,8 +10540,9 @@ ctrl2 = property(_get_ctrl2, _set_ctrl2)
 
 # Thanks to Prof. F. De Smedt at the Vrije Universiteit Brussel.
 
-from context import BezierPath, PathElement, PathError, Point, MOVETO, LINETO, CURVETO, CLOSE
-from math import sqrt, pow
+from .context import BezierPath, PathElement, PathError, Point, MOVETO, LINETO, CURVETO, CLOSE
+from math import sqrt, pow, acos, sin, cos, hypot, ceil, radians, degrees
+
 
 </t>
 <t tx="karstenw.20240123172920.10">def point(path, t, segments=None):
@@ -10699,6 +10558,7 @@ from math import sqrt, pow
     i, t, closeto = _locate(path, t, segments=segments)
     x0, y0 = path[i].x, path[i].y
     p1 = path[i+1]
+
     if p1.cmd == CLOSE:
         x, y = linepoint(t, x0, y0, closeto.x, closeto.y)
         return DynamicPathElement(LINETO, ((x, y),))
@@ -10725,16 +10585,14 @@ from math import sqrt, pow
         raise PathError( "The given path is empty" )
     n = end - start
     d = n
-    if amount &gt; 1: 
+    if amount &gt; 1:
         # The delta value is divided by amount-1, because we also want the last point (t=1.0)
         # If we don't use amount-1, we fall one point short of the end.
         # If amount=4, we want the point at t 0.0, 0.33, 0.66 and 1.0.
         # If amount=2, we want the point at t 0.0 and 1.0.
         d = float(n) / (amount-1)
-    for i in xrange(amount):
+    for i in range(amount):
         yield point(path, start+d*i, segments)
-
-#--- BEZIER PATH CONTOURS ----------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172920.12">def contours(path):
@@ -10763,8 +10621,6 @@ from math import sqrt, pow
     if not empty:
         contours.append(current_contour)
     return contours
-
-#--- BEZIER PATH FROM POINTS -------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172920.13">def findpath(points, curvature=1.0):
@@ -10838,8 +10694,6 @@ from math import sqrt, pow
     
     return path
 
-#--- BEZIER PATH INSERT POINT ------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172920.14">def insert_point(path, t):
     """ Inserts an extra point at t.
@@ -10908,37 +10762,6 @@ from math import sqrt, pow
     #            new_path.closepath()
                 
     return new_path
-
-#=====================================================================================================
-
-#--- BEZIER ARC --------------------------------------------------------------------------------------
-
-# Copyright (c) 2005-2008, Enthought, Inc.
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without modification, 
-# are permitted provided that the following conditions are met:
-#
-# Redistributions of source code must retain the above copyright notice, 
-# this list of conditions and the following disclaimer.
-# Redistributions in binary form must reproduce the above copyright notice, 
-# this list of conditions and the following disclaimer in the documentation 
-# and/or other materials provided with the distribution.
-# Neither the name of Enthought, Inc. nor the names of its contributors 
-# may be used to endorse or promote products derived from this software 
-# without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY 
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-from math import acos, sin, cos, hypot, ceil, sqrt, radians, degrees
 
 </t>
 <t tx="karstenw.20240123172920.15">def arc(x1, y1, x2, y2, angle=0, extent=90):
@@ -11055,10 +10878,6 @@ from math import acos, sin, cos, hypot, ceil, sqrt, radians, degrees
     # Not a "fixed" point in the BezierPath, but calculated with BezierPath.point().
     pass
 
-#=====================================================================================================
-
-#--- BEZIER MATH ------------------------------------------------------------------------------------
-
 </t>
 <t tx="karstenw.20240123172920.3">def linepoint(t, x0, y0, x1, y1):
     """ Returns coordinates for point at t on the line.
@@ -11135,13 +10954,11 @@ from math import acos, sin, cos, hypot, ceil, sqrt, radians, degrees
 # Fast C implementations:
 try:
     from nglbezier import linepoint, linelength, curvepoint, curvelength
-    #print "FAST BEZIER"
+    print( "FAST BEZIER" )
 except Exception as err:
-    #print err
-    #print "SLOW BEZIER"
+    print( err )
+    print( "SLOW BEZIER" )
     pass
-
-#--- BEZIER PATH LENGTH ------------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172920.7">def segment_lengths(path, relative=False, n=20):
@@ -11170,8 +10987,8 @@ except Exception as err:
         length = sum(lengths)
         try:
             # Relative segment lengths' sum is 1.0.
-            return map(lambda l: l / length, lengths)
-        except ZeroDivisionError: 
+            return list(map(lambda l: l / length, lengths))
+        except ZeroDivisionError:
             # If the length is zero, just return zero for all segments
             return [0.0] * len(lengths)
     else:
@@ -11189,8 +11006,6 @@ except Exception as err:
         return sum(segment_lengths(path, n=n), 0.0)
     else:
         return segment_lengths(path, relative=True, n=n)
-
-#--- BEZIER PATH POINT -------------------------------------------------------------------------------
 
 </t>
 <t tx="karstenw.20240123172920.9">def _locate(path, t, segments=None):
@@ -11216,7 +11031,8 @@ except Exception as err:
             break
         else: 
             t -= segments[i]
-    try: t /= segments[i]
+    try:
+        t /= segments[i]
     except ZeroDivisionError: 
         pass
     if i == len(segments)-1 and segments[i] == 0: i -= 1
@@ -11230,7 +11046,10 @@ from . import shader
 import nglbezier
 import nglgeometry
 
-import nglnoise as noise
+import nglnoise # import nglnoise as noise
+# noise = nglnoise.noise
+from . import noise
+
 
 from .context import *
 
@@ -11268,6 +11087,352 @@ canvas = Canvas()
 </t>
 <t tx="karstenw.20240123172922.5">def clear():
     canvas.clear()
+</t>
+<t tx="karstenw.20240126154716.1">#=====================================================================================================
+
+#--- BEZIER MATH ------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126154749.1">#--- BEZIER PATH LENGTH ------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126154832.1">#--- BEZIER PATH POINT -------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126154916.1">#--- BEZIER PATH CONTOURS ----------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126154940.1">#--- BEZIER PATH FROM POINTS -------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126155025.1">#--- BEZIER PATH INSERT POINT ------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126155058.1">#=====================================================================================================
+
+#--- BEZIER ARC --------------------------------------------------------------------------------------
+
+# Copyright (c) 2005-2008, Enthought, Inc.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification, 
+# are permitted provided that the following conditions are met:
+#
+# Redistributions of source code must retain the above copyright notice, 
+# this list of conditions and the following disclaimer.
+# Redistributions in binary form must reproduce the above copyright notice, 
+# this list of conditions and the following disclaimer in the documentation 
+# and/or other materials provided with the distribution.
+# Neither the name of Enthought, Inc. nor the names of its contributors 
+# may be used to endorse or promote products derived from this software 
+# without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+# IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY 
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+</t>
+<t tx="karstenw.20240126155307.1">#=====================================================================================================
+
+#--- CACHING -----------------------------------------------------------------------------------------
+# OpenGL Display Lists offer a simple way to precompile batches of OpenGL commands.
+# The drawback is that the commands, once compiled, can't be modified.
+
+</t>
+<t tx="karstenw.20240126155339.1">#=====================================================================================================
+
+#--- COLOR -------------------------------------------------------------------------------------------
+
+RGB = "RGB"
+HSB = "HSB"
+XYZ = "XYZ"
+LAB = "LAB"
+
+_background  = None    # Current state background color.
+_fill        = None    # Current state fill color.
+_stroke      = None    # Current state stroke color.
+_strokewidth = 1       # Current state strokewidth.
+_strokestyle = "solid" # Current state strokestyle.
+_alpha       = 1       # Current state alpha transparency.
+
+</t>
+<t tx="karstenw.20240126155445.1">#--- COLOR SPACE -------------------------------------------------------------------------------------
+# Transformations between RGB, HSB, CIE XYZ and CIE LAB color spaces.
+# http://www.easyrgb.com/math.php
+
+</t>
+<t tx="karstenw.20240126155525.1">#--- COLOR ROTATION ----------------------------------------------------------------------------------
+
+# Approximation of the RYB color wheel.
+# In HSB, colors hues range from 0 to 360, 
+# but on the color wheel these values are not evenly distributed. 
+# The second tuple value contains the actual value on the wheel (angle).
+_colorwheel = [
+    (  0,   0), ( 15,   8), ( 30,  17), ( 45,  26),
+    ( 60,  34), ( 75,  41), ( 90,  48), (105,  54),
+    (120,  60), (135,  81), (150, 103), (165, 123),
+    (180, 138), (195, 155), (210, 171), (225, 187),
+    (240, 204), (255, 219), (270, 234), (285, 251),
+    (300, 267), (315, 282), (330, 298), (345, 329), (360, 360)
+]
+
+</t>
+<t tx="karstenw.20240126155550.1">#--- COLOR MIXIN -------------------------------------------------------------------------------------
+# Drawing commands like rect() have optional parameters fill and stroke to set the color directly.
+
+</t>
+<t tx="karstenw.20240126155609.1">#--- COLOR PLANE -------------------------------------------------------------------------------------
+# Not part of the standard API but too convenient to leave out.
+
+</t>
+<t tx="karstenw.20240126155632.1">#=====================================================================================================
+
+#--- TRANSFORMATIONS ---------------------------------------------------------------------------------
+# Unlike NodeBox, all transformations are CORNER-mode and originate from the bottom-left corner.
+
+# Example: using Transform to get a transformed path.
+# t = Transform()
+# t.rotate(45)
+# p = BezierPath()
+# p.rect(10,10,100,70)
+# p = t.transform_path(p)
+# p.contains(x,y) # now we can check if the mouse is in the transformed shape.
+Transform = geometry.AffineTransform
+
+</t>
+<t tx="karstenw.20240126155731.1">#=====================================================================================================
+
+#--- DRAWING PRIMITIVES ------------------------------------------------------------------------------
+# Drawing primitives: Point, line, rect, ellipse, arrow. star.
+# The fill and stroke are two different shapes put on top of each other.
+
+Point = geometry.Point
+
+</t>
+<t tx="karstenw.20240126155903.1">#=====================================================================================================
+
+#--- BEZIER PATH -------------------------------------------------------------------------------------
+# A BezierPath class with lineto(), curveto() and moveto() commands.
+# It has all the path math functionality from NodeBox and a ray casting algorithm for contains().
+# A number of caching mechanisms are used for performance:
+# drawn vertices, segment lengths, path bounds, and a hit test area for BezierPath.contains().
+# For optimal performance, the path should be created once (not every frame) and left unmodified.
+# When points in the path are added, removed or modified, a _dirty flag is set.
+# When dirty, the cache will be cleared and the new path recalculated.
+# If the path is being drawn with a fill color, this means doing tessellation
+# (i.e. additional math for finding out if parts overlap and punch a hole in the shape).
+
+MOVETO  = "moveto"
+LINETO  = "lineto"
+CURVETO = "curveto"
+CLOSE   = "close"
+
+RELATIVE = "relative" # Number of straight lines to represent a curve = 20% of curve length.
+RELATIVE_PRECISION = 0.2
+
+</t>
+<t tx="karstenw.20240126155952.1">#--- BEZIER EDITOR -----------------------------------------------------------------------------------
+
+EQUIDISTANT = "equidistant"
+IN, OUT, BOTH = "in", "out", "both" # Drag pt1.ctrl2, pt2.ctrl1 or both simultaneously?
+
+</t>
+<t tx="karstenw.20240126160010.1">#--- POINT ANGLES ------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160022.1">#--- CLIPPING PATH -----------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160104.1">#--- SUPERSHAPE --------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160123.1">#=====================================================================================================
+
+#--- IMAGE -------------------------------------------------------------------------------------------
+# Textures and quad vertices are cached for performance.
+# Textures remain in cache for the duration of the program.
+# Quad vertices are cached as Display Lists and destroyed when the Image object is deleted.
+# For optimal performance, images should be created once (not every frame) and its quads left unmodified.
+# Performance should be comparable to (moving) pyglet.Sprites drawn in a batch.
+
+pow2 = [2**n for n in range(20)] # [1, 2, 4, 8, 16, 32, 64, ...]
+
+</t>
+<t tx="karstenw.20240126160327.1">#--- PIXELS ------------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160358.1">#--- OFFSCREEN RENDERING -----------------------------------------------------------------------------
+# Offscreen buffers can be used to render images from paths etc. 
+# or to apply filters on images before drawing them to the screen.
+# There are several ways to draw offscreen:
+# - render(img, filter): applies the given filter to the image and returns it.
+# - procedural(function, width, height): execute the drawing commands in function inside an image.
+# - Create your own subclass of OffscreenBuffer with a draw() method:
+#   class MyBuffer(OffscreenBuffer):
+#       def draw(self): pass
+# - Define drawing commands between OffscreenBuffer.push() and pop():
+#   b = MyBuffer()
+#   b.push()
+#   # drawing commands
+#   b.pop()
+#   img = Image(b.render())
+#
+# The shader.py module already defines several filters that use an offscreen buffer, for example:
+# blur(), adjust(), multiply(), twirl(), ...
+#
+# The less you change about an offscreen buffer, the faster it runs.
+# This includes switching it on and off and changing its size.
+
+from .shader import *
+
+</t>
+<t tx="karstenw.20240126160433.1">#=====================================================================================================
+
+#--- FONT --------------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160534.1">#--- FONT MIXIN --------------------------------------------------------------------------------------
+# The text() command has optional parameters font, fontsize, fontweight, bold, italic, lineheight and align.
+
+</t>
+<t tx="karstenw.20240126160602.1">#--- TEXT --------------------------------------------------------------------------------------------
+# Text is cached for performance.
+# For optimal performance, texts should be created once (not every frame) and left unmodified.
+# Dynamic texts use a cache of recycled Text objects.
+
+# pyglet.text.Label leaks memory when deleted, because its old batch continues to reference
+# loaded font/fontsize/bold/italic glyphs.
+# Adding all labels to our own batch remedies this.
+_label_batch = pyglet.graphics.Batch()
+
+</t>
+<t tx="karstenw.20240126160625.1">#--- TEXTPATH ----------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160653.1">#=====================================================================================================
+
+#--- UTILITIES ---------------------------------------------------------------------------------------
+
+_RANDOM_MAP = [90.0, 9.00, 4.00, 2.33, 1.50, 1.00, 0.66, 0.43, 0.25, 0.11, 0.01]
+</t>
+<t tx="karstenw.20240126160719.1">#=====================================================================================================
+
+#--- PROTOTYPE ----------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160737.1">#=====================================================================================================
+
+#--- TRANSITION --------------------------------------------------------------------------------------
+# Transition.update() will tween from the last value to transition.set() new value in the given time.
+# Transitions are used as attributes (e.g. position, rotation) for the Layer class.
+
+TIME = 0 # the current time in this frame changes when the canvas is updated
+    
+LINEAR = "linear"
+SMOOTH = "smooth"
+
+</t>
+<t tx="karstenw.20240126160803.1">#--- LAYER -------------------------------------------------------------------------------------------
+# The Layer class is responsible for the following:
+# - it has a draw() method to override; all sorts of NodeBox drawing commands can be put here,
+# - it has a transformation origin point and rotates/scales its drawn items as a group,
+# - it has child layers that transform relative to this layer,
+# - when its attributes (position, scale, angle, ...) change, they will tween smoothly over time. 
+
+_UID = 0
+</t>
+<t tx="karstenw.20240126160845.1">#--- GROUP -------------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240126160906.1">#=====================================================================================================
+
+#--- MOUSE -------------------------------------------------------------------------------------------
+
+# Mouse cursors:
+DEFAULT = "default"
+HIDDEN  = "hidden"
+CROSS   = pyglet.window.Window.CURSOR_CROSSHAIR
+HAND    = pyglet.window.Window.CURSOR_HAND
+TEXT    = pyglet.window.Window.CURSOR_TEXT
+WAIT    = pyglet.window.Window.CURSOR_WAIT
+
+# Mouse buttons:
+LEFT    = "left"
+RIGHT   = "right"
+MIDDLE  = "middle"
+
+</t>
+<t tx="karstenw.20240126160950.1">#=====================================================================================================
+
+#--- CANVAS ------------------------------------------------------------------------------------------
+
+VERY_LIGHT_GREY = 0.95
+
+FRAME = 0
+
+# Window styles.
+WINDOW_DEFAULT    = pyglet.window.Window.WINDOW_STYLE_DEFAULT
+WINDOW_BORDERLESS = pyglet.window.Window.WINDOW_STYLE_BORDERLESS
+
+# Configuration settings for the canvas.
+# http://www.pyglet.org/doc/programming_guide/opengl_configuration_options.html
+# The stencil buffer is enabled (we need it to do clipping masks).
+# Multisampling will be enabled (if possible) to do anti-aliasing.
+settings = OPTIMAL = dict(
+#      buffer_size = 32, # Let Pyglet decide automatically.
+#         red_size = 8,
+#       green_size = 8,
+#        blue_size = 8,
+        depth_size = 24,
+      stencil_size = 1,
+        alpha_size = 8, 
+     double_buffer = 1,
+    sample_buffers = 1, 
+           samples = 4
+)
+
+</t>
+<t tx="karstenw.20240126161010.1">#--- PROFILER ----------------------------------------------------------------------------------------
+
+CUMULATIVE = "cumulative"
+SLOWEST    = "slowest"
+
+_profile_canvas = None
+_profile_frames = 100
+</t>
+<t tx="karstenw.20240126161026.1">#--- LIBRARIES ---------------------------------------------------------------------------------------
+# Import the library and assign it a _ctx variable containing the current context.
+# This mimics the behavior in NodeBox for Mac OS X.
+
+</t>
+<t tx="karstenw.20240126161053.1"></t>
+<t tx="karstenw.20240317203023.1">#--- GRAPH -------------------------------------------------------------------------------------------
+
+# Return value of Graph.shortest_paths().
+# Dictionary values can be accessed by Node as well as by node id.
+</t>
+<t tx="karstenw.20240317203143.1">#--- GRAPH TRAVERSAL ---------------------------------------------------------------------------------
+</t>
+<t tx="karstenw.20240317203210.1">#--- GRAPH THEORY ------------------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240317203259.1">#--- GRAPH THEORY | CLIQUE ---------------------------------------------------------------------------
+
+</t>
+<t tx="karstenw.20240317203331.1">#--- GRAPH MAINTENANCE -------------------------------------------------------------------------------
+# Utility commands for safe linking and unlinking of nodes,
+# with respect for the surrounding nodes.
+
+</t>
+<t tx="karstenw.20240317204938.1">def __hash__(self):
+    # print(hash(repr(self)))
+    return hash(repr(self))
 </t>
 </tnodes>
 </leo_file>
