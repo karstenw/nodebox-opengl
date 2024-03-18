@@ -63,10 +63,10 @@ fonts = {
         'light': 'Lato-Hairline',
         'bold': 'Lato-Bold',
         'bold italic': 'Lato-BoldItalic',
-    }
-
+    },
 }
-"""    'Eurostile': {
+"""
+    'Eurostile': {
         'bold': 'Eurostile-Bold',
         'bold condensed': 'Eurostile-BoldCondensed',
         'bold extended': 'Eurostile-BoldExtendedTwo',
@@ -77,7 +77,8 @@ fonts = {
         'extended': 'Eurostile-ExtendedTwo',
         'normal': 'Eurostile',
         'oblique': 'Eurostile-Oblique'},
-}"""
+}
+"""
 
 # How point size is measured (NodeBox for OpenGL uses 96dpi).
 dpi = 96
@@ -102,7 +103,9 @@ def descent(fontname, fontsize=10):
     
 for fontname in fonts:
     glyphs[fontname] = {}
+    print(fontname)
     for fontweight in fonts[fontname]:
+        print("   "+fontweight)
         glyphs[fontname][fontweight] = {}
         # Render the font at a large size so we can round the path points.
         # This saves disk space and decreases the loading time.
@@ -113,6 +116,7 @@ for fontname in fonts:
         for i in characters:
             # ch = unichr(i)
             ch = chr(i)
+            # print( i, ch )
             glyphs[fontname][fontweight][ch] = []
             for pt in _ctx.textpath(ch, 0, 0):
                 if pt.cmd == 0:
@@ -155,3 +159,4 @@ def textpath_from_glyphs(string, x=0, y=0, fontname="Droid Sans", fontweight="no
                 p.closepath()
         x += _ctx.textwidth(ch)
     return p
+textpath_from_glyphs("Hello World!", 100,100 )
