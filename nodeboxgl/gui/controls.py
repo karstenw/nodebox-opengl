@@ -28,11 +28,13 @@ def _popdefault(dict, key, default=None):
         return dict.pop(key)
     return default
     
-def _find(match=lambda item: False, list=[]):
+def _find(match=lambda item: False, thelist=[]):
     """ Returns the first item in the list for which match(item)=True, or None.
     """
-    for item in list:
-        if match(item): return item
+    for item in thelist:
+        if match(item):
+            return item
+
 
 #=====================================================================================================
 
@@ -99,12 +101,12 @@ class Control(Layer):
     def on_mouse_press(self, mouse):
         # Fire Control.on_mouse_doubleclick() when mouse is pressed twice in same location.
         # Subclasses need to call this method in their overridden on_mouse_press().
-        if  self._press and \
-        abs(self._press[0] - mouse.x) < 2 and \
-        abs(self._press[1] - mouse.y) < 2 and \
-            self._press[2] == mouse.button and \
-            self._press[3] == mouse.modifiers and \
-            self._press[4] - time() > -0.4:
+        if (    self._press
+            and abs(self._press[0] - mouse.x) < 2
+            and abs(self._press[1] - mouse.y) < 2
+            and self._press[2] == mouse.button
+            and self._press[3] == mouse.modifiers
+            and self._press[4] - time() > -0.4):
             self._press = None
             self.on_mouse_doubleclick(mouse)
         self._press = (mouse.x, mouse.y, mouse.button, mouse.modifiers, time())
@@ -1130,7 +1132,7 @@ class Labeled(Layout):
         Layout.insert(self, i, self.captions[i])
         
     def append(self, control, caption=""):
-        self.insert(len(self)/2, control, caption)
+        self.insert(len(self) // 2, control, caption)
     def extend(self, controls):
         for control in controls:
             caption, control = isinstance(control, tuple) and control or ("", control)
@@ -1171,7 +1173,7 @@ class Rows(Labeled):
         w2 = min(w2, mw)
         dx = 0
         dy = 0
-        for caption, control in reversed(zip(self.captions, self.controls)):
+        for caption, control in reversed( list(zip(self.captions, self.controls)) ):
             if isinstance(control, Layout) and control.height > caption.height * 2:
                 caption.y = dy + control.height - caption.height     # valign top.
             if isinstance(control, (Label, Button, Slider, Field)):
