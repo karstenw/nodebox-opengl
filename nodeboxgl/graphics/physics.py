@@ -13,6 +13,7 @@ from random   import random
 from heapq    import heappush, heappop
 from warnings import warn
 
+import pdb
 
 try:
     basestring
@@ -968,7 +969,7 @@ def deepcopy(o):
     if isinstance(o, (list, tuple, set)):
         return o.__class__(deepcopy(v) for v in o)
     if isinstance(o, dict):
-        return dict((deepcopy(k), deepcopy(v)) for k,v in o.iteritems())
+        return dict((deepcopy(k), deepcopy(v)) for k,v in o.items())
     raise Exception( "don't know how to copy %s" % (o.__class__.__name__,) )
 
 class Node(object):
@@ -990,7 +991,7 @@ class Node(object):
         self.stroke      = kwargs.pop("stroke", (0,0,0,1))
         self.strokewidth = kwargs.pop("strokewidth", 1)
         self.text        = kwargs.get("text", True) and \
-            Text(isinstance(id, unicode) and id or str(id).decode("utf-8", "ignore"), 
+            Text(isinstance(id, str) and id or str(id).decode("utf-8", "ignore"), 
                    width = 85,
                     fill = kwargs.pop("text", (0,0,0,1)), 
                 fontsize = kwargs.pop("fontsize", 11), **kwargs) or None
@@ -1086,13 +1087,18 @@ class Node(object):
                abs(self.y - y) < self.radius*2
                
     def __repr__(self):
-        return "%s(id=%s)" % (self.__class__.__name__, repr(self.id))
+        return "%s(id=%s, _weight=%s)" % (self.__class__.__name__, str(self.id), str(self._weight))
 
     def __eq__(self, node):
-        return isinstance(node, Node) and self.id == node.id
+        # return isinstance(node, Node) and self.id == node.id
+        return self.id == node.id
+
     def __ne__(self, node):
         return not self.__eq__(node)
 
+    def __hash__(self):
+        # print(hash(repr(self)))
+        return hash(repr(self))
 class Links(list):
     
     def __init__(self): 
@@ -1179,6 +1185,8 @@ class Edge(object):
     def __repr__(self):
         return "%s(id1=%s, id2=%s)" % (self.__class__.__name__, repr(self.node1.id), repr(self.node2.id))
 
+
+
 #--- GRAPH -------------------------------------------------------------------------------------------
 
 # Return value of Graph.shortest_paths().
@@ -1194,10 +1202,12 @@ class nodedict(dict):
     def get(self, node, default=None):
         return dict.get(self, self.graph.get(node, node), default)
 
-def unique(list):
+def unique( thelist ):
     u, b = [], {}
-    for item in list: 
-        if item not in b: u.append(item); b[item]=True
+    for item in thelist: 
+        if item not in b:
+            u.append(item)
+            b[item]=True
     return u
 
 # Graph layouts:
@@ -1331,7 +1341,7 @@ class Graph(dict):
         if not isinstance(node, Node): 
             node = self[node]
         p = nodedict(self)
-        for id, path in dijkstra_shortest_paths(self, node.id, heuristic, directed).iteritems():
+        for id, path in dijkstra_shortest_paths(self, node.id, heuristic, directed).items():
             p[self[id]] = path and [self[id] for id in path] or None
         return p 
             
@@ -1340,20 +1350,23 @@ class Graph(dict):
             Node.weight is updated in the process.
             Node.weight is higher for nodes with a lot of (indirect) incoming traffic.
         """
-        ec = eigenvector_centrality(self, normalized, reversed, rating, iterations, tolerance)
-        ec = nodedict(self, ((self[id], w) for id, w in ec.iteritems()))
-        for n, w in ec.iteritems(): 
+        ec1 = eigenvector_centrality(self, normalized, reversed, rating, iterations, tolerance)
+        idweights = list((self[_id], w) for _id, w in ec1.items())
+        pdb.set_trace()
+        # ec2 = nodedict(self, ( (self[_id], w) for _id, w in ec1.items()) )
+        ec2 = nodedict(self, idweights )
+        for n, w in ec2.items(): 
             n._weight = w
-        return ec
-            
+        return ec2
+
     def betweenness_centrality(self, normalized=True, directed=False):
         """ Calculates betweenness centrality and returns a node => weight dictionary.
             Node.centrality is updated in the process.
             Node.centrality is higher for nodes with a lot of passing traffic.
         """
         bc = brandes_betweenness_centrality(self, normalized, directed)
-        bc = nodedict(self, ((self[id], w) for id, w in bc.iteritems()))
-        for n, w in bc.iteritems(): 
+        bc = nodedict(self, ((self[id], w) for id, w in bc.items()))
+        for n, w in bc.items(): 
             n._centrality = w
         return bc
         
@@ -1430,7 +1443,7 @@ class Graph(dict):
         except TypeError:
             new = self.add_node(n.id, root=kwargs.get("root",False))
         new.__class__ = n.__class__
-        new.__dict__.update((k, deepcopy(v)) for k,v in n.__dict__.iteritems() 
+        new.__dict__.update((k, deepcopy(v)) for k,v in n.__dict__.items() 
             if k not in ("graph", "links", "_x", "_y", "force", "_weight", "_centrality"))
 
     def _add_edge_copy(self, e, **kwargs):
@@ -1441,7 +1454,7 @@ class Graph(dict):
             kwargs.get("node1", self[e.node1.id]), 
             kwargs.get("node2", self[e.node2.id]))
         new.__class__ = e.__class__
-        new.__dict__.update((k, deepcopy(v)) for k,v in e.__dict__.iteritems()
+        new.__dict__.update((k, deepcopy(v)) for k,v in e.__dict__.items()
             if k not in ("node1", "node2"))
 
     def copy(self, nodes=ALL):
@@ -1566,8 +1579,8 @@ class GraphSpringLayout(GraphLayout):
         g.k, g.force, g.repulsion = self.k, self.force, self.repulsion
         return g
 
-#--- GRAPH TRAVERSAL ---------------------------------------------------------------------------------
 
+#--- GRAPH TRAVERSAL ---------------------------------------------------------------------------------
 def depth_first_search(node, visit=lambda node: False, traversable=lambda node, edge: True, _visited=None):
     """ Visits all the nodes connected to the given root node, depth-first.
         The visit function is called on each node.
@@ -1687,7 +1700,7 @@ def dijkstra_shortest_path(graph, id1, id2, heuristic=None, directed=False):
         if n1 == id2:
             return list(flatten(path))[::-1] + [n1]
         path = (n1, path)
-        for (n2, cost2) in G[n1].iteritems():
+        for (n2, cost2) in G[n1].items():
             if n2 not in visited:
                 heappush(q, (cost1 + cost2, n2, path))
 
@@ -1710,7 +1723,7 @@ def dijkstra_shortest_paths(graph, id, heuristic=None, directed=False):
         (dist, v) = heappop(Q)
         if v in D: continue
         D[v] = dist
-        for w in W[v].iterkeys():
+        for w in W[v].keys():
             vw_dist = D[v] + W[v][w]
             if w not in D and (w not in seen or vw_dist < seen[w]):
                 seen[w] = vw_dist
@@ -1754,7 +1767,7 @@ def floyd_warshall_all_pairs_distance(graph, heuristic=None, directed=False):
         def __init__(self, predecessors, *args, **kwargs):
             dict.__init__(self, *args, **kwargs)
             self.predecessors = predecessors
-    return pdict(p, ((u, dict((v, w) for v,w in d[u].iteritems() if w < 1e30)) for u in d))
+    return pdict(p, ((u, dict((v, w) for v,w in d[u].items() if w < 1e30)) for u in d))
 
 def predecessor_path(tree, u, v):
     """ Returns the path between node u and node v as a list of node id's.
@@ -1815,7 +1828,7 @@ def brandes_betweenness_centrality(graph, normalized=True, directed=False):
                 b[w] += d[w]
     # Normalize between 0.0 and 1.0.
     m = normalized and max( list( b.values() )) or 1
-    b = dict((id, w/m) for id, w in b.iteritems())
+    b = dict((id, w/m) for id, w in b.items())
     return b
 
 def eigenvector_centrality(graph, normalized=True, reversed=True, rating={}, iterations=100, tolerance=0.0001):
@@ -1839,7 +1852,7 @@ def eigenvector_centrality(graph, normalized=True, reversed=True, rating={}, ite
     # It has no guarantee of convergence.
     for i in range(iterations):
         v0 = v
-        v  = dict.fromkeys(v0.iterkeys(), 0)
+        v  = dict.fromkeys(v0.keys(), 0)
         for n1 in v:
             for n2 in G[n1]:
                 v[n1] += 0.01 + v0[n2] * G[n1][n2] * rating.get(n1, 1)
@@ -1848,7 +1861,7 @@ def eigenvector_centrality(graph, normalized=True, reversed=True, rating={}, ite
         if e < len(G) * tolerance:
             # Normalize between 0.0 and 1.0.
             m = normalized and max( list(v.values()) ) or 1
-            v = dict((id, w/m) for id, w in v.iteritems())
+            v = dict((id, w/m) for id, w in v.items())
             return v
     warn("node weight is 0 because eigenvector_centrality() did not converge.", Warning)
     return dict((n, 0) for n in G)
