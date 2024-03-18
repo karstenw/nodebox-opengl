@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+from nodeboxgl.graphics.noise import noise
 
 # Create a pixels array from a solid white image:
 p = Pixels(solid(200, 200, Color(1)))
