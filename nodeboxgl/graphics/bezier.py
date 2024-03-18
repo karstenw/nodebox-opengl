@@ -8,7 +8,8 @@
 # Thanks to Prof. F. De Smedt at the Vrije Universiteit Brussel.
 
 from .context import BezierPath, PathElement, PathError, Point, MOVETO, LINETO, CURVETO, CLOSE
-from math import sqrt, pow
+from math import sqrt, pow, acos, sin, cos, hypot, ceil, radians, degrees
+
 
 class DynamicPathElement(PathElement):
     # Not a "fixed" point in the BezierPath, but calculated with BezierPath.point().
@@ -66,6 +67,8 @@ def curvepoint(t, x0, y0, x1, y1, x2, y2, x3, y3, handles=False):
     else:
         return (out_x, out_y, out_c1x, out_c1y, out_c2x, out_c2y, x01, y01, x23, y23)
 
+#--- BEZIER PATH LENGTH ------------------------------------------------------------------------------
+
 def curvelength(x0, y0, x1, y1, x2, y2, x3, y3, n=20):
     """ Returns the length of the spline.
         Integrates the estimated length of the cubic bezier spline defined by x0, y0, ... x3, y3, 
@@ -96,8 +99,6 @@ except Exception as err:
     print( "SLOW BEZIER" )
     pass
 
-#--- BEZIER PATH LENGTH ------------------------------------------------------------------------------
-
 def segment_lengths(path, relative=False, n=20):
     """ Returns a list with the lengths of each segment in the path.
     """
@@ -124,8 +125,8 @@ def segment_lengths(path, relative=False, n=20):
         length = sum(lengths)
         try:
             # Relative segment lengths' sum is 1.0.
-            return map(lambda l: l / length, lengths)
-        except ZeroDivisionError: 
+            return list(map(lambda l: l / length, lengths))
+        except ZeroDivisionError:
             # If the length is zero, just return zero for all segments
             return [0.0] * len(lengths)
     else:
@@ -168,7 +169,8 @@ def _locate(path, t, segments=None):
             break
         else: 
             t -= segments[i]
-    try: t /= segments[i]
+    try:
+        t /= segments[i]
     except ZeroDivisionError: 
         pass
     if i == len(segments)-1 and segments[i] == 0: i -= 1
@@ -187,6 +189,7 @@ def point(path, t, segments=None):
     i, t, closeto = _locate(path, t, segments=segments)
     x0, y0 = path[i].x, path[i].y
     p1 = path[i+1]
+
     if p1.cmd == CLOSE:
         x, y = linepoint(t, x0, y0, closeto.x, closeto.y)
         return DynamicPathElement(LINETO, ((x, y),))
@@ -212,13 +215,13 @@ def points(path, amount=100, start=0.0, end=1.0, segments=None):
         raise PathError( "The given path is empty" )
     n = end - start
     d = n
-    if amount > 1: 
+    if amount > 1:
         # The delta value is divided by amount-1, because we also want the last point (t=1.0)
         # If we don't use amount-1, we fall one point short of the end.
         # If amount=4, we want the point at t 0.0, 0.33, 0.66 and 1.0.
         # If amount=2, we want the point at t 0.0 and 1.0.
         d = float(n) / (amount-1)
-    for i in xrange(amount):
+    for i in range(amount):
         yield point(path, start+d*i, segments)
 
 #--- BEZIER PATH CONTOURS ----------------------------------------------------------------------------
@@ -421,8 +424,6 @@ def insert_point(path, t):
 # OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
 # STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY 
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-from math import acos, sin, cos, hypot, ceil, sqrt, radians, degrees
 
 def arc(x1, y1, x2, y2, angle=0, extent=90):
     """ Compute a cubic Bezier approximation of an elliptical arc.
