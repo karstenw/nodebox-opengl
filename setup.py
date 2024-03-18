@@ -11,8 +11,8 @@ def read(fname):
 packages = find_packages()
 print("packages:", packages)
 
-desc = read("README.txt")
-print("desc:", desc)
+desc = read("README.md")
+# print("desc:", desc)
 
 # Utility function to read the README file.
 # From http://packages.python.org/an_example_pypi_project/setuptools.html.
