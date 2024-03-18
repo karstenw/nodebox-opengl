@@ -1405,6 +1405,7 @@ class BezierEditor:
             a = geometry.angle(self.path[i-1].x, self.path[i-1].y, pt1.x, pt1.y)
             pt2.ctrl1.x, pt2.ctrl1.y = geometry.coordinates(pt1.x, pt1.y, d, a)
 
+
 #--- POINT ANGLES ------------------------------------------------------------------------------------
 
 def directed(points):
@@ -1488,7 +1489,7 @@ def supershape(x, y, width, height, m, n1, n2, n3, points=100, percentage=1.0, r
     """
     path = BezierPath()
     first = True
-    for i in xrange(points):
+    for i in range(points):
         if i <= points * percentage: 
             dx, dy = geometry.superformula(m, n1, n2, n3, i*range/points)
             dx, dy = dx*width/2 + x, dy*height/2 + y
@@ -1516,7 +1517,8 @@ def ceil2(x):
     """ Returns the nearest power of 2 that is higher than x, e.g. 700 => 1024.
     """
     for y in pow2:
-        if y >= x: return y
+        if y >= x:
+            return y
 
 class ImageError(Exception): 
     pass
@@ -1530,6 +1532,7 @@ def texture(img, data=None):
     # Image texture stored in cache, referenced by file path (or a custom id defined with cache()).
     if isinstance(img, (basestring, int)) and img in _texture_cache:
         return _texture_cache[img]
+
     # Image file path, load it, cache it, return texture.
     if isinstance(img, basestring):
         try: 
@@ -1537,22 +1540,28 @@ def texture(img, data=None):
         except IOError:
             raise ImageError( "can't load image from %s" % (repr(img),) )
         return _texture_cache[img]
+
     # Image texture, return original.
     if isinstance(img, pyglet.image.Texture):
         return img
+
     # Image object, return image texture.
     # (if you use this to create a new image, the new image will do expensive caching as well).
     if isinstance(img, Image):
         return img.texture
+
     # Pixels object, return pixel texture.
     if isinstance(img, Pixels):
         return img.texture
+
     # Pyglet image data.
     if isinstance(img, pyglet.image.ImageData):
         return img.texture
+
     # Image data as byte string, load it, return texture.
     if isinstance(data, basestring):
         return pyglet.image.load("", file=StringIO(data)).get_texture()
+
     # Don't know how to handle this image.
     raise ImageError( "unknown image type: %s" % (repr(img.__class__),) )
 
@@ -1881,7 +1890,7 @@ class Pixels(list):
         return len(self.array) / 4
 
     def __iter__(self):
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             yield self[i]
 
     def __getitem__(self, i):
@@ -1904,17 +1913,17 @@ class Pixels(list):
             self.array[i*4+j] = v[j]
 
     def __getslice__(self, i, j):
-        return [self[i+n] for n in xrange(j-i)]
+        return [self[i+n] for n in range(j-i)]
 
     def __setslice__(self, i, j, seq):
-        for n in xrange(j-i):
+        for n in range(j-i):
             self[i+n] = seq[n]
             
     def map(self, function):
         """ Applies a function to each pixel.
             Function takes a list of R,G,B,A channel values and must return a similar list.
         """
-        for i in xrange(len(self)):
+        for i in range(len(self)):
             self[i] = function(self[i])
             
     def get(self, i, j):
@@ -2171,7 +2180,7 @@ def font_mixin(**kwargs):
 # Adding all labels to our own batch remedies this.
 _label_batch = pyglet.graphics.Batch()
 
-def label(str="", width=None, height=None, **kwargs):
+def label(string="", width=None, height=None, **kwargs):
     """ Returns a drawable pyglet.text.Label object from the given string.
         Optional arguments include: font, fontsize, bold, italic, align, lineheight, fill.
         If these are omitted the current state is used.
@@ -2183,7 +2192,7 @@ def label(str="", width=None, height=None, **kwargs):
     # FormattedDocument allows individual styling of characters - see Text.style().
     label = pyglet.text.Label(batch=_label_batch)
     label.begin_update()
-    label.document = pyglet.text.document.FormattedDocument(str or " ")
+    label.document = pyglet.text.document.FormattedDocument(string or " ")
     label.width     = width    
     label.height    = height
     label.font_name = fontname
@@ -2195,15 +2204,15 @@ def label(str="", width=None, height=None, **kwargs):
     label.set_style("align", align)
     label.set_style("line_spacing", lineheight * fontsize)
     label.color     = [int(ch*255) for ch in fill]
-    if str == "":
+    if string == "":
         # Empty string "" does not set properties so we used " " first.
-        label.text = str
+        label.text = string
     label.end_update()
     return label
 
 class Text(object):
     
-    def __init__(self, str, x=0, y=0, width=None, height=None, **kwargs):
+    def __init__(self, string, x=0, y=0, width=None, height=None, **kwargs):
         """ A formatted string of text that can be drawn at a given position.
             Text has the following properties: 
             text, x, y, width, height, font, fontsize, bold, italic, lineheight, align, fill.
@@ -2218,7 +2227,7 @@ class Text(object):
             a = None
         self.__dict__["x"]      = x
         self.__dict__["y"]      = y
-        self.__dict__["_label"] = label(str, width, height, **kwargs)
+        self.__dict__["_label"] = label(string, width, height, **kwargs)
         self.__dict__["_dirty"] = False
         self.__dict__["_align"] = a
         self.__dict__["_fill"]  = None
@@ -2400,14 +2409,14 @@ class Text(object):
 _TEXT_CACHE = 200
 _text_cache = {}
 _text_queue = []
-def text(str, x=None, y=None, width=None, height=None, draw=True, **kwargs):
+def text(string, x=None, y=None, width=None, height=None, draw=True, **kwargs):
     """ Draws the string at the given position, with the current font().
         Lines of text will span the given width before breaking to the next line.
         The text will be displayed with the current state font(), fontsize(), fontweight(), etc.
         When the given text is a Text object, the state will not be applied.
     """
-    if isinstance(str, Text) and width is None and height is None and len(kwargs) == 0:
-        txt = str
+    if isinstance(string, Text) and width is None and height is None and len(kwargs) == 0:
+        txt = string
     else:
         # If the given text is not a Text object, create one on the fly.
         # Dynamic Text objects are cached by (font, fontsize, bold, italic),
@@ -2423,7 +2432,7 @@ def text(str, x=None, y=None, width=None, height=None, draw=True, **kwargs):
                 # Reference count 3 => Python, _text_cache[id], txt.
                 # No other variables are referencing the text, so we can recycle it.
                 if getrefcount(txt) == 3:
-                    txt.text = str
+                    txt.text = string
                     txt.x = x or 0
                     txt.y = y or 0
                     txt.width = width
@@ -2434,7 +2443,7 @@ def text(str, x=None, y=None, width=None, height=None, draw=True, **kwargs):
                     recycled = True
                     break
         if not recycled:
-            txt = Text(str, x or 0, y or 0, width, height, **kwargs)
+            txt = Text(string, x or 0, y or 0, width, height, **kwargs)
             _text_cache.setdefault(id, [])
             _text_cache[id].append(txt)
             _text_queue.insert(0, id)
@@ -2479,10 +2488,11 @@ glyphs = {}
 try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
     # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
-    glyphs = path.join(path.dirname(__file__), "..", "font", "glyph.p")
-    glyphs = pickle.load(open(glyphs))
-except:
-    pass
+    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
+    glyphs = pickle.load(open(glyphpath, 'rb'))
+except Exception as err:
+    print("ERROR loading glyphs pickle.")
+    print( err )
 
 def textpath(string, x=0, y=0, **kwargs):
     """ Returns a BezierPath from the given text string.
@@ -2491,7 +2501,9 @@ def textpath(string, x=0, y=0, **kwargs):
         Only works with ASCII characters in the default fonts (Droid Sans, Droid Sans Mono, Droid Serif, Arial).
         See nodebox/font/glyph.py on how to activate other fonts.
     """
+    
     fontname, fontsize, bold, italic, lineheight, align = font_mixin(**kwargs)
+    
     w = bold and italic and "bold italic" or bold and "bold" or italic and "italic" or "normal"
     p = BezierPath()
     f = fontsize / 1000.0
@@ -2584,7 +2596,7 @@ class Prototype(object):
             return [self._deepcopy(x) for x in value]
         elif isinstance(value, dict):
             return dict([(k, self._deepcopy(v)) for k,v in value.items()])
-        elif isinstance(value, (str, unicode, int, long, float, bool)):
+        elif isinstance(value, (str, bytes, int, long, float, bool)):
             return value
         else:
             # Biggest problem here is how to find/relink circular references.
@@ -3618,8 +3630,8 @@ class Canvas(list, Prototype, EventHandler):
 
     def _get_name(self):
         return self._window.caption
-    def _set_name(self, str):
-        self._window.set_caption(str)
+    def _set_name(self, string):
+        self._window.set_caption(string)
         
     name = property(_get_name, _set_name)
 
@@ -4191,9 +4203,6 @@ def ximport(library):
     library = __import__(library)
     library._ctx = modules[__name__]
     return library
-
-#-----------------------------------------------------------------------------------------------------
-# Linear interpolation math for BezierPath.point() etc.
 
 from . import bezier
 
