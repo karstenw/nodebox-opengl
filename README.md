@@ -15,40 +15,34 @@ BSD, see LICENSE.txt for further details.
 
 #### REQUIREMENTS
 
-NodeBox for OpenGL is built on the excellent Pyglet module. It works on all platforms if you have Python and Pyglet installed. Note: on Mac OS 10.5, Python is already installed. On Mac OS X 10.6+ (Snow Leopard), you need to install a 32-bit version of Python (Pyglet won't work as expected with the preinstalled 64-bit version).
-
-
 - Python 3.11 : an installer can be downloaded from http://www.python.org/download/
-- Pyglet 1.5  : an installer can be downloaded from http://www.pyglet.org/
-	- It must be exactly version 1.5!
+- Pyglet 1.5.28  : an installer can be downloaded from http://www.pyglet.org/
+	- It must be exactly version 1.5.28!
 
 Your video hardware needs support for OpenGL 2.0.
 If this is not the case, try updating to a new driver.
 
+
+#### ATTENTION
+
+This fork has been renamed "nodeboxgl" for coexistence with the NodeBox1 console install.
+
+You import the commands with:
+
+```python
+from nodeboxgl.graphics import *
+```
+
+
 INSTALLATION
 ============
 
+Run:
 
-Download the latest version manually. To be able to import NodeBox in your scripts, Python needs to know where the module is located. There are three basic ways to accomplish this:
+`python3 setup.py install`
 
-- Put the nodebox/ folder in the same folder as your script.
-- Put the nodebox/ folder in the standard location for modules so it is available to all scripts.
-  The standard location depends on your operating system, for example:
-  /Library/Python/2.5/site-packages/ on Mac,
-  /usr/lib/python2.5/site-packages/ on Unix,
-  c:\python25\Lib\site-packages\ on Windows.
-- In your script, add the location of NodeBox to sys.path, before importing it:
-  >>> MODULE = '/users/tom/python/nodebox'
-  >>> import sys; if MODULE not in sys.path: sys.path.append(MODULE)
-  >>> import nodebox
+in the nodeboxgl directory.
 
-If you get an "import pyglet" error, make sure that Pyglet is installed in site-packages/ too.
-
-Binaries:
-NOGL contains C extensions for faster mathematics. If you want to activate them, you need to compile them from source. 
-From the command line, do:
-> cd nodebox/ext
-> python setup.py
 
 USAGE
 =====
@@ -59,7 +53,7 @@ USAGE
 
 Here is a simple NodeBox script:
 
->>> from nodebox.graphics import *
+>>> from nodeboxgl.graphics import *
 >>> def draw(canvas):
 >>>     canvas.clear()
 >>>     translate(250, 250)
