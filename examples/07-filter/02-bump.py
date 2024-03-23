@@ -17,8 +17,9 @@ def draw(canvas):
     # Since the effect is interactive, we can't render it beforehand.
     # We need to reapply it to the source image each frame, 
     # based on the current mouse position in this frame.
+
     image(bump(img, dx, dy, radius=0.5, zoom=0.75))
-    
+
     # The opposite of bump() is dent():
     #image(dent(img, dx, dy, radius=0.5, zoom=0.75))
 

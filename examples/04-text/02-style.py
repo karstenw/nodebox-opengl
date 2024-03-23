@@ -1,9 +1,10 @@
 from nodeboxgl.graphics import *
 
 txt = Text("So long!\nThanks for all the fish.", 
-          font = "Droid Serif", 
-      fontsize = 20, 
-    fontweight = BOLD,
+          # font = "Droid Serif", 
+          font = "Herculanum",
+      fontsize = 90, 
+    fontweight = NORMAL,
     lineheight = 1.2,
           fill = color(0.25))
 
@@ -16,8 +17,8 @@ def draw(canvas):
     canvas.clear()
 
     x = (canvas.width - textwidth(txt)) / 2
-    y = 250
+    y = 50
     text(txt, x, y)
     
-canvas.size = 500, 500
+canvas.size = 900, 500
 canvas.run(draw)
