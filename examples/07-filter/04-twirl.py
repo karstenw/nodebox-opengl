@@ -10,7 +10,7 @@ def draw(canvas):
     # To do this, we replace the source image with the twirled version.
     # Hence we declare img as global, so we can modify the variable's contents.
     global img
-
+    
     canvas.clear()
     
     dx = canvas.mouse.x / float(img.width)

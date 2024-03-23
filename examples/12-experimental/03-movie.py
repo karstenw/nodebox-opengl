@@ -8,7 +8,7 @@ class MovieEncoderError(Exception):
 
 class Movie:
     
-    def __init__(self, canvas, fps=25, compression=0.0, encoder="ffmpeg"):
+    def __init__(self, canvas, fps=25, compression=0.0, encoder="/usr/local/bin/ffmpeg"):
         """ Creates a movie recorder for the given Canvas.
             Saving the movie requires ffmpeg (http://www.ffmpeg.org/).
             If fps=None, uses the actual framerate of the canvas.
@@ -22,10 +22,13 @@ class Movie:
         # This binary was obtained from ffmpegX.
         # Binaries for Win32 can also be found online.
         self._canvas      = canvas
-        self._frames      = tempfile.mkdtemp()
+        # self._frames      = tempfile.mkdtemp()
+        self._frames      = os.path.abspath("./frames")
         self._fps         = fps
         self._compression = compression
         self._encoder     = encoder
+        if not os.path.exists( self._frames ):
+            os.makedirs( self._frames )
     
     def record(self):
         """ Call Movie.record() in Canvas.draw() to add the current frame to the movie.
@@ -44,17 +47,21 @@ class Movie:
             o = [self._encoder, "-y", "-r", r, "-i", f, "-qscale", q, path]
             p = subprocess.Popen(o, stderr=subprocess.PIPE) # Option -y overwrites exising files.
             p.wait()
-        except Exception, e:
+        except Exception as e:
             self.close()
             raise MovieEncoderError
         
     def close(self):
-        try: shutil.rmtree(self._frames)
+        try:
+            # shutil.rmtree(self._frames)
+            pass
         except:
             pass
 
     def __del__(self):
-        try: shutil.rmtree(self._frames)
+        try:
+            # shutil.rmtree(self._frames)
+            pass
         except:
             pass
 

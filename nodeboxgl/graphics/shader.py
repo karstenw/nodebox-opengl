@@ -6,14 +6,16 @@
 # http://cityinabottle.org/nodebox
 
 from pyglet.gl    import *
-from pyglet.image import Texture, SolidColorImagePattern
+from pyglet.image import Texture, SolidColorImagePattern, TextureRegion
 from .context      import Image, texture
 from .geometry     import lerp, clamp
 from math         import radians
 from ctypes       import byref, cast, pointer, POINTER
 from ctypes       import c_char, c_char_p, c_uint, c_int
 
-# import pdb
+#import pdb
+#import pprint
+#pp=pprint.pprint
 
 #def next(generator, default=None):
 #    try: 
@@ -1300,6 +1302,11 @@ def blur(img, kernel=5, scale=1.0, amount=1, cumulative=False):
                   this produces a nicer effect than repeatedly using blur() in a for-loop
                   (which blurs the blurred).
     """
+    #
+    # TODO: 2024-03-23 kw:  texture and img need separation - currently texture
+    #                       is only a view in pyglet
+    #
+    
     for i in range(amount):
         clear = i==0 or not cumulative
         img = filter(img, HorizontalBlur(img.texture, kernel, scale), clear=clear)

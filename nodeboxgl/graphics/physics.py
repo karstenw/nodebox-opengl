@@ -1352,7 +1352,7 @@ class Graph(dict):
         """
         ec1 = eigenvector_centrality(self, normalized, reversed, rating, iterations, tolerance)
         idweights = list((self[_id], w) for _id, w in ec1.items())
-        pdb.set_trace()
+        # pdb.set_trace()
         # ec2 = nodedict(self, ( (self[_id], w) for _id, w in ec1.items()) )
         ec2 = nodedict(self, idweights )
         for n, w in ec2.items(): 
