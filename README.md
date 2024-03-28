@@ -53,14 +53,14 @@ USAGE
 
 Here is a simple NodeBox script:
 ```python
->>> from nodeboxgl.graphics import *
->>> def draw(canvas):
->>>     canvas.clear()
->>>     translate(250, 250)
->>>     rotate(canvas.frame)
->>>     rect(x=-50, y=-50, width=100, height=100)
->>> canvas.size = 500, 500
->>> canvas.run(draw)
+from nodeboxgl.graphics import *
+def draw(canvas):
+    canvas.clear()
+    translate(250, 250)
+    rotate(canvas.frame)
+    rect(x=-50, y=-50, width=100, height=100)
+canvas.size = 500, 500
+canvas.run(draw)
 ```
 
 It imports the nodebox.graphics module with the standard set of drawing commands. It defines a draw() function and attaches it to the canvas, so that it will be drawn each animation frame. It opens the main application window with canvas.run().
