@@ -17,6 +17,9 @@ void _mmult(double, double, double, double, double, double, double, double, doub
 			double, double, double, double, double, double, double, double, double,
 			double *, double *, double *, double *, double *, double *, double *, double *, double *);
 
+#ifndef M_PI
+#define M_PI 3.1415926535
+#endif
 
 // --- FAST INVERSE SQRT --------------------------------------------------------
 // Chris Lomont, http://www.math.purdue.edu/~clomont/Math/Papers/2003/InvSqrt.pdf
