@@ -1,6 +1,10 @@
 from nodeboxgl.graphics import *
 
-img = Image("creature.png")
+import os
+if os.path.exists("__DEBUG__"):
+    img = Image("grid.png")
+else:
+    img = Image("creature.png")
 X,Y = img.width, img.height
 
 def draw(canvas):
@@ -16,7 +20,10 @@ def draw(canvas):
     
     dx = canvas.mouse.x / float(canvas.width)
     dy = canvas.mouse.y / float(canvas.height)
-    image( dent(img, dx, dy, radius=0.25, zoom=0.5) )
+    if canvas.mouse.pressed:
+        image( dent(img, dx, dy, radius=0.3, zoom=0.6) )
+    else:
+        image( dent(img, dx, dy, radius=0.15, zoom=0.3) )
 # Start the application:
 canvas.fps  = 60
 canvas.size = X, Y

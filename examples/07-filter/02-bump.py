@@ -1,6 +1,12 @@
 from nodeboxgl.graphics import *
 
-img = Image("creature.png")
+import os
+if os.path.exists("__DEBUG__"):
+    img = Image("grid.png")
+else:
+    img = Image("creature.png")
+
+
 
 def draw(canvas):
     
