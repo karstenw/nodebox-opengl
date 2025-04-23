@@ -22,6 +22,12 @@ void _mmult(double, double, double, double, double, double, double, double, doub
 			double, double, double, double, double, double, double, double, double,
 			double *, double *, double *, double *, double *, double *, double *, double *, double *);
 
+// missing on windows
+#ifndef M_PI
+#define M_PI 3.1415926535
+#endif
+
+
 /*
 
 // deactivated and replaced with 1.0/sqrt(x)
@@ -38,6 +44,7 @@ float _fast_inverse_sqrt(float x) {
     return x;
 }
 
+// alternate implementation for doubles
 double invsqrt(const double x)
 {
     return 1.0 / sqrt(x);
