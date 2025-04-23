@@ -4,9 +4,14 @@
 #include <stdio.h>
 #include <math.h>
 
+// windows had a problem
+#ifndef M_PI
+#define M_PI 3.1415926535798932
+#endif
 
 // protos
-float _fast_inverse_sqrt(float);
+//float _fast_inverse_sqrt(float);
+//double invsqrt(const double);
 void _angle(double, double, double, double, double *);
 void _distance(double, double, double, double, double *);
 void _coordinates(double, double, double, double, double *, double *);
@@ -17,6 +22,10 @@ void _mmult(double, double, double, double, double, double, double, double, doub
 			double, double, double, double, double, double, double, double, double,
 			double *, double *, double *, double *, double *, double *, double *, double *, double *);
 
+/*
+
+// deactivated and replaced with 1.0/sqrt(x)
+// - it's a 32-bit hack in a 64-bit world
 
 // --- FAST INVERSE SQRT --------------------------------------------------------
 // Chris Lomont, http://www.math.purdue.edu/~clomont/Math/Papers/2003/InvSqrt.pdf
@@ -28,6 +37,12 @@ float _fast_inverse_sqrt(float x) {
     x = x*(1.5f-xhalf*x*x);
     return x;
 }
+
+double invsqrt(const double x)
+{
+    return 1.0 / sqrt(x);
+}
+*/
 
 // --- ANGLE --------------------------------------------------------------------
 void _angle(double x0, double y0, double x1, double y1, double *a) {
@@ -108,7 +123,9 @@ fast_inverse_sqrt(PyObject *self, PyObject *args) {
     double x;   
     if (!PyArg_ParseTuple(args, "d", &x))
         return NULL;
-    x = _fast_inverse_sqrt(x);
+    //x = _fast_inverse_sqrt(x);
+    //x = invsqrt( x );
+    x = 1.0 / sqrt( x );
     return Py_BuildValue("d", x);
 }
 
