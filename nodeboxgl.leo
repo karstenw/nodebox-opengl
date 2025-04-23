@@ -15,12 +15,12 @@
 <v t="karstenw.20231124171037.1"><vh>Declarations</vh></v>
 </v>
 <v t="karstenw.20231124170856.1" a="E"><vh>ext</vh>
-<v t="karstenw.20231124171143.1"><vh>@clean nodeboxgl/ext/setup.py</vh>
+<v t="karstenw.20231124171143.1" a="E"><vh>@clean nodeboxgl/ext/setup.py</vh>
 <v t="karstenw.20231124171244.1"><vh>Declarations</vh></v>
 </v>
 </v>
-<v t="karstenw.20231124170908.1"><vh>font</vh>
-<v t="karstenw.20240123172532.1"><vh>@clean nodeboxgl/font/glyph.py</vh>
+<v t="karstenw.20231124170908.1" a="E"><vh>font</vh>
+<v t="karstenw.20240123172532.1" a="E"><vh>@clean nodeboxgl/font/glyph.py</vh>
 <v t="karstenw.20240123172554.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172554.2"><vh>descent</vh></v>
 <v t="karstenw.20240123172554.3"><vh>textpath_from_glyphs</vh></v>
@@ -34,10 +34,10 @@
 <v t="karstenw.20240123172922.4"><vh>frame</vh></v>
 <v t="karstenw.20240123172922.5"><vh>clear</vh></v>
 </v>
-<v t="karstenw.20240123172734.1"><vh>@clean nodeboxgl/graphics/bezier.py</vh>
+<v t="karstenw.20240123172734.1" a="E"><vh>@clean nodeboxgl/graphics/bezier.py</vh>
 <v t="karstenw.20240123172920.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172920.2"><vh>class DynamicPathElement</vh></v>
-<v t="karstenw.20240126154716.1"><vh>+ BEZIERMATH +</vh>
+<v t="karstenw.20240126154716.1" a="E"><vh>+ BEZIERMATH +</vh>
 <v t="karstenw.20240123172920.3"><vh>linepoint</vh></v>
 <v t="karstenw.20240123172920.4"><vh>linelength</vh></v>
 <v t="karstenw.20240123172920.5"><vh>curvepoint</vh></v>
@@ -69,7 +69,7 @@
 <v t="karstenw.20240123172753.1"><vh>@clean nodeboxgl/graphics/context.py</vh>
 <v t="karstenw.20240123172917.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172917.2"><vh>getscreenconf</vh></v>
-<v t="karstenw.20240126155307.1" a="E"><vh>+ CACHING +</vh>
+<v t="karstenw.20240126155307.1"><vh>+ CACHING +</vh>
 <v t="karstenw.20240123172917.3"><vh>precompile</vh></v>
 <v t="karstenw.20240123172917.4"><vh>precompiled</vh></v>
 </v>
@@ -152,7 +152,7 @@
 <v t="karstenw.20240123172917.67"><vh>fast_star</vh></v>
 <v t="karstenw.20240123172917.68"><vh>star</vh></v>
 </v>
-<v t="karstenw.20240126155903.1" a="E"><vh>BEZIER PATH</vh>
+<v t="karstenw.20240126155903.1"><vh>BEZIER PATH</vh>
 <v t="karstenw.20240123172917.69"><vh>class PathError</vh></v>
 <v t="karstenw.20240123172917.70"><vh>class NoCurrentPointForPath</vh></v>
 <v t="karstenw.20240123172917.71"><vh>class NoCurrentPath</vh></v>
@@ -184,7 +184,7 @@
 <v t="karstenw.20240123172917.96"><vh>__repr__</vh></v>
 <v t="karstenw.20240123172917.97"><vh>copy</vh></v>
 </v>
-<v t="karstenw.20240123172917.98" a="E"><vh>class BezierPath</vh>
+<v t="karstenw.20240123172917.98"><vh>class BezierPath</vh>
 <v t="karstenw.20240123172917.99"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.100"><vh>copy</vh></v>
 <v t="karstenw.20240123172917.101"><vh>append</vh></v>
@@ -254,7 +254,7 @@
 <v t="karstenw.20240126160104.1"><vh>+ SUPERSHAPE +</vh>
 <v t="karstenw.20240123172917.155"><vh>supershape</vh></v>
 </v>
-<v t="karstenw.20240126160123.1" a="E"><vh>+ IMAGE +</vh>
+<v t="karstenw.20240126160123.1"><vh>+ IMAGE +</vh>
 <v t="karstenw.20240123172917.156"><vh>ceil2</vh></v>
 <v t="karstenw.20240123172917.157"><vh>class ImageError</vh></v>
 <v t="karstenw.20240123172917.158"><vh>texture</vh></v>
@@ -305,7 +305,7 @@
 <v t="karstenw.20240123172917.201"><vh>imagesize</vh></v>
 <v t="karstenw.20240123172917.202"><vh>crop</vh></v>
 </v>
-<v t="karstenw.20240126160327.1" a="E"><vh>+ PIXELS +</vh>
+<v t="karstenw.20240126160327.1"><vh>+ PIXELS +</vh>
 <v t="karstenw.20240123172917.203" a="E"><vh>class Pixels</vh>
 <v t="karstenw.20240123172917.204"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.205"><vh>width</vh></v>
@@ -349,9 +349,9 @@
 <v t="karstenw.20240126160534.1"><vh>+ FONT MIXIN +</vh>
 <v t="karstenw.20240123172917.237"><vh>font_mixin</vh></v>
 </v>
-<v t="karstenw.20240126160602.1" a="E"><vh>+ TEXT +</vh>
+<v t="karstenw.20240126160602.1"><vh>+ TEXT +</vh>
 <v t="karstenw.20240123172917.238"><vh>label</vh></v>
-<v t="karstenw.20240123172917.239" a="E"><vh>class Text</vh>
+<v t="karstenw.20240123172917.239"><vh>class Text</vh>
 <v t="karstenw.20240123172917.240"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.241"><vh>_get_xy</vh></v>
 <v t="karstenw.20240123172917.242"><vh>_set_xy</vh></v>
@@ -373,9 +373,11 @@
 <v t="karstenw.20240123172917.257"><vh>textheight</vh></v>
 <v t="karstenw.20240123172917.258"><vh>textmetrics</vh></v>
 </v>
-<v t="karstenw.20240126160625.1" a="E"><vh>+ TEXTPATH +</vh>
+<v t="karstenw.20240126160625.1"><vh>+ TEXTPATH +</vh>
 <v t="karstenw.20240123172917.259"><vh>class GlyphPathError</vh></v>
+<v t="karstenw.20240405203948.1"><vh>+ LOAD GLYPHs +</vh></v>
 <v t="karstenw.20240123172917.260"><vh>textpath</vh></v>
+<v t="karstenw.20240405204143.1"><vh>fontnames</vh></v>
 </v>
 <v t="karstenw.20240126160653.1"><vh> + UTILITIES +</vh>
 <v t="karstenw.20240123172917.261"><vh>_rnd_exp</vh></v>
@@ -383,8 +385,8 @@
 <v t="karstenw.20240123172917.263"><vh>grid</vh></v>
 <v t="karstenw.20240123172917.264"><vh>files</vh></v>
 </v>
-<v t="karstenw.20240126160719.1" a="E"><vh>+ PROTOTYPE +</vh>
-<v t="karstenw.20240123172917.265" a="E"><vh>class Prototype</vh>
+<v t="karstenw.20240126160719.1"><vh>+ PROTOTYPE +</vh>
+<v t="karstenw.20240123172917.265"><vh>class Prototype</vh>
 <v t="karstenw.20240123172917.266"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.267"><vh>_deepcopy</vh></v>
 <v t="karstenw.20240123172917.268"><vh>_bind</vh></v>
@@ -524,9 +526,9 @@
 <v t="karstenw.20240123172917.387"><vh>__repr__</vh></v>
 </v>
 </v>
-<v t="karstenw.20240126160950.1" a="E"><vh>+ CANVAS +</vh>
+<v t="karstenw.20240126160950.1"><vh>+ CANVAS +</vh>
 <v t="karstenw.20240123172917.388"><vh>_configure</vh></v>
-<v t="karstenw.20240123172917.389" a="E"><vh>class Canvas</vh>
+<v t="karstenw.20240123172917.389"><vh>class Canvas</vh>
 <v t="karstenw.20240123172917.390"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.391"><vh>_get_name</vh></v>
 <v t="karstenw.20240123172917.392"><vh>_set_name</vh></v>
@@ -597,9 +599,9 @@
 <v t="karstenw.20240123172917.457"><vh>__repr__</vh></v>
 </v>
 </v>
-<v t="karstenw.20240126161010.1" a="E"><vh>+ PROFILER +</vh>
+<v t="karstenw.20240126161010.1"><vh>+ PROFILER +</vh>
 <v t="karstenw.20240123172917.458"><vh>profile_run</vh></v>
-<v t="karstenw.20240123172917.459" a="E"><vh>class Profiler</vh>
+<v t="karstenw.20240123172917.459"><vh>class Profiler</vh>
 <v t="karstenw.20240123172917.460"><vh>__init__</vh></v>
 <v t="karstenw.20240123172917.461"><vh>framerate</vh></v>
 <v t="karstenw.20240123172917.462"><vh>run</vh></v>
@@ -690,11 +692,11 @@
 </v>
 <v t="karstenw.20240123172911.9"><vh>noise</vh></v>
 </v>
-<v t="karstenw.20240123172826.1" a="E"><vh>@clean nodeboxgl/graphics/physics.py</vh>
+<v t="karstenw.20240123172826.1"><vh>@clean nodeboxgl/graphics/physics.py</vh>
 <v t="karstenw.20240123172908.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172908.2"><vh>line</vh></v>
 <v t="karstenw.20240123172908.3"><vh>ellipse</vh></v>
-<v t="karstenw.20240123172908.4" a="E"><vh>class Text</vh>
+<v t="karstenw.20240123172908.4"><vh>class Text</vh>
 <v t="karstenw.20240123172908.5"><vh>__init__</vh></v>
 <v t="karstenw.20240123172908.6"><vh>copy</vh></v>
 <v t="karstenw.20240123172908.7"><vh>draw</vh></v>
@@ -865,8 +867,8 @@
 <v t="karstenw.20240123172908.158"><vh>draw_arrow</vh></v>
 <v t="karstenw.20240123172908.159"><vh>__repr__</vh></v>
 </v>
-<v t="karstenw.20240317203023.1" a="E"><vh>++ GRAPH ++</vh>
-<v t="karstenw.20240123172908.160" a="E"><vh>class nodedict</vh>
+<v t="karstenw.20240317203023.1"><vh>++ GRAPH ++</vh>
+<v t="karstenw.20240123172908.160"><vh>class nodedict</vh>
 <v t="karstenw.20240123172908.161"><vh>__init__</vh></v>
 <v t="karstenw.20240123172908.162"><vh>__contains__</vh></v>
 <v t="karstenw.20240123172908.163"><vh>__getitem__</vh></v>
@@ -874,7 +876,7 @@
 </v>
 <v t="karstenw.20240123172908.165"><vh>unique</vh></v>
 </v>
-<v t="karstenw.20240123172908.166" a="E"><vh>class Graph</vh>
+<v t="karstenw.20240123172908.166"><vh>class Graph</vh>
 <v t="karstenw.20240123172908.167"><vh>__init__</vh></v>
 <v t="karstenw.20240123172908.168"><vh>__getitem__</vh></v>
 <v t="karstenw.20240123172908.169"><vh>append</vh></v>
@@ -1404,13 +1406,16 @@ textpath_from_glyphs("Hello World!", 100,100 )
 @tabwidth -4
 </t>
 <t tx="karstenw.20240123172852.1">from pyglet.gl    import *
-from pyglet.image import Texture, SolidColorImagePattern
+from pyglet.image import Texture, SolidColorImagePattern, TextureRegion
 from .context      import Image, texture
 from .geometry     import lerp, clamp
 from math         import radians
 from ctypes       import byref, cast, pointer, POINTER
 from ctypes       import c_char, c_char_p, c_uint, c_int
 
+#import pdb
+#import pprint
+#pp=pprint.pprint
 </t>
 <t tx="karstenw.20240123172852.10">class ShaderError(Exception):
     @others
@@ -1449,6 +1454,7 @@ from ctypes       import c_char, c_char_p, c_uint, c_int
     # Compile the GLSL source code, either as GL_FRAGMENT_SHADER or GL_VERTEX_SHADER.
     # If the source fails to compile, retrieve the error message and raise ShaderError.
     # Store the compiled shader so we can delete it later on.
+    #pdb.set_trace()
     shader = glCreateShader(type)
     status = c_int(-1)
     glShaderSource(shader, 1, cast(pointer(c_char_p(source)), POINTER(POINTER(c_char))), None)
@@ -1509,7 +1515,12 @@ from ctypes       import c_char, c_char_p, c_uint, c_int
 
 </t>
 <t tx="karstenw.20240123172852.19">def _set(self, name, value):
-    address = glGetUniformLocation(self._program, name)
+    try:
+        address = glGetUniformLocation(self._program, name)
+    except Exception as e:
+        print("name:", name)
+        print(e)
+        # pdb.set_trace()
     # A vector with 2, 3 or 4 floats representing vec2, vec3 or vec4.
     if isinstance(value, vector):
         if len(value) == 2:
@@ -1553,8 +1564,10 @@ pow2 = [2**n for n in range(20)] # [1, 2, 4, 8, 16, 32, 64, ...]
     """ Returns the nearest power of 2 that is higher than x, e.g. 700 =&gt; 1024.
     """
     for y in pow2:
-        if y &gt;= x: return y
-            
+        if y &gt;= x:
+            return y
+
+
 </t>
 <t tx="karstenw.20240123172852.4">def extent2(texture):
     """ Returns the extent of the image data (0.0-1.0, 0.0-1.0) inside its texture owner.
@@ -1590,12 +1603,12 @@ pow2 = [2**n for n in range(20)] # [1, 2, 4, 8, 16, 32, 64, ...]
 #      shader.pop()
 
 DEFAULT = "default"
-DEFAULT_VERTEX_SHADER = '''
+DEFAULT_VERTEX_SHADER = b'''
 void main() { 
     gl_TexCoord[0] = gl_MultiTexCoord0; 
     gl_Position = ftransform(); 
 }'''
-DEFAULT_FRAGMENT_SHADER = '''
+DEFAULT_FRAGMENT_SHADER = b'''
 uniform sampler2D src;
 void main() {
     gl_FragColor = texture2D(src, gl_TexCoord[0].xy);
@@ -1628,6 +1641,9 @@ BUILD   = "build"   # Error occurs during glLinkProgram().
     self._active = True
     glUseProgram(self._program)
     for k, v in self.variables.items():
+        # print("push kv:", repr(k), repr(v))
+        if type(k) in (str,):
+            k = bytes(k, "ascii")
         self._set(k, v)
         
 </t>
@@ -1671,6 +1687,11 @@ grayscale = desaturate
                   this produces a nicer effect than repeatedly using blur() in a for-loop
                   (which blurs the blurred).
     """
+    #
+    # TODO: 2024-03-23 kw:  texture and img need separation - currently texture
+    #                       is only a view in pyglet
+    #
+    
     for i in range(amount):
         clear = i==0 or not cumulative
         img = filter(img, HorizontalBlur(img.texture, kernel, scale), clear=clear)
@@ -1885,6 +1906,7 @@ grayscale = desaturate
         - vertical  : when True, mirrors the image vertically.
     """
     dx, dy, m, i = distortion_mixin(MIRROR, dx, dy, **kwargs)
+    # pdb.set_trace()
     return filter(img, filter=Distortion(MIRROR, img.texture, dx-0.5, dy-0.5, m, i))
 
 </t>
@@ -1955,11 +1977,15 @@ grayscale = desaturate
         This mechanisms ensures that the module doesn't crash while doing this,
         instead the shader simply won't have any visible effect and SUPPORTED will be False.
     """
+    global SUPPORTED
+    #pdb.set_trace()
     if not silent:
         return Shader(vertex, fragment)
     try:
         return Shader(vertex, fragment)
     except Exception as e:
+        #print("shader.shader() NOT SUPPORTED.")
+        #print( e )
         SUPPORTED = False
         return ShaderFacade()
 
@@ -1978,7 +2004,7 @@ grayscale = desaturate
 
 #--- INVERT -----------------------------------------------------------------------------------------
 
-_invert = shader(fragment='''
+_invert = shader(fragment=b'''
 uniform sampler2D src;
 void main() {
     gl_FragColor = texture2D(src, gl_TexCoord[0].xy);
@@ -2020,7 +2046,7 @@ LINEAR = "linear"
 RADIAL = "radial"
 
 _gradient = {}
-_gradient[LINEAR] = shader(fragment='''
+_gradient[LINEAR] = shader(fragment=b'''
 uniform sampler2D src;
 uniform vec4 clr1;
 uniform vec4 clr2;
@@ -2028,7 +2054,7 @@ void main() {
     vec2 v = gl_TexCoord[0].xy;
     gl_FragColor = clr1 * v.y + clr2 * (1.0 - v.y);
 }''')
-_gradient[RADIAL] = shader(fragment='''
+_gradient[RADIAL] = shader(fragment=b'''
 uniform sampler2D src;
 uniform vec4 clr1;
 uniform vec4 clr2;
@@ -2078,7 +2104,7 @@ void main() {
     @others
 #--- COLORIZE ---------------------------------------------------------------------------------------
 
-_colorize = shader(fragment='''
+_colorize = shader(fragment=b'''
 uniform sampler2D src;
 uniform vec4 color;
 uniform vec4 bias;
@@ -2109,7 +2135,7 @@ void main() {
 # Based on "Photoshop math with GLSL shaders" (2009), Romain Dura,
 # http://blog.mouaif.org/?p=94
 
-glsl_hsb2rgb = '''
+glsl_hsb2rgb = b'''
 float _hue2rgb(float a, float b, float hue) {
     hue = mod(hue, 1.0);
     if (6.0 * hue &lt; 1.0) return a + (b - a) * 6.0 * hue;
@@ -2128,7 +2154,7 @@ vec3 hsb2rgb(vec3 hsb) {
         );
 }'''
 
-glsl_rgb2hsb = '''
+glsl_rgb2hsb = b'''
 vec3 rgb2hsb(vec3 rgb) {
     vec3 hsb = vec3(0.0);
     float a = min(min(rgb.r, rgb.g), rgb.b);
@@ -2154,21 +2180,21 @@ SATURATION = "saturation"
 HUE        = "hue"
 
 _adjustment = {}
-_adjustment[BRIGHTNESS] = shader(fragment='''
+_adjustment[BRIGHTNESS] = shader(fragment=b'''
 uniform sampler2D src;
 uniform float m;
 void main() {
     vec4 p = texture2D(src, gl_TexCoord[0].xy);
     gl_FragColor = vec4(clamp(p.rgb + m, 0.0, 1.0), p.a);
 }''')
-_adjustment[CONTRAST] = shader(fragment='''
+_adjustment[CONTRAST] = shader(fragment=b'''
 uniform sampler2D src;
 uniform float m;
 void main() {
     vec4 p = texture2D(src, gl_TexCoord[0].xy);
     gl_FragColor = vec4(clamp((p.rgb - 0.5) * m + 0.5, 0.0, 1.0), p.a);
 }''')
-_adjustment[SATURATION] = shader(fragment='''
+_adjustment[SATURATION] = shader(fragment=b'''
 uniform sampler2D src;
 uniform float m;
 void main() {
@@ -2181,7 +2207,7 @@ void main() {
         p.a
     );
 }''')
-_adjustment[HUE] = shader(fragment=glsl_hsb2rgb+glsl_rgb2hsb+'''
+_adjustment[HUE] = shader(fragment=glsl_hsb2rgb+glsl_rgb2hsb+b'''
 uniform sampler2D src;
 uniform float m;
 void main() {
@@ -2268,7 +2294,7 @@ def source(self):
 # green contributes the most to luminosity while blue hardly contributes anything.
 # Thus, luminance L = R*0.2125 + G*0.7154 + B+0.0721
 
-_brightpass = shader(fragment='''
+_brightpass = shader(fragment=b'''
 uniform sampler2D src;
 uniform float threshold;
 void main() {
@@ -2298,7 +2324,7 @@ void main() {
 # Blurring occurs in two steps (requiring an FBO): horizontal blur and vertical blur.
 # Separating these two steps reduces the problem to linear complexity (i.e. it is faster).
 
-glsl_blur = '''
+glsl_blur = b'''
 uniform sampler2D src;
 uniform int kernel;
 uniform float radius;
@@ -2319,8 +2345,8 @@ void main() {
     gl_FragColor = p;
 }'''
 _blur = {
-    "horizontal": shader(fragment=glsl_blur % ("-a","","+a","")), # vary v.x
-    "vertical"  : shader(fragment=glsl_blur % ("","-a","","+a"))  # vary v.y
+    "horizontal": shader(fragment=glsl_blur % (b"-a", b"",   b"+a", b"")), # vary v.x
+    "vertical"  : shader(fragment=glsl_blur % (b"",   b"-a", b"",   b"+a"))  # vary v.y
 }
 
 </t>
@@ -2359,7 +2385,7 @@ _blur = {
 # It is useful to have a blur in a single pass as well,
 # which we can use as a parameter for the image() command.
 # However, for a simple 3x3 in separate steps =&gt; 6 calculations, single pass =&gt; 9 calculations.
-_blur["gaussian3x3"] = shader(fragment='''
+_blur["gaussian3x3"] = shader(fragment=b'''
 uniform sampler2D src;
 uniform vec2 radius;
 void main() {
@@ -2415,7 +2441,7 @@ void main() {
 # Compositing function.
 # It will be reused in alpha compositing and blending filters below.
 # It prepares pixels p1 and p2, which need to be mixed into vec4 p.
-glsl_compositing = '''
+glsl_compositing = b'''
 uniform sampler2D src1;
 uniform sampler2D src2;
 uniform vec2 extent;
@@ -2459,14 +2485,14 @@ void main() {
 #--- ALPHA TRANSPARENCY ------------------------------------------------------------------------------
 
 _alpha = {}
-_alpha["transparency"] = shader(fragment='''
+_alpha["transparency"] = shader(fragment=b'''
 uniform sampler2D src;
 uniform float alpha;
 void main() {
     vec4 p = texture2D(src, gl_TexCoord[0].xy);
     gl_FragColor = vec4(p.rgb, p.a * alpha);
 }''')
-_alpha["mask"] = shader(fragment=glsl_compositing % '''
+_alpha["mask"] = shader(fragment=glsl_compositing % b'''
     p = vec4(p1.rgb, p1.a * (p2.r * p2.a * alpha));
 '''.strip())
 
@@ -2545,13 +2571,13 @@ HUE       = "hue"       # Hue from the blend image, brightness and saturation fr
 
 # If the blend is opaque (alpha=1.0), swap base and blend.
 # This way lighten, darken, multiply and screen appear the same as in Photoshop and Core Image.
-_blendx = '''if (p2.a == 1.0) { vec4 p3=p1; p1=p2; p2=p3; }
+_blendx = b'''if (p2.a == 1.0) { vec4 p3=p1; p1=p2; p2=p3; }
     '''
 # Blending operates on RGB values, the A needs to be handled separately.
 # Where both images are transparent, their transparency is blended.
 # Where the base image is fully transparent, the blend image appears source over.
 # There is a subtle transition at transparent edges, which makes the edges less jagged.
-glsl_blend = glsl_compositing % '''
+glsl_blend = glsl_compositing % b'''
     vec3 w  = vec3(1.0); // white
     %s
     p = mix(p1, clamp(p, 0.0, 1.0), p2.a * alpha);
@@ -2559,20 +2585,20 @@ glsl_blend = glsl_compositing % '''
     p = (p1.a &lt; 0.25)? p * p1.a + p2 * (1.0-p1.a) : p;
 '''.strip()
 _blend = {}
-_blend[ADD]      =           'p = vec4(p1.rgb + p2.rgb, 1.0);'
-_blend[SUBTRACT] =           'p = vec4(p1.rgb + p2.rgb - 1.0, 1.0);'
-_blend[LIGHTEN]  = _blendx + 'p = vec4(max(p1.rgb, p2.rgb), 1.0);'
-_blend[DARKEN]   = _blendx + 'p = vec4(min(p1.rgb, p2.rgb), 1.0);'
-_blend[MULTIPLY] = _blendx + 'p = vec4(p1.rgb * p2.rgb, 1.0);'
-_blend[SCREEN]   = _blendx + 'p = vec4(w - (w - p1.rgb) * (w - p2.rgb), 1.0);'
-_blend[OVERLAY]  = '''
+_blend[ADD]      =           b'p = vec4(p1.rgb + p2.rgb, 1.0);'
+_blend[SUBTRACT] =           b'p = vec4(p1.rgb + p2.rgb - 1.0, 1.0);'
+_blend[LIGHTEN]  = _blendx + b'p = vec4(max(p1.rgb, p2.rgb), 1.0);'
+_blend[DARKEN]   = _blendx + b'p = vec4(min(p1.rgb, p2.rgb), 1.0);'
+_blend[MULTIPLY] = _blendx + b'p = vec4(p1.rgb * p2.rgb, 1.0);'
+_blend[SCREEN]   = _blendx + b'p = vec4(w - (w - p1.rgb) * (w - p2.rgb), 1.0);'
+_blend[OVERLAY]  = b'''
     float L = dot(p1.rgb, vec3(0.2125, 0.7154, 0.0721)); // luminance
     vec4 a = vec4(2.0 * p1.rgb * p2.rgb, 1.0);
     vec4 b = vec4(w - 2.0 * (w - p1.rgb) * (w - p2.rgb), 1.0);
     p = (L &lt; 0.45)? a : (L &gt; 0.55)? b : vec4(mix(a.rgb, b.rgb, (L - 0.45) * 10.0), 1.0);
 '''
-_blend[HARDLIGHT] = _blend[OVERLAY].replace("dot(p1", "dot(p2")
-_blend[HUE] = '''
+_blend[HARDLIGHT] = _blend[OVERLAY].replace( b"dot(p1", b"dot(p2")
+_blend[HUE] = b'''
     vec3 h1 = rgb2hsb(p1.rgb);
     vec3 h2 = rgb2hsb(p2.rgb);
     p = vec4(hsb2rgb(vec3(h2.x, h1.yz)).rgb, p1.a);
@@ -2614,7 +2640,7 @@ MIRROR  = "mirror"
 # - float m: the magnitude of the effect (e.g. radius, ...) 
 # - float i: the intensity of the effect (e.g. number of rotations, ...) 
 # - vec2 n: a normalized texture space between -1.0 and 1.0 (instead of 0.0-1.0).
-glsl_distortion = '''
+glsl_distortion = b'''
 uniform sampler2D src;
 uniform vec2 offset;
 uniform vec2 extent;
@@ -2635,7 +2661,7 @@ void main() {
 # Polar coordinates.
 # Most of the effects are based on simple angle and radius transformations.
 # After the transformations, convert back to cartesian coordinates n.
-glsl_polar = '''
+glsl_polar = b'''
     float r = length(n);
     float phi = atan(n.y, n.x);
     %s
@@ -2645,28 +2671,28 @@ glsl_polar = '''
 # The second version wraps, with respect to the extent of the actual image in its power-of-2 texture.
 # The third version wraps with a flipped image (transition).
 glsl_wrap = (
-    '''vec4 p = (v.x &lt; 0.0 || v.y &lt; 0.0 || v.x &gt; 0.999 || v.y &gt; 0.999)? vec4(0.0) : texture2D(src, v);''',
-    '''
+    b'''vec4 p = (v.x &lt; 0.0 || v.y &lt; 0.0 || v.x &gt; 0.999 || v.y &gt; 0.999)? vec4(0.0) : texture2D(src, v);''',
+    b'''
     v.x = (v.x &gt;= extent.x - 0.001)? mod(v.x, extent.x) - 0.002 : max(v.x, 0.001);
     v.y = (v.y &gt;= extent.y - 0.001)? mod(v.x, extent.x) - 0.002 : max(v.y, 0.001);
     vec4 p = texture2D(src, v);'''.strip(),
-    '''
+    b'''
     v.x = (v.x &gt;= extent.x - 0.001)? (extent.x - (v.x-extent.x)) - 0.002 : max(v.x, 0.001);
     v.y = (v.y &gt;= extent.y - 0.001)? (extent.y - (v.y-extent.y)) - 0.002 : max(v.y, 0.001);
     vec4 p = texture2D(src, v);'''.strip())
 
 _distortion = {}
-_distortion[BUMP]    = 'r = r * smoothstep(i, m, r);'
-_distortion[DENT]    = 'r = 2.0 * r - r * smoothstep(0.0, m, r/i);'
-_distortion[PINCH]   = 'r = pow(r, m/i) * m;'
-_distortion[FISHEYE] = 'r = r * r / sqrt(2.0);'
-_distortion[SPLASH]  = 'if (r &gt; m) r = m;'
-_distortion[TWIRL]   = 'phi = phi + (1.0 - smoothstep(-m, m, r)) * i;'
-_distortion[MIRROR]  = '''
+_distortion[BUMP]    = b'r = r * smoothstep(i, m, r);'
+_distortion[DENT]    = b'r = 2.0 * r - r * smoothstep(0.0, m, r/i);'
+_distortion[PINCH]   = b'r = pow(r, m/i) * m;'
+_distortion[FISHEYE] = b'r = r * r / sqrt(2.0);'
+_distortion[SPLASH]  = b'if (r &gt; m) r = m;'
+_distortion[TWIRL]   = b'phi = phi + (1.0 - smoothstep(-m, m, r)) * i;'
+_distortion[MIRROR]  = b'''
     if (m &gt; 0.0) { n.x += offset.x * extent.x * ratio; n.x = n.x * sign(n.x); }
     if (i &gt; 0.0) { n.y += offset.y * extent.y;         n.y = n.y * sign(n.y); }
 '''.strip()
-_distortion[STRETCH] = '''
+_distortion[STRETCH] = b'''
     vec2 s = sign(n);
     n = abs(n);
     n = (1.0-i) * n + i * smoothstep(m*0.25, m, n) * n;
@@ -2732,11 +2758,11 @@ abs_dy = property(_get_abs_dy, _set_abs_dy)
     h  = float(self.texture.height)
     w2 = float(ceil2(w))
     h2 = float(ceil2(h))
-    self.shader.set("extent", vec2(w/w2, h/h2))
-    self.shader.set("offset", vec2(float(2*self.dx), float(2*self.dy)))
-    self.shader.set("ratio", w2/h2)
-    self.shader.set("m", float(self.m))
-    self.shader.set("i", float(self.i))
+    self.shader.set( b"extent", vec2(w/w2, h/h2))
+    self.shader.set( b"offset", vec2(float(2*self.dx), float(2*self.dy)))
+    self.shader.set( b"ratio", w2/h2)
+    self.shader.set( b"m", float(self.m))
+    self.shader.set( b"i", float(self.i))
     self.shader.push()
 
 </t>
@@ -2789,7 +2815,9 @@ FBO = OffscreenBuffer
 
 try: 
     _buffer = OffscreenBuffer(640, 480)
+    print("Offscreen buffer created.")
 except OffscreenBufferError:
+    print("Offscreen buffer create FAILED.")
     _buffer = None
 
 </t>
@@ -2967,6 +2995,7 @@ def active(self):
         - filter: an instance of the Filter class, with parameters set.
         - clear : if True, clears the contents of the offscreen buffer and resizes it to the image.
     """
+    # pdb.set_trace() 
     # For file paths, textures and Pixel objects, create an Image first.
     if not isinstance(img, Image):
         img = Image(img)
@@ -3872,7 +3901,7 @@ ALL = "all"
     """
     ec1 = eigenvector_centrality(self, normalized, reversed, rating, iterations, tolerance)
     idweights = list((self[_id], w) for _id, w in ec1.items())
-    pdb.set_trace()
+    # pdb.set_trace()
     # ec2 = nodedict(self, ( (self[_id], w) for _id, w in ec1.items()) )
     ec2 = nodedict(self, idweights )
     for n, w in ec2.items(): 
@@ -7863,16 +7892,6 @@ def metrics(self):
     pass
 
 
-glyphs = {}
-try:
-    # Load cached font glyph path information from nodebox/font/glyph.p.
-    # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
-    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
-    glyphs = pickle.load(open(glyphpath, 'rb'))
-except Exception as err:
-    print("ERROR loading glyphs pickle.")
-    print( err )
-
 </t>
 <t tx="karstenw.20240123172917.26">def map(self, base=1.0, colorspace=RGB):
     """ Returns a list of R,G,B,A values mapped to the given base,
@@ -7901,11 +7920,18 @@ except Exception as err:
     
     fontname, fontsize, bold, italic, lineheight, align = font_mixin(**kwargs)
     
-    w = bold and italic and "bold italic" or bold and "bold" or italic and "italic" or "normal"
+    w = (   bold and italic and "bold italic"
+         or bold and "bold"
+         or italic and "italic"
+         or "normal")
+    
     p = BezierPath()
+    
     f = fontsize / 1000.0
+    
     for ch in string:
-        try: glyph = glyphs[fontname][w][ch]
+        try:
+            glyph = glyphs[fontname][w][ch]
         except:
             raise GlyphPathError( "no glyph path information for %s %s '%s'" % (w, fontname, ch) )
         for pt in glyph:
@@ -11433,6 +11459,30 @@ _profile_frames = 100
 <t tx="karstenw.20240317204938.1">def __hash__(self):
     # print(hash(repr(self)))
     return hash(repr(self))
+</t>
+<t tx="karstenw.20240405203948.1">glyphs = {}
+try:
+    # Load cached font glyph path information from nodebox/font/glyph.p.
+    # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
+    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
+    glyphs = pickle.load(open(glyphpath, 'rb'))
+except Exception as err:
+    print("ERROR loading glyphs pickle.")
+    print( err )
+
+</t>
+<t tx="karstenw.20240405204143.1">def fontnames():
+    result = []
+    fontnames = list( glyphs.keys() )
+    if 0:
+        for fontname in fontnames:
+            for style in glyphs[fontname]:
+                items = glyphs[fontname][style]
+                glyphcount = len( items )
+                print(fontname, style, glyphcount ) 
+    return fontnames
+    
+
 </t>
 </tnodes>
 </leo_file>
