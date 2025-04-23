@@ -3,7 +3,11 @@ from nodeboxgl.graphics import *
 # Load an image from file.
 # For performance, it's a good idea to create images once, outside the draw() loop.
 # NodeBox can then keep the image in graphics card memory so it displays faster.
-img = Image("creature.png")
+import os
+if os.path.exists("__DEBUG__"):
+    img = Image("grid.png")
+else:
+    img = Image("creature.png")
 
 # A simple image effect is a drop shadow.
 # We create a grayscale version of the image with the colorize() filter,
