@@ -2504,11 +2504,18 @@ def textpath(string, x=0, y=0, **kwargs):
     
     fontname, fontsize, bold, italic, lineheight, align = font_mixin(**kwargs)
     
-    w = bold and italic and "bold italic" or bold and "bold" or italic and "italic" or "normal"
+    w = (   bold and italic and "bold italic"
+         or bold and "bold"
+         or italic and "italic"
+         or "normal")
+    
     p = BezierPath()
+    
     f = fontsize / 1000.0
+    
     for ch in string:
-        try: glyph = glyphs[fontname][w][ch]
+        try:
+            glyph = glyphs[fontname][w][ch]
         except:
             raise GlyphPathError( "no glyph path information for %s %s '%s'" % (w, fontname, ch) )
         for pt in glyph:
@@ -2522,6 +2529,18 @@ def textpath(string, x=0, y=0, **kwargs):
                 p.closepath()
         x += textwidth(ch, font=fontname, fontsize=fontsize, bold=bold, italic=italic)
     return p
+
+def fontnames():
+    result = []
+    fontnames = list( glyphs.keys() )
+    if 0:
+        for fontname in fontnames:
+            for style in glyphs[fontname]:
+                items = glyphs[fontname][style]
+                glyphcount = len( items )
+                print(fontname, style, glyphcount ) 
+    return fontnames
+    
 
 #=====================================================================================================
 
