@@ -16,8 +16,9 @@ BSD, see LICENSE.txt for further details.
 #### REQUIREMENTS
 
 - Python 3.11 : an installer can be downloaded from http://www.python.org/download/
-- Pyglet 1.5.28  : an installer can be downloaded from http://www.pyglet.org/
-	- It must be exactly version 1.5.28!
+- Pyglet 1.5.31  : you'll need the last version of v1.5 pyglet which is currently at 1.5.31
+	- use `pip3 install "pyglet==1.5.31"`
+
 
 Your video hardware needs support for OpenGL 2.0.
 If this is not the case, try updating to a new driver.
@@ -53,15 +54,16 @@ USAGE
 
 Here is a simple NodeBox script:
 
->>> from nodeboxgl.graphics import *
->>> def draw(canvas):
->>>     canvas.clear()
->>>     translate(250, 250)
->>>     rotate(canvas.frame)
->>>     rect(x=-50, y=-50, width=100, height=100)
->>> canvas.size = 500, 500
->>> canvas.run(draw)
-
+```python
+from nodeboxgl.graphics import *
+def draw(canvas):
+    canvas.clear()
+    translate(250, 250)
+    rotate(canvas.frame)
+    rect(x=-50, y=-50, width=100, height=100)
+canvas.size = 500, 500
+canvas.run(draw)
+```
 It imports the nodebox.graphics module with the standard set of drawing commands. It defines a draw() function and attaches it to the canvas, so that it will be drawn each animation frame. It opens the main application window with canvas.run().
 
 DOCUMENTATION
