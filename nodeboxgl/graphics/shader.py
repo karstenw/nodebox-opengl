@@ -889,7 +889,8 @@ _distortion = {}
 _distortion[BUMP]    = b'r = r * smoothstep(i, m, r);'
 _distortion[DENT]    = b'r = 2.0 * r - r * smoothstep(0.0, m, r/i);'
 _distortion[PINCH]   = b'r = pow(r, m/i) * m;'
-_distortion[FISHEYE] = b'r = r * r / sqrt(2.0);'
+# _distortion[FISHEYE] = b'r = r * r / sqrt(2.0);'
+_distortion[FISHEYE] = b'r = (r*m)*(r*m) / sqrt(8.0*i);'
 _distortion[SPLASH]  = b'if (r > m) r = m;'
 _distortion[TWIRL]   = b'phi = phi + (1.0 - smoothstep(-m, m, r)) * i;'
 _distortion[MIRROR]  = b'''
@@ -1414,6 +1415,9 @@ def distortion_mixin(type, dx, dy, **kwargs):
     elif type == STRETCH:
         m = max(0, kwargs.get("radius", 0.5))
         i = max(0, min(1, 0.5 * kwargs.get("zoom", 1.0)))
+    elif type == FISHEYE:
+        m = max(0, kwargs.get("radius", 0.1))
+        i = max(0, kwargs.get("zoom", 0.1))
     else:
         m = 0.5
         i = 0.5
@@ -1450,6 +1454,16 @@ def pinch(img, dx=0.5, dy=0.5, **kwargs):
     """
     dx, dy, m, i = distortion_mixin(PINCH, dx, dy, **kwargs)
     return filter(img, filter=Distortion(PINCH, img.texture, dx-0.5, dy-0.5, m, i))
+
+#def fisheye(img, dx=0.5, dy=0.5, zoom=0.75)
+def fisheye(img, dx=0.5, dy=0.5, **kwargs):
+    """ Returns the image with a fisheye distortion applied to it.
+        - dx: horizontal origin of the effect, between 0.0 and 1.0.
+        - dy: vertical origin of the effect, between 0.0 and 1.0.
+        - zoom: the amount of bulge (0.1-0.5) or fisheye (0.5-1.0):
+    """
+    dx, dy, m, i = distortion_mixin(FISHEYE, dx, dy, **kwargs)
+    return filter(img, filter=Distortion(FISHEYE, img.texture, dx-0.5, dy-0.5, m, i))
 
 #def twirl(img, dx=0.5, dy=0.5, radius=1.0, angle=180.0)
 def twirl(img, dx=0.5, dy=0.5, **kwargs):
