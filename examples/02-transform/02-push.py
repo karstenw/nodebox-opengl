@@ -25,14 +25,15 @@ def draw(canvas):
         # at which point the transformation state resets to the way it was before push().
         # Each planet acts as a local origin for its orbitting moon.
         push()
-        rotate(canvas.frame + i*360.0/n) # Rotate around sun.
-        line(0, 0, 120, 0)               # Draw a (rotated) line with length 120.
-        translate(120, 0)                # Move the origin to the end of the (rotated) line.
-        ellipse(0, 0, 5, 5)              # Draw the planet at the end of the (rotated) line.
-        text("planet", 10, 0)
-        rotate(canvas.frame * 6)         # Increase rotation.
-        line(0, 0, 30, 0)                # Draw a line with length 30 from the planet.
-        text("moon", 32, 0)
+        if 1:
+            rotate(canvas.frame + i*360.0/n) # Rotate around sun.
+            line(0, 0, 120, 0)               # Draw a (rotated) line with length 120.
+            translate(120, 0)                # Move the origin to the end of the (rotated) line.
+            ellipse(0, 0, 5, 5)              # Draw the planet at the end of the (rotated) line.
+            text("planet", 10, 0)
+            rotate(canvas.frame * 6)         # Increase rotation.
+            line(0, 0, 30, 0)                # Draw a line with length 30 from the planet.
+            text("moon", 32, 0)
         pop()                            # Move the origin back to the sun. Undo rotation.
 
 canvas.size = 500, 500
