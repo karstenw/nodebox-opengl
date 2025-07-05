@@ -15,12 +15,12 @@
 <v t="karstenw.20231124171037.1"><vh>Declarations</vh></v>
 </v>
 <v t="karstenw.20231124170856.1" a="E"><vh>ext</vh>
-<v t="karstenw.20231124171143.1" a="E"><vh>@clean nodeboxgl/ext/setup.py</vh>
+<v t="karstenw.20231124171143.1"><vh>@clean nodeboxgl/ext/setup.py</vh>
 <v t="karstenw.20231124171244.1"><vh>Declarations</vh></v>
 </v>
 </v>
 <v t="karstenw.20231124170908.1" a="E"><vh>font</vh>
-<v t="karstenw.20240123172532.1" a="E"><vh>@clean nodeboxgl/font/glyph.py</vh>
+<v t="karstenw.20240123172532.1"><vh>@clean nodeboxgl/font/glyph.py</vh>
 <v t="karstenw.20240123172554.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172554.2"><vh>descent</vh></v>
 <v t="karstenw.20240123172554.3"><vh>textpath_from_glyphs</vh></v>
@@ -34,7 +34,7 @@
 <v t="karstenw.20240123172922.4"><vh>frame</vh></v>
 <v t="karstenw.20240123172922.5"><vh>clear</vh></v>
 </v>
-<v t="karstenw.20240123172734.1" a="E"><vh>@clean nodeboxgl/graphics/bezier.py</vh>
+<v t="karstenw.20240123172734.1"><vh>@clean nodeboxgl/graphics/bezier.py</vh>
 <v t="karstenw.20240123172920.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172920.2"><vh>class DynamicPathElement</vh></v>
 <v t="karstenw.20240126154716.1" a="E"><vh>+ BEZIERMATH +</vh>
@@ -66,7 +66,7 @@
 <v t="karstenw.20240123172920.16"><vh>arcto</vh></v>
 </v>
 </v>
-<v t="karstenw.20240123172753.1"><vh>@clean nodeboxgl/graphics/context.py</vh>
+<v t="karstenw.20240123172753.1" a="E"><vh>@clean nodeboxgl/graphics/context.py</vh>
 <v t="karstenw.20240123172917.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172917.2"><vh>getscreenconf</vh></v>
 <v t="karstenw.20240126155307.1"><vh>+ CACHING +</vh>
@@ -1818,6 +1818,9 @@ grayscale = desaturate
     elif type == STRETCH:
         m = max(0, kwargs.get("radius", 0.5))
         i = max(0, min(1, 0.5 * kwargs.get("zoom", 1.0)))
+    elif type == FISHEYE:
+        m = max(0, kwargs.get("radius", 0.1))
+        i = max(0, kwargs.get("zoom", 0.1))
     else:
         m = 0.5
         i = 0.5
@@ -1860,6 +1863,16 @@ grayscale = desaturate
     """
     dx, dy, m, i = distortion_mixin(PINCH, dx, dy, **kwargs)
     return filter(img, filter=Distortion(PINCH, img.texture, dx-0.5, dy-0.5, m, i))
+
+#def fisheye(img, dx=0.5, dy=0.5, zoom=0.75)
+def fisheye(img, dx=0.5, dy=0.5, **kwargs):
+    """ Returns the image with a fisheye distortion applied to it.
+        - dx: horizontal origin of the effect, between 0.0 and 1.0.
+        - dy: vertical origin of the effect, between 0.0 and 1.0.
+        - zoom: the amount of bulge (0.1-0.5) or fisheye (0.5-1.0):
+    """
+    dx, dy, m, i = distortion_mixin(FISHEYE, dx, dy, **kwargs)
+    return filter(img, filter=Distortion(FISHEYE, img.texture, dx-0.5, dy-0.5, m, i))
 
 #def twirl(img, dx=0.5, dy=0.5, radius=1.0, angle=180.0)
 </t>
@@ -2685,7 +2698,8 @@ _distortion = {}
 _distortion[BUMP]    = b'r = r * smoothstep(i, m, r);'
 _distortion[DENT]    = b'r = 2.0 * r - r * smoothstep(0.0, m, r/i);'
 _distortion[PINCH]   = b'r = pow(r, m/i) * m;'
-_distortion[FISHEYE] = b'r = r * r / sqrt(2.0);'
+# _distortion[FISHEYE] = b'r = r * r / sqrt(2.0);'
+_distortion[FISHEYE] = b'r = (r*m)*(r*m) / sqrt(8.0*i);'
 _distortion[SPLASH]  = b'if (r &gt; m) r = m;'
 _distortion[TWIRL]   = b'phi = phi + (1.0 - smoothstep(-m, m, r)) * i;'
 _distortion[MIRROR]  = b'''
@@ -6129,7 +6143,7 @@ import pickle
 import pyglet
 pyglet.options['debug_gl'] = False
 
-from pyglet.gl      import *
+from pyglet.gl     import *
 
 from pyglet.image import Texture
 from math         import cos, sin, radians, pi, floor

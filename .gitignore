@@ -23,3 +23,6 @@ Thumbs.db
 examples/12-experimental/test.mp4
 examples/12-experimental/frames
 *.mp4
+examples/*/a__DEBUG__
+examples/*/__DEBUG__
+examples/07-filter/grid.py

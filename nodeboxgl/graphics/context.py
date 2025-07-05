@@ -15,7 +15,7 @@ import pickle
 import pyglet
 pyglet.options['debug_gl'] = False
 
-from pyglet.gl      import *
+from pyglet.gl     import *
 
 from pyglet.image import Texture
 from math         import cos, sin, radians, pi, floor
