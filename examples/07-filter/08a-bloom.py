@@ -1,0 +1,20 @@
+from nodeboxgl.graphics import *
+
+img = Image("dendrite.png")
+
+def draw(canvas):
+    canvas.clear()
+    
+    # The bloom() and glow() filters can be used for a "magic light" effect.
+    # They work as a combination of brightpass(), blur() and add() filters.
+
+    if canvas.mouse.pressed:
+        image(bloom(img, 
+            intensity = 1.0, 
+            threshold = 0.6 - 0.3*canvas.mouse.relative_x))
+    else:
+        image( img )
+# Start the application:
+canvas.fps  = 30
+canvas.size = 700, 350
+canvas.run(draw)
