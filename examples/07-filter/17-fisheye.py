@@ -14,8 +14,8 @@ def draw(canvas):
         image( fisheye( img,
                         canvas.mouse.relative_x,
                         canvas.mouse.relative_y,
-                        radius=0.1,
-                        zoom=0.1) )
+                        radius=1.6,
+                        zoom=1.6) )
     else:
         image( img )
 
