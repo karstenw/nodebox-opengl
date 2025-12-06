@@ -7,7 +7,8 @@ from nodeboxgl.graphics import *
 
 from random import seed
 from math   import sin
- 
+
+
 lines = []
 
 # seed(0)
@@ -36,9 +37,15 @@ def draw(canvas):
                     p.moveto(x, y)
                 else:
                     p.lineto(x, y)
-            drawpath(p)
+            try:
+                drawpath(p)
+            except Exception as err:
+                if 0:
+                    print("p:",p)
+                    print(err)
+                    print()
 
-canvas.fps = 60
-canvas.size = 600, 400
+canvas.fps = 40
+canvas.size = 900, 700
 #canvas.fullscreen = True
 canvas.run(draw)
