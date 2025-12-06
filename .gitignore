@@ -26,3 +26,4 @@ examples/12-experimental/frames
 examples/*/a__DEBUG__
 examples/*/__DEBUG__
 examples/07-filter/grid.py
+nodeboxgl/font/glyph-large.p
