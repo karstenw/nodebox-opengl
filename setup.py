@@ -26,17 +26,20 @@ long_description = desc,
           author = "Tom De Smedt",
              url = "https://cityinabottle.org/nodebox/",
         packages = packages,
-    package_data = {"nodeboxgl.gui": ["theme/*"], "nodeboxgl.font":["glyph.p"]},
+    package_data = {
+        "nodeboxgl.gui": ["theme/*"],
+        "nodeboxgl.font":["glyph*.p"]},
 install_requires = ["pyglet",],
-      py_modules = ["nodeboxgl", "nodeboxgl.graphics", "nodeboxgl.gui", "nodeboxgl.sound", "nodeboxgl.font"],
-
+      py_modules = ["nodeboxgl", "nodeboxgl.graphics", "nodeboxgl.gui",
+                    "nodeboxgl.sound", "nodeboxgl.font"],
+    
      ext_modules = [
         Extension("nglbezier",   ["nodeboxgl/ext/nglbezier.c"]),
         Extension("nglgeometry", ["nodeboxgl/ext/nglgeometry.c"]),
         Extension("nglnoise",    ["nodeboxgl/ext/nglnoise.c"])
     ],
-
-     classifiers = [
+    
+    classifiers = [
         "Development Status :: 4 - Beta",
         "Environment :: MacOS X",
         "Environment :: Win32 (MS Windows)",
