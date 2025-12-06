@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.sound import PD, LOCALHOST
 
 # PureData is a free, real-time graphical programming environment for audio processing.

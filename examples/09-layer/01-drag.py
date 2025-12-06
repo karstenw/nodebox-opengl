@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # In the previous examples, drawing occurs directly to the canvas.
 # It is also possible to draw into different layers, 

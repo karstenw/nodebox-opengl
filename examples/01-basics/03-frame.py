@@ -1,6 +1,7 @@
 import os, sys; sys.path.insert(0, os.path.join("..",".."))
 
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Here is the "Hypnoval", a classic example in NodeBox for Mac OS X.
 # It uses the canvas.frame counter to create variation in each frame.

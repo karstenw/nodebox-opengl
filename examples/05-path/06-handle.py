@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # I always seem to forget how Bezier handles work.
 # This example clarifies which handles control what part of a curve.

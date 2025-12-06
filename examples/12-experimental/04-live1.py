@@ -2,6 +2,7 @@ import os
 import warnings
 
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Live coding example.
 # The actual drawing code is in 04-live2.py.
@@ -18,7 +19,7 @@ def draw(canvas):
     global modified
     try:
         exec(source)
-    except Exception, e:
+    except Exception as e:
         warnings.warn(str(e), Warning)
     if os.path.getmtime(SCRIPT) > modified:
         source = open(SCRIPT).read()

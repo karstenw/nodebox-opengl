@@ -66,6 +66,7 @@ class Movie:
             pass
 
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 movie = Movie(canvas)
 

@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Blend modes are used to combine the pixels of two images,
 # in different ways than standard transparency.

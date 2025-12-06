@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # On Mac OS X, you can access the built-in iSight camera with PySight + CocoaSequenceGrabber:
 # http://livingcode.blogspot.com/2005/10/pysight-preview.html (Tim Omernick, Dethe Elza)

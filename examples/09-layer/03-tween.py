@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # This example demonstrates motion tweening and prototype-based inheritance on layers.
 

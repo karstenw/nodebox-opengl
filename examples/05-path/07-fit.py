@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # This example demonstrated how to fit text to a path using the directed() command
 # (thanks to Karsten Wolf).

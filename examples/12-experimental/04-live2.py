@@ -8,6 +8,7 @@ import os
 import warnings
 
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # from random import random
 

@@ -1,6 +1,7 @@
 import os, sys; sys.path.insert(0, os.path.join("..",".."))
 
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # A freehand drawing application!
 

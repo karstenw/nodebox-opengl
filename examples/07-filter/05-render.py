@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # The render() command executes a function with drawing commands 
 # in an offscreen (i.e. hidden) canvas and returns an Image object.

@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.graphics.physics import Particle, Force, System
 
 # BANG!

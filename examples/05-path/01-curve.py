@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # The BezierPath object handles complex vector shapes made up of curves and lines.
 # As with images and text, it is a good idea to create the path once, outside the draw loop.

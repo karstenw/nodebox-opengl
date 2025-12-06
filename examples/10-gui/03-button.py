@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.gui import *
 
 # This is the same example as the previous, but with a button added to the panel.

@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Often, you may need groups of shapes that you can transform as a whole.
 # For example: a planet that has moons rotating around it.

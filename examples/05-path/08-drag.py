@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # A classic NodeBox example (http://nodebox.net/code/index.php/Dendrite).
 # It registers the dragged mouse movements,

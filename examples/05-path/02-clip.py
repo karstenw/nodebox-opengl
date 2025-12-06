@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Here, the leaf shape from the previous example is reused,
 # but instead of simply coloring it with blue, we give it a nice gradient touch.

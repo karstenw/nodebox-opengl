@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # The pixels() command yields a list of pixels from a given image.
 # Since this is a relatively slow operation, this is not useful for dynamic image processing,

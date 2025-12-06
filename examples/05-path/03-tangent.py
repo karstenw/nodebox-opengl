@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # The classic NodeBox for Mac OS X has interesting path mathematics functionality.
 # This functionality is also present in NodeBox for OpenGL.

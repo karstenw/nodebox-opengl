@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # In the classic NodeBox for Mac OS X, text can easily be drawn with text(), font(), fontsize().
 # This is possible here as well, but it is much faster to prepare the text beforehand:

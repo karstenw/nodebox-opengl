@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # The main purpose of NodeBox for OpenGL is drawing images to the canvas.
 # Typically, an image can be a JPEG or TIFF file, or a PNG if it uses transparency.

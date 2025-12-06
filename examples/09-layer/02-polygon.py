@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Since a layer is a rectangular area, all mouse events are also triggered in a rectangle.
 # This can be a bit clumsy in some situations. 

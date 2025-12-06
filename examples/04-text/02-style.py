@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 txt = Text("So long!\nThanks for all the fish.", 
           # font = "Droid Serif", 

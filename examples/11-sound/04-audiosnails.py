@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.sound import PD
 from math import sqrt
 

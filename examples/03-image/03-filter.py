@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # This example will make more sense after you've seen the examples in /07-filter
 

@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Render a radial gradient image.
 # Without additional parameters, the gradient will be grayscale.

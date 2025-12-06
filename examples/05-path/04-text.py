@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # The classic NodeBox for Mac OS X has an interesting textpath() function
 # that transforms a string into a BezierPath.

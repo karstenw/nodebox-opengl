@@ -1,6 +1,5 @@
-import os, sys; sys.path.insert(0, os.path.join("..",".."))
-
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # When you run a script, NodeBox reads the code from top to bottom, like a recipe. 
 # When it encounters coloring or transformation commands, it changes the current state. 

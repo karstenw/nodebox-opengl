@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from math import sin, cos
 
 # The Peter De Jong attractor feeds its previous value back into the equation,

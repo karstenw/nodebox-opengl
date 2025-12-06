@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.graphics.physics import Node, Edge, Graph
 
 # Create a graph with randomly connected nodes.

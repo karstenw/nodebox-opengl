@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 
 # Load an image from file.
 # For performance, it's a good idea to create images once, outside the draw() loop.

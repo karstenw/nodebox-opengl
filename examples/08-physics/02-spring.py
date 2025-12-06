@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.graphics.physics import Particle, Spring, System
 
 # A "particle system" is used to simulate effects such as explosions, smoke, water, ...

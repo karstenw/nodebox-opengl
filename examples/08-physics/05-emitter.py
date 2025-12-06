@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.graphics.physics import System, Emitter, Particle, MASS
 
 # 1) An emitter will be firing particles with a constant velocity.

@@ -1,4 +1,5 @@
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 from nodeboxgl.graphics.physics import Vector, Boid, Flock, Obstacle
 
 # Flocking can be used to simulate birds, herds, or school of fish.

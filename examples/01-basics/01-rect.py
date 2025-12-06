@@ -1,7 +1,5 @@
-# Import the drawing commands from the NodeBox module.
-import os, sys; sys.path.insert(0, os.path.join("..",".."))
-
 from nodeboxgl.graphics import *
+print(os.path.basename(__file__))
 # This includes:
 # - drawing primitives such as line(), rect(), ellipse(), triangle(),
 # - color commands such as fill(), stroke(), strokewidth(),
