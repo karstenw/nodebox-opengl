@@ -10,6 +10,7 @@
 
 # Debugging must be switched on or of before other modules are imported.
 
+import os
 import pickle
 
 import pyglet
@@ -57,9 +58,9 @@ def getscreenconf():
 # OpenGL version, e.g. "2.0 NVIDIA-1.5.48".
 OPENGL = pyglet.gl.gl_info.get_version()
 
-#=====================================================================================================
+#=========================================================================================
 
-#--- CACHING -----------------------------------------------------------------------------------------
+#--- CACHING -----------------------------------------------------------------------------
 # OpenGL Display Lists offer a simple way to precompile batches of OpenGL commands.
 # The drawback is that the commands, once compiled, can't be modified.
 
@@ -85,9 +86,9 @@ def flush(id):
     if id is not None:
         glDeleteLists(id, 1)
 
-#=====================================================================================================
+#=========================================================================================
 
-#--- COLOR -------------------------------------------------------------------------------------------
+#--- COLOR -------------------------------------------------------------------------------
 
 RGB = "RGB"
 HSB = "HSB"
@@ -2488,7 +2489,10 @@ glyphs = {}
 try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
     # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
-    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
+    
+    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph-large.p")
+    if not path.exists( glyphpath ):
+        glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
     glyphs = pickle.load(open(glyphpath, 'rb'))
 except Exception as err:
     print("ERROR loading glyphs pickle.")
