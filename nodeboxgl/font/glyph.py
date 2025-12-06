@@ -33,52 +33,8 @@ fonts = {
     "Arial": {
          "normal" : "ArialMT",
            "bold" : "Arial-BoldMT",  
-    },
-    'Verdana': {'bold': 'Verdana-Bold',
-             'bold italic': 'Verdana-BoldItalic',
-             'italic': 'Verdana-Italic',
-             'normal': 'Verdana'},
-    'Monaco': {'normal': 'Monaco'},
-    'Menlo': {'bold': 'Menlo-Bold',
-           'bold italic': 'Menlo-BoldItalic',
-           'italic': 'Menlo-Italic',
-           'normal': 'Menlo-Regular'},
-    'Herculanum': {'normal': 'Herculanum'},
-    # 'Acme': {'normal': 'Acme-Regular'},
-    'Gill Sans': {
-        'bold': 'GillSans-Bold',
-        'bold italic': 'GillSans-BoldItalic',
-        'italic': 'GillSans-Italic',
-        'light': 'GillSans-Light',
-        'light italic': 'GillSans-LightItalic',
-        'normal': u'GillSans'},
-    'FontAwesome': {'normal': 'FontAwesome'},
-    'Futura': {
-        'condensed extrabold': 'Futura-CondensedExtraBold',
-        'condensed medium': 'Futura-CondensedMedium',
-        'medium': 'Futura-Medium',
-        'medium italic': 'Futura-MediumItalic'},
-    'Lato': {
-        'normal': 'Lato-Regular',
-        'light': 'Lato-Hairline',
-        'bold': 'Lato-Bold',
-        'bold italic': 'Lato-BoldItalic',
-    },
+    }
 }
-"""
-    'Eurostile': {
-        'bold': 'Eurostile-Bold',
-        'bold condensed': 'Eurostile-BoldCondensed',
-        'bold extended': 'Eurostile-BoldExtendedTwo',
-        'bold oblique': 'Eurostile-BoldOblique',
-        'condensed': 'Eurostile-Condensed',
-        'demi': 'Eurostile-Demi',
-        'demi oblique': 'Eurostile-DemiOblique',
-        'extended': 'Eurostile-ExtendedTwo',
-        'normal': 'Eurostile',
-        'oblique': 'Eurostile-Oblique'},
-}
-"""
 
 # How point size is measured (NodeBox for OpenGL uses 96dpi).
 dpi = 96
@@ -86,7 +42,7 @@ dpi = 96
 # Measure from the baseline?
 baseline = True
 
-#=====================================================================================================
+#=========================================================================================
 
 glyphs = {}
 
