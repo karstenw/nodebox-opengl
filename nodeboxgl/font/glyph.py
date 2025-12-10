@@ -60,15 +60,23 @@ def descent(fontname, fontsize=10):
 for fontname in fonts:
     glyphs[fontname] = {}
     print(fontname)
+    
     for fontweight in fonts[fontname]:
-        print("   "+fontweight)
+        
+        
         glyphs[fontname][fontweight] = {}
+        
         # Render the font at a large size so we can round the path points.
         # This saves disk space and decreases the loading time.
         _ctx.font(fonts[fontname][fontweight])
         _ctx.fontsize(1000.0 * dpi / 72)
         _ctx.lineheight(1.0)
-        dy = baseline and descent(fontname, _ctx.fontsize()) or 0
+        dy = (    baseline
+              and descent(fontname, _ctx.fontsize())
+              or 0 )
+        
+        print("   ", fontweight, dy)
+        
         for i in characters:
             # ch = unichr(i)
             ch = chr(i)
@@ -98,6 +106,10 @@ f.close()
 
 def textpath_from_glyphs(string, x=0, y=0, fontname="Droid Sans", fontweight="normal"):
     glyphs = pickle.load(open("glyph.p", 'rb'))
+    
+    fontname = choice( list( glyphs.keys() ))
+    fontweight = choice( list( glyphs[fontname].keys() ))
+                       
     p = _ctx.BezierPath()
     f = _ctx.fontsize() / 1000.0 * 72 / dpi
     y += textheight(" ", lineheight()) - textheight(" ", lineheight=1)
@@ -105,14 +117,28 @@ def textpath_from_glyphs(string, x=0, y=0, fontname="Droid Sans", fontweight="no
     for ch in string:
         glyph = glyphs[fontname][fontweight][ch]
         for pt in glyph:
+            
             if pt[0] == "moveto":
                 p.moveto(x+pt[1]*f, y+pt[2]*f)
+            
             elif pt[0] == "lineto":
                 p.lineto(x+pt[1]*f, y+pt[2]*f)
+            
             elif pt[0] == "curveto":
                 p.curveto(x+pt[3]*f, y+pt[4]*f, x+pt[5]*f, y+pt[6]*f, x+pt[1]*f, y+pt[2]*f)
+            
             elif pt[0] == "close":
                 p.closepath()
+        
         x += _ctx.textwidth(ch)
     return p
-textpath_from_glyphs("Hello World!", 100,100 )
+size( 1800, 1400 )
+
+
+fill(0.5, 0,0,1)
+stroke( 0.1 )
+strokewidth( 3 )
+p = textpath_from_glyphs("Hello World!", 100, 900 )
+
+p.draw()
+
