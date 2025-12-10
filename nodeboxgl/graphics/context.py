@@ -1133,10 +1133,10 @@ class BezierPath(list):
                     glVertex2f(x, y)
                 glEnd()
         self._update() # Remove the cache if points were modified.
-        if self._cache is None \
-        or self._cache[0] is None and fill \
-        or self._cache[1] is None and stroke \
-        or self._cache[-1] != precision:
+        if (    self._cache is None
+             or self._cache[0] is None and fill
+             or self._cache[1] is None and stroke
+             or self._cache[-1] != precision):
             # Calculate and cache the vertices as Display Lists.
             # If the path requires a fill color, it will have to be tessellated.
             if self._cache is not None:
@@ -1380,8 +1380,8 @@ class BezierEditor:
         if pt1.cmd == pt2.cmd == CURVETO:
             if mode == EQUIDISTANT:
                 d1 = d2 = 0.5 * (
-                     geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y) + \
-                     geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y))
+                       geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y)
+                     + geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y))
             else:
                 d1 = geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y)
                 d2 = geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y)            
@@ -1394,15 +1394,15 @@ class BezierEditor:
             pt1.ctrl2.x, pt1.ctrl2.y = geometry.coordinates(pt1.x, pt1.y, d1, a)
             pt2.ctrl1.x, pt2.ctrl1.y = geometry.coordinates(pt1.x, pt1.y, d2, a-180)
         elif pt1.cmd == CURVETO and pt2.cmd == LINETO:
-            d = mode == EQUIDISTANT and \
-                geometry.distance(pt1.x, pt1.y, pt2.x, pt2.y) or \
-                geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y)
+            d = (   mode == EQUIDISTANT
+                 and geometry.distance(pt1.x, pt1.y, pt2.x, pt2.y)
+                  or geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y) )
             a = geometry.angle(pt1.x, pt1.y, pt2.x, pt2.y)
             pt1.ctrl2.x, pt1.ctrl2.y = geometry.coordinates(pt1.x, pt1.y, d, a-180)
         elif pt1.cmd == LINETO and pt2.cmd == CURVETO and i > 0:
-            d = mode == EQUIDISTANT and \
-                geometry.distance(pt1.x, pt1.y, self.path[i-1].x, self.path[i-1].y) or \
-                geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y)
+            d = (    mode == EQUIDISTANT
+                 and geometry.distance(pt1.x, pt1.y, self.path[i-1].x, self.path[i-1].y)
+                  or geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y) )
             a = geometry.angle(self.path[i-1].x, self.path[i-1].y, pt1.x, pt1.y)
             pt2.ctrl1.x, pt2.ctrl1.y = geometry.coordinates(pt1.x, pt1.y, d, a)
 
@@ -2063,15 +2063,16 @@ def install_font(ttf):
     try: 
         pyglet.font.add_file(ttf)
         return True
-    except:
+    except Exception as err:
         # This might fail with Carbon on 64-bit Mac systems.
         # Fonts can be installed on the system manually if this is the case.
+        print(err)
         return False
 
 # Load the platform-independent fonts shipped with NodeBox.
 # The default font is Droid (licensed under Apache 2.0).
 try:
-    for f in glob(path.join(path.dirname(__file__), "..", "font", "*")):
+    for f in glob( os.path.join( os.path.dirname(__file__), "..", "font", "*.ttf")):
         install_font(f)
     DEFAULT_FONT = "Droid Sans"
 except:
@@ -2490,9 +2491,9 @@ try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
     # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
     
-    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph-large.p")
-    if not path.exists( glyphpath ):
-        glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
+    glyphpath = os.path.join(path.dirname(__file__), "..", "font", "glyph-large.p")
+    if not os.path.exists( glyphpath ):
+        glyphpath = os.path.join( os.path.dirname(__file__), "..", "font", "glyph.p")
     glyphs = pickle.load(open(glyphpath, 'rb'))
 except Exception as err:
     print("ERROR loading glyphs pickle.")
@@ -4147,8 +4148,8 @@ class Canvas(list, Prototype, EventHandler):
             object.__setattr__(self, k, v)
             
     def set_method(self, function, name=None):
-        if name == "stop" \
-        or name is None and function.__name__ == "stop":
+        if (   name == "stop"
+            or name is None and function.__name__ == "stop" ):
             Prototype.set_method(self, function, name="_user_defined_stop") # Called from Canvas.stop().
         else:
             Prototype.set_method(self, function, name)
