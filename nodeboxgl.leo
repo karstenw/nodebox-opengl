@@ -11,18 +11,19 @@
 <vnodes>
 <v t="karstenw.20231124170756.2" a="E"><vh>nodeboxgl</vh>
 <v t="karstenw.20231124170851.1" a="E"><vh>library</vh>
-<v t="karstenw.20231124170956.1" a="E"><vh>@clean nodeboxgl/__init__.py</vh>
+<v t="karstenw.20231124170956.1"><vh>@clean nodeboxgl/__init__.py</vh>
 <v t="karstenw.20231124171037.1"><vh>Declarations</vh></v>
 </v>
-<v t="karstenw.20231124170856.1" a="E"><vh>ext</vh>
+<v t="karstenw.20231124170856.1"><vh>ext</vh>
 <v t="karstenw.20231124171143.1"><vh>@clean nodeboxgl/ext/setup.py</vh>
 <v t="karstenw.20231124171244.1"><vh>Declarations</vh></v>
 </v>
 </v>
 <v t="karstenw.20231124170908.1" a="E"><vh>font</vh>
-<v t="karstenw.20240123172532.1"><vh>@clean nodeboxgl/font/glyph.py</vh>
+<v t="karstenw.20240123172532.1" a="E"><vh>@clean nodeboxgl/font/glyph.py</vh>
 <v t="karstenw.20240123172554.1"><vh>Declarations</vh></v>
 <v t="karstenw.20240123172554.2"><vh>descent</vh></v>
+<v t="karstenw.20251206163347.1"><vh>Create Glyphs</vh></v>
 <v t="karstenw.20240123172554.3"><vh>textpath_from_glyphs</vh></v>
 </v>
 </v>
@@ -1146,7 +1147,11 @@
 <t tx="karstenw.20231124170943.1"></t>
 <t tx="karstenw.20231124170948.1"></t>
 <t tx="karstenw.20231124170950.1"></t>
-<t tx="karstenw.20231124170956.1">#=== NODEBOX FOR OPENGL ========================================================
+<t tx="karstenw.20231124170956.1">@language python
+@tabwidth -4
+@others
+</t>
+<t tx="karstenw.20231124171037.1">#=== NODEBOX FOR OPENGL ========================================================
 
 # NodeBox for OpenGL is a Python module for creating 2D interactive visuals
 # using OpenGL. 
@@ -1157,11 +1162,7 @@
 # It has support for Bezier paths, text, image filters (blur, bloom, ...),
 # offscreen rendering, animation &amp; motion tweening, and simple 2D physics.
 
-@others
-@language python
-@tabwidth -4
-</t>
-<t tx="karstenw.20231124171037.1">__author__    = "Tom De Smedt, Frederik De Bleser"
+__author__    = "Tom De Smedt, Frederik De Bleser"
 __version__   = "1.8"
 __copyright__ = "Copyright (c) 2008-2012 City In A Bottle (cityinabottle.org)"
 __license__   = "BSD"
@@ -1170,9 +1171,9 @@ import sys
 
 import nodeboxgl
 </t>
-<t tx="karstenw.20231124171143.1">@others
-@language python
+<t tx="karstenw.20231124171143.1">@language python
 @tabwidth -4
+@others
 </t>
 <t tx="karstenw.20231124171244.1">import os
 from setuptools import setup
@@ -1231,52 +1232,8 @@ fonts = {
     "Arial": {
          "normal" : "ArialMT",
            "bold" : "Arial-BoldMT",  
-    },
-    'Verdana': {'bold': 'Verdana-Bold',
-             'bold italic': 'Verdana-BoldItalic',
-             'italic': 'Verdana-Italic',
-             'normal': 'Verdana'},
-    'Monaco': {'normal': 'Monaco'},
-    'Menlo': {'bold': 'Menlo-Bold',
-           'bold italic': 'Menlo-BoldItalic',
-           'italic': 'Menlo-Italic',
-           'normal': 'Menlo-Regular'},
-    'Herculanum': {'normal': 'Herculanum'},
-    # 'Acme': {'normal': 'Acme-Regular'},
-    'Gill Sans': {
-        'bold': 'GillSans-Bold',
-        'bold italic': 'GillSans-BoldItalic',
-        'italic': 'GillSans-Italic',
-        'light': 'GillSans-Light',
-        'light italic': 'GillSans-LightItalic',
-        'normal': u'GillSans'},
-    'FontAwesome': {'normal': 'FontAwesome'},
-    'Futura': {
-        'condensed extrabold': 'Futura-CondensedExtraBold',
-        'condensed medium': 'Futura-CondensedMedium',
-        'medium': 'Futura-Medium',
-        'medium italic': 'Futura-MediumItalic'},
-    'Lato': {
-        'normal': 'Lato-Regular',
-        'light': 'Lato-Hairline',
-        'bold': 'Lato-Bold',
-        'bold italic': 'Lato-BoldItalic',
-    },
+    }
 }
-"""
-    'Eurostile': {
-        'bold': 'Eurostile-Bold',
-        'bold condensed': 'Eurostile-BoldCondensed',
-        'bold extended': 'Eurostile-BoldExtendedTwo',
-        'bold oblique': 'Eurostile-BoldOblique',
-        'condensed': 'Eurostile-Condensed',
-        'demi': 'Eurostile-Demi',
-        'demi oblique': 'Eurostile-DemiOblique',
-        'extended': 'Eurostile-ExtendedTwo',
-        'normal': 'Eurostile',
-        'oblique': 'Eurostile-Oblique'},
-}
-"""
 
 # How point size is measured (NodeBox for OpenGL uses 96dpi).
 dpi = 96
@@ -1284,7 +1241,7 @@ dpi = 96
 # Measure from the baseline?
 baseline = True
 
-#=====================================================================================================
+#=========================================================================================
 
 glyphs = {}
 
@@ -1300,47 +1257,11 @@ from AppKit import NSFont
 <t tx="karstenw.20240123172554.2">def descent(fontname, fontsize=10):
     return NSFont.fontWithName_size_(fontname, fontsize).descender()
     
-for fontname in fonts:
-    glyphs[fontname] = {}
-    print(fontname)
-    for fontweight in fonts[fontname]:
-        print("   "+fontweight)
-        glyphs[fontname][fontweight] = {}
-        # Render the font at a large size so we can round the path points.
-        # This saves disk space and decreases the loading time.
-        _ctx.font(fonts[fontname][fontweight])
-        _ctx.fontsize(1000.0 * dpi / 72)
-        _ctx.lineheight(1.0)
-        dy = baseline and descent(fontname, _ctx.fontsize()) or 0
-        for i in characters:
-            # ch = unichr(i)
-            ch = chr(i)
-            # print( i, ch )
-            glyphs[fontname][fontweight][ch] = []
-            for pt in _ctx.textpath(ch, 0, 0):
-                if pt.cmd == 0:
-                    pt = [commands[pt.cmd], int(pt.x), int(pt.y-dy)]
-                elif pt.cmd == 1:
-                    pt = [commands[pt.cmd], int(pt.x), int(pt.y-dy)]
-                elif pt.cmd == 2:
-                    pt = [commands[pt.cmd], 
-                          int(pt.x), int(pt.y-dy), 
-                          int(pt.ctrl1.x), int(pt.ctrl1.y-dy), 
-                          int(pt.ctrl2.x), int(pt.ctrl2.y-dy)]
-                elif pt.cmd == 3:
-                    pt = [commands[pt.cmd]]
-                glyphs[fontname][fontweight][ch].append(pt)
-
-import pickle
-f = open("glyph.p","wb")
-pickle.dump(glyphs, f)
-f.close()
-
-#=====================================================================================================
+</t>
+<t tx="karstenw.20240123172554.3">#=====================================================================================================
 # For testing purposes:
 
-</t>
-<t tx="karstenw.20240123172554.3">def textpath_from_glyphs(string, x=0, y=0, fontname="Droid Sans", fontweight="normal"):
+def textpath_from_glyphs(string, x=0, y=0, fontname="Droid Sans", fontweight="normal"):
     glyphs = pickle.load(open("glyph.p", 'rb'))
     p = _ctx.BezierPath()
     f = _ctx.fontsize() / 1000.0 * 72 / dpi
@@ -1349,18 +1270,28 @@ f.close()
     for ch in string:
         glyph = glyphs[fontname][fontweight][ch]
         for pt in glyph:
+            
             if pt[0] == "moveto":
                 p.moveto(x+pt[1]*f, y+pt[2]*f)
+            
             elif pt[0] == "lineto":
                 p.lineto(x+pt[1]*f, y+pt[2]*f)
+            
             elif pt[0] == "curveto":
                 p.curveto(x+pt[3]*f, y+pt[4]*f, x+pt[5]*f, y+pt[6]*f, x+pt[1]*f, y+pt[2]*f)
+            
             elif pt[0] == "close":
                 p.closepath()
+        
         x += _ctx.textwidth(ch)
     return p
-textpath_from_glyphs("Hello World!", 100,100 )
-</t>
+
+fill(0.5, 0,0,1)
+stroke( 0.1 )
+strokewidth( 3 )
+p = textpath_from_glyphs("Hello World!", 100,100 )
+
+p.draw()</t>
 <t tx="karstenw.20240123172657.1">@others
 @language python
 @tabwidth -4
@@ -6138,6 +6069,7 @@ tesselate = tessellate # Common spelling error.
 
 # Debugging must be switched on or of before other modules are imported.
 
+import os
 import pickle
 
 import pyglet
@@ -6394,10 +6326,10 @@ oval = ellipse
                 glVertex2f(x, y)
             glEnd()
     self._update() # Remove the cache if points were modified.
-    if self._cache is None \
-    or self._cache[0] is None and fill \
-    or self._cache[1] is None and stroke \
-    or self._cache[-1] != precision:
+    if (    self._cache is None
+         or self._cache[0] is None and fill
+         or self._cache[1] is None and stroke
+         or self._cache[-1] != precision):
         # Calculate and cache the vertices as Display Lists.
         # If the path requires a fill color, it will have to be tessellated.
         if self._cache is not None:
@@ -6669,8 +6601,8 @@ Path = BezierPath
     if pt1.cmd == pt2.cmd == CURVETO:
         if mode == EQUIDISTANT:
             d1 = d2 = 0.5 * (
-                 geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y) + \
-                 geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y))
+                   geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y)
+                 + geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y))
         else:
             d1 = geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y)
             d2 = geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y)            
@@ -6683,15 +6615,15 @@ Path = BezierPath
         pt1.ctrl2.x, pt1.ctrl2.y = geometry.coordinates(pt1.x, pt1.y, d1, a)
         pt2.ctrl1.x, pt2.ctrl1.y = geometry.coordinates(pt1.x, pt1.y, d2, a-180)
     elif pt1.cmd == CURVETO and pt2.cmd == LINETO:
-        d = mode == EQUIDISTANT and \
-            geometry.distance(pt1.x, pt1.y, pt2.x, pt2.y) or \
-            geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y)
+        d = (   mode == EQUIDISTANT
+             and geometry.distance(pt1.x, pt1.y, pt2.x, pt2.y)
+              or geometry.distance(pt1.x, pt1.y, pt1.ctrl2.x, pt1.ctrl2.y) )
         a = geometry.angle(pt1.x, pt1.y, pt2.x, pt2.y)
         pt1.ctrl2.x, pt1.ctrl2.y = geometry.coordinates(pt1.x, pt1.y, d, a-180)
     elif pt1.cmd == LINETO and pt2.cmd == CURVETO and i &gt; 0:
-        d = mode == EQUIDISTANT and \
-            geometry.distance(pt1.x, pt1.y, self.path[i-1].x, self.path[i-1].y) or \
-            geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y)
+        d = (    mode == EQUIDISTANT
+             and geometry.distance(pt1.x, pt1.y, self.path[i-1].x, self.path[i-1].y)
+              or geometry.distance(pt1.x, pt1.y, pt2.ctrl1.x, pt2.ctrl1.y) )
         a = geometry.angle(self.path[i-1].x, self.path[i-1].y, pt1.x, pt1.y)
         pt2.ctrl1.x, pt2.ctrl1.y = geometry.coordinates(pt1.x, pt1.y, d, a)
 
@@ -7457,15 +7389,16 @@ def done(self):
     try: 
         pyglet.font.add_file(ttf)
         return True
-    except:
+    except Exception as err:
         # This might fail with Carbon on 64-bit Mac systems.
         # Fonts can be installed on the system manually if this is the case.
+        print(err)
         return False
 
 # Load the platform-independent fonts shipped with NodeBox.
 # The default font is Droid (licensed under Apache 2.0).
 try:
-    for f in glob(path.join(path.dirname(__file__), "..", "font", "*")):
+    for f in glob( os.path.join( os.path.dirname(__file__), "..", "font", "*.ttf")):
         install_font(f)
     DEFAULT_FONT = "Droid Sans"
 except:
@@ -9899,8 +9832,8 @@ def texture(self):
         
 </t>
 <t tx="karstenw.20240123172917.456">def set_method(self, function, name=None):
-    if name == "stop" \
-    or name is None and function.__name__ == "stop":
+    if (   name == "stop"
+        or name is None and function.__name__ == "stop" ):
         Prototype.set_method(self, function, name="_user_defined_stop") # Called from Canvas.stop().
     else:
         Prototype.set_method(self, function, name)
@@ -11178,16 +11111,16 @@ canvas = Canvas()
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 </t>
-<t tx="karstenw.20240126155307.1">#=====================================================================================================
+<t tx="karstenw.20240126155307.1">#=========================================================================================
 
-#--- CACHING -----------------------------------------------------------------------------------------
+#--- CACHING -----------------------------------------------------------------------------
 # OpenGL Display Lists offer a simple way to precompile batches of OpenGL commands.
 # The drawback is that the commands, once compiled, can't be modified.
 
 </t>
-<t tx="karstenw.20240126155339.1">#=====================================================================================================
+<t tx="karstenw.20240126155339.1">#=========================================================================================
 
-#--- COLOR -------------------------------------------------------------------------------------------
+#--- COLOR -------------------------------------------------------------------------------
 
 RGB = "RGB"
 HSB = "HSB"
@@ -11478,7 +11411,10 @@ _profile_frames = 100
 try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
     # By default, it has glyph path info for Droid Sans, Droid Sans Mono, Droid Serif.
-    glyphpath = path.join(path.dirname(__file__), "..", "font", "glyph.p")
+    
+    glyphpath = os.path.join(path.dirname(__file__), "..", "font", "glyph-large.p")
+    if not os.path.exists( glyphpath ):
+        glyphpath = os.path.join( os.path.dirname(__file__), "..", "font", "glyph.p")
     glyphs = pickle.load(open(glyphpath, 'rb'))
 except Exception as err:
     print("ERROR loading glyphs pickle.")
@@ -11496,6 +11432,47 @@ except Exception as err:
                 print(fontname, style, glyphcount ) 
     return fontnames
     
+
+</t>
+<t tx="karstenw.20251206163347.1">for fontname in fonts:
+    glyphs[fontname] = {}
+    print(fontname)
+    
+    for fontweight in fonts[fontname]:
+        
+        print("   "+fontweight)
+        
+        glyphs[fontname][fontweight] = {}
+        
+        # Render the font at a large size so we can round the path points.
+        # This saves disk space and decreases the loading time.
+        _ctx.font(fonts[fontname][fontweight])
+        _ctx.fontsize(1000.0 * dpi / 72)
+        _ctx.lineheight(1.0)
+        dy = baseline and descent(fontname, _ctx.fontsize()) or 0
+        for i in characters:
+            # ch = unichr(i)
+            ch = chr(i)
+            # print( i, ch )
+            glyphs[fontname][fontweight][ch] = []
+            for pt in _ctx.textpath(ch, 0, 0):
+                if pt.cmd == 0:
+                    pt = [commands[pt.cmd], int(pt.x), int(pt.y-dy)]
+                elif pt.cmd == 1:
+                    pt = [commands[pt.cmd], int(pt.x), int(pt.y-dy)]
+                elif pt.cmd == 2:
+                    pt = [commands[pt.cmd], 
+                          int(pt.x), int(pt.y-dy), 
+                          int(pt.ctrl1.x), int(pt.ctrl1.y-dy), 
+                          int(pt.ctrl2.x), int(pt.ctrl2.y-dy)]
+                elif pt.cmd == 3:
+                    pt = [commands[pt.cmd]]
+                glyphs[fontname][fontweight][ch].append(pt)
+
+import pickle
+f = open("glyph.p","wb")
+pickle.dump(glyphs, f)
+f.close()
 
 </t>
 </tnodes>
