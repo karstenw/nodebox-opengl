@@ -2485,7 +2485,6 @@ def textmetrics(txt, width=None, **kwargs):
 class GlyphPathError(Exception):
     pass
 
-
 glyphs = {}
 try:
     # Load cached font glyph path information from nodebox/font/glyph.p.
