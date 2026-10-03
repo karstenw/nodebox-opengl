@@ -15,23 +15,23 @@ lines = []
 # seed(0)
 
 def draw(canvas):
-    background(0.1, 0.0, 0.1, 0.25)
+    background(0.3, 0.0, 0.3, 1)
     nofill()
-    stroke(1, 1, 1, 0.2)
-    strokewidth(0.5)
+    stroke(0.8, 0.8, 0.8, 0.5)
+    strokewidth( 1.0 )
     
     # Register mouse movement.
     if canvas.mouse.dragged:
         lines.append((LINETO, canvas.mouse.x, canvas.mouse.y, canvas.frame))
     elif canvas.mouse.pressed:
-        lines.append((MOVETO, canvas.mouse.x, canvas.mouse.y, canvas.frame))  
-
+        lines.append((MOVETO, canvas.mouse.x, canvas.mouse.y, canvas.frame))
+    
     if len(lines) > 0:
         for i in range(5):
             seed(i) # Lock the seed for smooth animation.
             p = BezierPath()
             for cmd, x, y, atframe in lines:
-                d = sin((canvas.frame - atframe) / 5.0) * 5.0 # Play with the numbers.
+                d = sin( (canvas.frame - atframe) / 5.0) * 5.0 # Play with the numbers.
                 x += random(-d, d) 
                 y += random(-d, d)
                 if cmd == MOVETO:
@@ -46,7 +46,7 @@ def draw(canvas):
                     print(err)
                     print()
 
-canvas.fps = 40
+canvas.fps = 80
 canvas.size = 900, 700
 #canvas.fullscreen = True
 canvas.run(draw)
