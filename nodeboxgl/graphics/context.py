@@ -14,9 +14,11 @@ import os
 import pickle
 
 import pyglet
+import pyglet.gl as pygl
+
 pyglet.options['debug_gl'] = False
 
-from pyglet.gl     import *
+# from pyglet.gl     import *
 
 from pyglet.image import Texture
 from math         import cos, sin, radians, pi, floor
@@ -56,7 +58,7 @@ def getscreenconf():
 # Do this when we have defined texture() and image(), which are needed in the shader module.
 
 # OpenGL version, e.g. "2.0 NVIDIA-1.5.48".
-OPENGL = pyglet.gl.gl_info.get_version()
+OPENGL = pygl.gl_info.get_version()
 
 #=========================================================================================
 
@@ -69,22 +71,22 @@ def precompile(function, *args, **kwargs):
         A Display List will precompile the commands and (if possible) store them in graphics memory.
         Returns an id which can be used with precompiled() to execute the cached commands.
     """
-    id = glGenLists(1)
-    glNewList(id, GL_COMPILE)
+    id = pygl.glGenLists(1)
+    pygl.glNewList(id, pygl.GL_COMPILE)
     function(*args, **kwargs)
-    glEndList()
+    pygl.glEndList()
     return id
         
 def precompiled(id):
     """ Executes the Display List program with the given id.
     """
-    glCallList(id)
+    pygl.glCallList(id)
         
 def flush(id):
     """ Removes the Display List program with the given id from memory.
     """
     if id is not None:
-        glDeleteLists(id, 1)
+        pygl.glDeleteLists(id, 1)
 
 #=========================================================================================
 
@@ -195,7 +197,7 @@ class Color(list):
         return Color(self)
 
     def _apply(self):
-        glColor4f(self[0], self[1], self[2], self[3] * _alpha)
+        pygl.glColor4f(self[0], self[1], self[2], self[3] * _alpha)
 
     def __repr__(self):
         return "Color(%.3f, %.3f, %.3f, %.3f)" % \
@@ -253,7 +255,7 @@ def background(*args, **kwargs):
     global _background
     if args:
         _background = Color(*args, **kwargs)
-        xywh = (GLint*4)(); glGetIntegerv(GL_VIEWPORT, xywh); x,y,w,h = xywh
+        xywh = (pygl.GLint*4)(); pygl.glGetIntegerv(pygl.GL_VIEWPORT, xywh); x,y,w,h = xywh
         rect(x, y, w, h, fill=_background, stroke=None)   
     return _background
 
@@ -294,9 +296,15 @@ def strokewidth(width=None):
     # but finer lines can be achieved visually with a transparent stroke.
     # Thicker strokewidth results in ugly (i.e. no) line caps.
     global _strokewidth
-    if width is not None:
+    if width is not None and width > 0:
         _strokewidth = width
-        glLineWidth(width)
+        try:
+            pygl.glLineWidth(width)
+        except pyglet.gl.lib.GLException as err:
+            print()
+            print("err:", err)
+            print("width:", width )
+            
     return _strokewidth
 
 SOLID  = "solid"
@@ -314,11 +322,11 @@ def strokestyle(style=None):
     
 def glLineDash(style):
     if style == SOLID:
-        glDisable(GL_LINE_STIPPLE)
+        pygl.glDisable(pygl.GL_LINE_STIPPLE)
     elif style == DOTTED:
-        glEnable(GL_LINE_STIPPLE); glLineStipple(0, 0x0101)
+        pygl.glEnable(pygl.GL_LINE_STIPPLE); pygl.glLineStipple(0, 0x0101)
     elif style == DASHED:
-        glEnable(GL_LINE_STIPPLE); glLineStipple(1, 0x000F)
+        pygl.glEnable(pygl.GL_LINE_STIPPLE); pygl.glLineStipple(1, 0x000F)
 
 def outputmode(mode=None):
     raise NotImplementedError()
@@ -509,16 +517,16 @@ def colorplane(x, y, width, height, *a):
         # Black top, white bottom.
         clr1 = clr2 = (0,0,0,1)
         clr3 = clr4 = (1,1,1,1)
-    glPushMatrix()
-    glTranslatef(x, y, 0)
-    glScalef(width, height, 1)
-    glBegin(GL_QUADS)
-    glColor4f(clr1[0], clr1[1], clr1[2], clr1[3] * _alpha); glVertex2f(-0.0,  1.0)
-    glColor4f(clr2[0], clr2[1], clr2[2], clr2[3] * _alpha); glVertex2f( 1.0,  1.0)
-    glColor4f(clr3[0], clr3[1], clr3[2], clr3[3] * _alpha); glVertex2f( 1.0, -0.0)
-    glColor4f(clr4[0], clr4[1], clr4[2], clr4[3] * _alpha); glVertex2f(-0.0, -0.0)
-    glEnd()
-    glPopMatrix()
+    pygl.glPushMatrix()
+    pygl.glTranslatef(x, y, 0)
+    pygl.glScalef(width, height, 1)
+    pygl.glBegin( pygl.GL_QUADS )
+    pygl.glColor4f(clr1[0], clr1[1], clr1[2], clr1[3] * _alpha); pygl.glVertex2f(-0.0,  1.0)
+    pygl.glColor4f(clr2[0], clr2[1], clr2[2], clr2[3] * _alpha); pygl.glVertex2f( 1.0,  1.0)
+    pygl.glColor4f(clr3[0], clr3[1], clr3[2], clr3[3] * _alpha); pygl.glVertex2f( 1.0, -0.0)
+    pygl.glColor4f(clr4[0], clr4[1], clr4[2], clr4[3] * _alpha); pygl.glVertex2f(-0.0, -0.0)
+    pygl.glEnd()
+    pygl.glPopMatrix()
 
 #=====================================================================================================
 
@@ -538,26 +546,26 @@ def push():
     """ Pushes the transformation state.
         Subsequent transformations (translate, rotate, scale) remain in effect until pop() is called.
     """
-    glPushMatrix()
+    pygl.glPushMatrix()
 
 def pop():
     """ Pops the transformation state.
         This reverts the transformation to before the last push().
     """
-    glPopMatrix()
+    pygl.glPopMatrix()
 
 def translate(x, y, z=0):
     """ By default, the origin of the layer or canvas is at the bottom left.
         This origin point will be moved by (x,y) pixels.
     """
-    glTranslatef(round(x), round(y), round(z))
+    pygl.glTranslatef(round(x), round(y), round(z))
 
 def rotate(degrees, axis=(0,0,1)):
     """ Rotates the transformation state, i.e. all subsequent drawing primitives are rotated.
         Rotations work incrementally:
         calling rotate(60) and rotate(30) sets the current rotation to 90.
     """
-    glRotatef(degrees, *axis)
+    pygl.glRotatef(degrees, *axis)
 
 def scale(x, y=None, z=None):
     """ Scales the transformation state.
@@ -566,12 +574,12 @@ def scale(x, y=None, z=None):
         y = x
     if z is None: 
         z = 1
-    glScalef(x, y, z)
+    pygl.glScalef(x, y, z)
 
 def reset():
     """ Resets the transform state of the layer or canvas.
     """
-    glLoadIdentity()
+    pygl.glLoadIdentity()
 
 CORNER = "corner"
 CENTER = "center"
@@ -596,14 +604,14 @@ def line(x0, y0, x1, y1, **kwargs):
     """
     fill, stroke, strokewidth, strokestyle = color_mixin(**kwargs)
     if stroke is not None and strokewidth > 0:
-        glColor4f(stroke[0], stroke[1], stroke[2], stroke[3] * _alpha)
-        glLineWidth(strokewidth)
+        pygl.glColor4f(stroke[0], stroke[1], stroke[2], stroke[3] * _alpha)
+        pygl.glLineWidth(strokewidth)
         if strokestyle != _strokestyle:
             glLineDash(strokestyle)
-        glBegin(GL_LINES)
-        glVertex2f(x0, y0)
-        glVertex2f(x1, y1)
-        glEnd()
+        pygl.glBegin( pygl.GL_LINES )
+        pygl.glVertex2f(x0, y0)
+        pygl.glVertex2f(x1, y1)
+        pygl.glEnd()
 
 def rect(x, y, width, height, **kwargs):
     """ Draws a rectangle with the bottom left corner at x, y.
@@ -611,20 +619,20 @@ def rect(x, y, width, height, **kwargs):
     """
     fill, stroke, strokewidth, strokestyle = color_mixin(**kwargs)
     if fill is not None:
-        glColor4f(fill[0], fill[1], fill[2], fill[3] * _alpha)
-        glRectf(x, y, x+width, y+height)
+        pygl.glColor4f(fill[0], fill[1], fill[2], fill[3] * _alpha)
+        pygl.glRectf(x, y, x+width, y+height)
 
     if stroke is not None and strokewidth > 0:
-        glLineWidth(strokewidth)
+        pygl.glLineWidth(strokewidth)
         glLineDash(strokestyle)
-        glColor4f(stroke[0], stroke[1], stroke[2], stroke[3] * _alpha)
+        pygl.glColor4f(stroke[0], stroke[1], stroke[2], stroke[3] * _alpha)
         # Note: this performs equally well as when using precompile().
-        glBegin(GL_LINE_LOOP)
-        glVertex2f(x, y)
-        glVertex2f(x+width, y)
-        glVertex2f(x+width, y+height)
-        glVertex2f(x, y+height)
-        glEnd()
+        pygl.glBegin( pygl.GL_LINE_LOOP )
+        pygl.glVertex2f(x, y)
+        pygl.glVertex2f(x+width, y)
+        pygl.glVertex2f(x+width, y+height)
+        pygl.glVertex2f(x, y+height)
+        pygl.glEnd()
 
 def triangle(x1, y1, x2, y2, x3, y3, **kwargs):
     """ Draws the triangle created by connecting the three given points.
@@ -634,16 +642,16 @@ def triangle(x1, y1, x2, y2, x3, y3, **kwargs):
     for i, clr in enumerate((fill, stroke)):
         if clr is not None and (i==0 or strokewidth > 0):
             if i == 1: 
-                glLineWidth(strokewidth)
+                pygl.glLineWidth(strokewidth)
                 if strokestyle != _strokestyle:
                     glLineDash(strokestyle)
-            glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
+            pygl.glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
             # Note: this performs equally well as when using precompile().
-            glBegin((GL_TRIANGLES, GL_LINE_LOOP)[i])
-            glVertex2f(x1, y1)
-            glVertex2f(x2, y2)
-            glVertex2f(x3, y3)
-            glEnd()
+            pygl.glBegin( (pygl.GL_TRIANGLES, pygl.GL_LINE_LOOP)[i] )
+            pygl.glVertex2f(x1, y1)
+            pygl.glVertex2f(x2, y2)
+            pygl.glVertex2f(x3, y3)
+            pygl.glEnd()
 
 _ellipses = {}
 ELLIPSE_SEGMENTS = 50
@@ -657,11 +665,11 @@ def ellipse(x, y, width, height, segments=ELLIPSE_SEGMENTS, **kwargs):
         commands = []
         f = 2 * pi / segments
         v = [(cos(t)/2, sin(t)/2) for t in [i*f for i in list(range(segments))+[0]]]
-        for mode in (GL_TRIANGLE_FAN, GL_LINE_LOOP):
+        for mode in (pygl.GL_TRIANGLE_FAN, pygl.GL_LINE_LOOP):
             commands.append(precompile(lambda:(
-               glBegin(mode),
-               [glVertex2f(x, y) for (x, y) in v],
-               glEnd()
+               pygl.glBegin(mode),
+               [pygl.glVertex2f(x, y) for (x, y) in v],
+               pygl.glEnd()
                )))
         
         _ellipses[segments] = commands
@@ -670,15 +678,15 @@ def ellipse(x, y, width, height, segments=ELLIPSE_SEGMENTS, **kwargs):
     for i, clr in enumerate((fill, stroke)):
         if clr is not None and (i==0 or strokewidth > 0):
             if i == 1: 
-                glLineWidth(strokewidth)
+                pygl.glLineWidth(strokewidth)
                 if strokestyle != _strokestyle:
                     glLineDash(strokestyle)
-            glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
-            glPushMatrix()
-            glTranslatef(x, y, 0)
-            glScalef(width, height, 1)
-            glCallList(_ellipses[segments][i])
-            glPopMatrix()
+            pygl.glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
+            pygl.glPushMatrix()
+            pygl.glTranslatef(x, y, 0)
+            pygl.glScalef(width, height, 1)
+            pygl.glCallList(_ellipses[segments][i])
+            pygl.glPopMatrix()
 
 oval = ellipse # Backwards compatibility.
 
@@ -692,20 +700,20 @@ def arrow(x, y, width, **kwargs):
     for i, clr in enumerate((fill, stroke)):
         if clr is not None and (i==0 or strokewidth > 0):
             if i == 1: 
-                glLineWidth(strokewidth)
+                pygl.glLineWidth(strokewidth)
                 glLineDash(strokestyle)
-            glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
+            pygl.glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
             # Note: this performs equally well as when using precompile().
-            glBegin((GL_POLYGON, GL_LINE_LOOP)[i])
-            glVertex2f(x, y)
-            glVertex2f(x-head, y+head)
-            glVertex2f(x-head, y+tail)
-            glVertex2f(x-width, y+tail)
-            glVertex2f(x-width, y-tail)
-            glVertex2f(x-head, y-tail)
-            glVertex2f(x-head, y-head)
-            glVertex2f(x, y)
-            glEnd()
+            pygl.glBegin( (pygl.GL_POLYGON, pygl.GL_LINE_LOOP)[i] )
+            pygl.glVertex2f(x, y)
+            pygl.glVertex2f(x-head, y+head)
+            pygl.glVertex2f(x-head, y+tail)
+            pygl.glVertex2f(x-width, y+tail)
+            pygl.glVertex2f(x-width, y-tail)
+            pygl.glVertex2f(x-head, y-tail)
+            pygl.glVertex2f(x-head, y-head)
+            pygl.glVertex2f(x, y)
+            pygl.glEnd()
 
 def gcd(a, b):
     return gcd(b, a % b) if b else a
@@ -724,15 +732,15 @@ def fast_star(x, y, points=20, outer=100, inner=50, **kwargs):
         f = pi / points
         v = [(r*sin(i*f), r*cos(i*f)) for i, r in enumerate(radii)]
         cached.append(precompile(lambda:(
-            glBegin(GL_TRIANGLE_FAN),
-            glVertex2f(0, 0),
-            [glVertex2f(vx, vy) for (vx, vy) in v],
-            glEnd()
+            pygl.glBegin( pygl.GL_TRIANGLE_FAN ),
+            pygl.glVertex2f(0, 0),
+            [pygl.glVertex2f(vx, vy) for (vx, vy) in v],
+            pygl.glEnd()
         )))
         cached.append(precompile(lambda:(
-            glBegin(GL_LINE_LOOP),
-            [glVertex2f(vx, vy) for (vx, vy) in v],
-            glEnd()
+            pygl.glBegin( pygl.GL_LINE_LOOP ),
+            [pygl.glVertex2f(vx, vy) for (vx, vy) in v],
+            pygl.glEnd()
         )))
         _stars[(points, iscale, oscale)] = cached
 
@@ -740,15 +748,15 @@ def fast_star(x, y, points=20, outer=100, inner=50, **kwargs):
     for i, clr in enumerate((fill, stroke)):
         if clr is not None and (i == 0 or strokewidth > 0):
             if i == 1: 
-                glLineWidth(strokewidth)
+                pygl.glLineWidth(strokewidth)
                 if strokestyle != _strokestyle:
                     glLineDash(strokestyle)
-            glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
-            glPushMatrix()
-            glTranslatef(x, y, 0)
-            glScalef(scale, scale, 1)
-            glCallList(cached[i])
-            glPopMatrix()
+            pygl.glColor4f(clr[0], clr[1], clr[2], clr[3] * _alpha)
+            pygl.glPushMatrix()
+            pygl.glTranslatef(x, y, 0)
+            pygl.glScalef(scale, scale, 1)
+            pygl.glCallList(cached[i])
+            pygl.glPopMatrix()
 
 def star(x, y, points=20, outer=100, inner=50, **kwargs):
     """ Draws a star with the given points, outer radius and inner radius.
@@ -1121,17 +1129,17 @@ class BezierPath(list):
         def _draw_fill(contours):
             # Drawing commands for the path fill (as triangles by tessellating the contours).
             v = geometry.tesselate(contours)
-            glBegin(GL_TRIANGLES)
+            pygl.glBegin( pygl.GL_TRIANGLES )
             for x, y in v:
-                glVertex3f(x, y, 0)
-            glEnd()
+                pygl.glVertex3f(x, y, 0)
+            pygl.glEnd()
         def _draw_stroke(contours):
             # Drawing commands for the path stroke.
             for path in contours:
-                glBegin(GL_LINE_STRIP)
+                pygl.glBegin( pygl.GL_LINE_STRIP )
                 for x, y in path:
-                    glVertex2f(x, y)
-                glEnd()
+                    pygl.glVertex2f(x, y)
+                pygl.glEnd()
         self._update() # Remove the cache if points were modified.
         if (    self._cache is None
              or self._cache[0] is None and fill
@@ -1147,13 +1155,13 @@ class BezierPath(list):
             if fill   : self._cache[0] = precompile(_draw_fill, contours)
             if stroke : self._cache[1] = precompile(_draw_stroke, contours)
         if fill is not None:
-            glColor4f(fill[0], fill[1], fill[2], fill[3] * _alpha)
-            glCallList(self._cache[0])
+            pygl.glColor4f(fill[0], fill[1], fill[2], fill[3] * _alpha)
+            pygl.glCallList(self._cache[0])
         if stroke is not None and strokewidth > 0:
-            glColor4f(stroke[0], stroke[1], stroke[2], stroke[3] * _alpha)
-            glLineWidth(strokewidth)
+            pygl.glColor4f(stroke[0], stroke[1], stroke[2], stroke[3] * _alpha)
+            pygl.glLineWidth(strokewidth)
             glLineDash(strokestyle)
-            glCallList(self._cache[1])
+            pygl.glCallList(self._cache[1])
 
     def angle(self, t):
         """ Returns the directional angle at time t (0.0-1.0) on the path.
@@ -1467,20 +1475,20 @@ def beginclip(path):
         Drawing commands between beginclip() and endclip() are constrained to the shape of the path.
     """
     # Enable the stencil buffer to limit the area of rendering (stenciling).
-    glClear(GL_STENCIL_BUFFER_BIT)
-    glEnable(GL_STENCIL_TEST)
-    glStencilFunc(GL_NOTEQUAL, 0, 0)
-    glStencilOp(GL_INCR, GL_INCR, GL_INCR)
+    pygl.glClear( pygl.GL_STENCIL_BUFFER_BIT )
+    pygl.glEnable( pygl.GL_STENCIL_TEST )
+    pygl.glStencilFunc( pygl.GL_NOTEQUAL, 0, 0 )
+    pygl.glStencilOp( pygl.GL_INCR, pygl.GL_INCR, pygl.GL_INCR)
     # Shouldn't depth testing be disabled when stencilling?
     # In any case, if it is, transparency doesn't work.
     #glDisable(GL_DEPTH_TEST)
     path.draw(fill=(0,0,0,1), stroke=None) # Disregard color settings; always use a black mask.
     #glEnable(GL_DEPTH_TEST)
-    glStencilFunc(GL_EQUAL, 1, 1)
-    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP)
+    pygl.glStencilFunc( pygl.GL_EQUAL, 1, 1)
+    pygl.glStencilOp( pygl.GL_KEEP, pygl.GL_KEEP, pygl.GL_KEEP)
 
 def endclip():
-    glDisable(GL_STENCIL_TEST)
+    pygl.glDisable( pygl.GL_STENCIL_TEST )
 
 #--- SUPERSHAPE --------------------------------------------------------------------------------------
 
@@ -1597,15 +1605,15 @@ def _render(texture, quad=(0,0,0,0,0,0,0,0)):
     w = texture.width      # See Pyglet programming guide -> OpenGL imaging.
     h = texture.height
     dx1, dy1, dx2, dy2, dx3, dy3, dx4, dy4 = quad or (0,0,0,0,0,0,0,0)
-    glEnable(texture.target)
-    glBindTexture(texture.target, texture.id)
-    glBegin(GL_QUADS)
-    glTexCoord3f(t[0], t[1],  t[2] ); glVertex3f(dx4,   dy4,   0)
-    glTexCoord3f(t[3], t[4],  t[5] ); glVertex3f(dx3+w, dy3,   0)
-    glTexCoord3f(t[6], t[7],  t[8] ); glVertex3f(dx2+w, dy2+h, 0)
-    glTexCoord3f(t[9], t[10], t[11]); glVertex3f(dx1,   dy1+h, 0)
-    glEnd()
-    glDisable(texture.target)
+    pygl.glEnable(texture.target)
+    pygl.glBindTexture(texture.target, texture.id)
+    pygl.glBegin( pygl.GL_QUADS )
+    pygl.glTexCoord3f(t[0], t[1],  t[2] ); pygl.glVertex3f(dx4,   dy4,   0)
+    pygl.glTexCoord3f(t[3], t[4],  t[5] ); pygl.glVertex3f(dx3+w, dy3,   0)
+    pygl.glTexCoord3f(t[6], t[7],  t[8] ); pygl.glVertex3f(dx2+w, dy2+h, 0)
+    pygl.glTexCoord3f(t[9], t[10], t[11]); pygl.glVertex3f(dx1,   dy1+h, 0)
+    pygl.glEnd()
+    pygl.glDisable(texture.target)
 
 class Quad(list):
     
@@ -1776,12 +1784,12 @@ class Image(object):
         w = float(width) / self._texture.width
         h = float(height) / self._texture.height
         # Transform and draw the quads.
-        glPushMatrix()
-        glTranslatef(x, y, 0)
-        glScalef(w, h, 0)
-        glColor4f(color[0], color[1], color[2], color[3] * _alpha)
-        glCallList(self._cache)
-        glPopMatrix() 
+        pygl.glPushMatrix()
+        pygl.glTranslatef(x, y, 0)
+        pygl.glScalef(w, h, 0)
+        pygl.glColor4f(color[0], color[1], color[2], color[3] * _alpha)
+        pygl.glCallList(self._cache)
+        pygl.glPopMatrix() 
         if filter:
             filter.pop()
 
@@ -2349,11 +2357,11 @@ class Text(object):
         # Fontsize is rounded, and fontsize 0 will output a default font.
         # Therefore, we don't draw text with a fontsize smaller than 0.5.
         if self._label.font_size >= 0.5:
-            glPushMatrix()
-            glTranslatef(x, y, 0)
+            pygl.glPushMatrix()
+            pygl.glTranslatef(x, y, 0)
             self._update()
             self._label.draw()
-            glPopMatrix()
+            pygl.glPopMatrix()
 
     def copy(self):
         self._update()
@@ -3159,19 +3167,19 @@ class Layer(list, Prototype, EventHandler):
         """
         if self.hidden:
             return
-        glPushMatrix()
+        pygl.glPushMatrix()
         # Be careful that the transformations happen in the same order in Layer._transform().
         # translate => flip => rotate => scale => origin.
         # Center the contents around the origin point.
         dx, dy = self.origin(relative=False)
-        glTranslatef(round(self._x.current), round(self._y.current), 0)
+        pygl.glTranslatef(round(self._x.current), round(self._y.current), 0)
         if self.flipped:
-            glScalef(-1, 1, 1)
-        glRotatef(self._rotation.current, 0, 0, 1)
-        glScalef(self._scale.current, self._scale.current, 1)
+            pygl.glScalef(-1, 1, 1)
+        pygl.glRotatef(self._rotation.current, 0, 0, 1)
+        pygl.glScalef(self._scale.current, self._scale.current, 1)
         # Enable clipping mask if Layer.clipped=True.
         if self.clipped:
-            beginclip(self._clipping_mask)
+            pygl.beginclip(self._clipping_mask)
         # Draw child layers below.
         for layer in self:
             if layer.top is False:
@@ -3179,10 +3187,10 @@ class Layer(list, Prototype, EventHandler):
         # Draw layer.
         global _alpha
         _alpha = self._opacity.current # XXX should also affect child layers?
-        glPushMatrix()
-        glTranslatef(-round(dx), -round(dy), 0) # Layers are drawn relative from parent origin.
+        pygl.glPushMatrix()
+        pygl.glTranslatef(-round(dx), -round(dy), 0) # Layers are drawn relative from parent origin.
         self.draw()
-        glPopMatrix()
+        pygl.glPopMatrix()
         _alpha = 1
         # Draw child layers on top.
         for layer in self:
@@ -3190,7 +3198,7 @@ class Layer(list, Prototype, EventHandler):
                 layer._draw()
         if self.clipped:
             endclip()
-        glPopMatrix()
+        pygl.glPopMatrix()
         
     def draw(self):
         """Override this method to provide custom drawing code for this layer.
@@ -3968,30 +3976,30 @@ class Canvas(list, Prototype, EventHandler):
         if not self._active:
             self._window.switch_to()
             # Set the window color, this will be transparent in saved images.
-            glClearColor(VERY_LIGHT_GREY, VERY_LIGHT_GREY, VERY_LIGHT_GREY, 0)
+            pygl.glClearColor(VERY_LIGHT_GREY, VERY_LIGHT_GREY, VERY_LIGHT_GREY, 0)
             # Reset the transformation state.
             # Most of this is already taken care of in Pyglet.
             
             if 0:
-                glMatrixMode( GL_PROJECTION )
-                glLoadIdentity()
+                pygl.glMatrixMode( pygl.GL_PROJECTION )
+                pygl.glLoadIdentity()
                 
-                glOrtho(0, self.width, 0, self.height, -1, 1)
-                glMatrixMode(GL_MODELVIEW)
+                pygl.glOrtho(0, self.width, 0, self.height, -1, 1)
+                pygl.glMatrixMode( pygl.GL_MODELVIEW )
             else:
-                glLoadIdentity()
+                pygl.glLoadIdentity()
                 # pass
             
             # Enable line anti-aliasing.
-            glEnable(GL_LINE_SMOOTH)
+            pygl.glEnable( pygl.GL_LINE_SMOOTH )
             
             # Enable alpha transparency.
-            glEnable(GL_BLEND)
-            glBlendFuncSeparate( GL_SRC_ALPHA,
-                                 GL_ONE_MINUS_SRC_ALPHA,
-                                 GL_ONE,
-                                 GL_ONE_MINUS_SRC_ALPHA)
-            # glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            pygl.glEnable( pygl.GL_BLEND )
+            pygl.glBlendFuncSeparate( pygl.GL_SRC_ALPHA,
+                                      pygl.GL_ONE_MINUS_SRC_ALPHA,
+                                      pygl.GL_ONE,
+                                      pygl.GL_ONE_MINUS_SRC_ALPHA)
+            # pygl.glBlendFunc( pygl.GL_SRC_ALPHA, pygl.GL_ONE_MINUS_SRC_ALPHA)
             self._window.dispatch_events()
             self._window.set_visible(True)
             self._active = True
@@ -4005,16 +4013,16 @@ class Canvas(list, Prototype, EventHandler):
         if self.paused: 
             return
         self._window.switch_to()
-        glPushMatrix()
+        pygl.glPushMatrix()
         self.draw()
-        glPopMatrix()
-        glPushMatrix()
+        pygl.glPopMatrix()
+        pygl.glPushMatrix()
         for layer in self:
             layer._draw()
-        glPopMatrix()
-        glPushMatrix()
+        pygl.glPopMatrix()
+        pygl.glPushMatrix()
         self.draw_overlay()
-        glPopMatrix()
+        pygl.glPopMatrix()
 
     def _update(self, lapse=0):
         """ Updates the canvas and its layers.
@@ -4054,9 +4062,9 @@ class Canvas(list, Prototype, EventHandler):
     def clear(self):
         """ Clears the previous frame from the canvas.
         """
-        glClear(GL_COLOR_BUFFER_BIT)
-        glClear(GL_DEPTH_BUFFER_BIT)
-        glClear(GL_STENCIL_BUFFER_BIT)
+        pygl.glClear( pygl.GL_COLOR_BUFFER_BIT )
+        pygl.glClear( pygl.GL_DEPTH_BUFFER_BIT )
+        pygl.glClear( pygl.GL_STENCIL_BUFFER_BIT )
 
     def run(self, draw=None, setup=None, update=None, stop=None):
         """ Opens the application windows and starts drawing the canvas.

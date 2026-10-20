@@ -5,7 +5,9 @@
 # Copyright (c) 2008-2012 City In A Bottle (cityinabottle.org)
 # http://cityinabottle.org/nodebox
 
-from pyglet.gl    import *
+# from pyglet.gl    import *
+import pyglet.gl as pygl
+
 from pyglet.image import Texture, SolidColorImagePattern, TextureRegion
 from .context      import Image, texture
 from .geometry     import lerp, clamp
@@ -119,16 +121,16 @@ class Shader(object):
         self.variables = {}
         self._build()
     
-    def _compile(self, source, type=GL_VERTEX_SHADER):
+    def _compile(self, source, type=pygl.GL_VERTEX_SHADER):
         # Compile the GLSL source code, either as GL_FRAGMENT_SHADER or GL_VERTEX_SHADER.
         # If the source fails to compile, retrieve the error message and raise ShaderError.
         # Store the compiled shader so we can delete it later on.
         #pdb.set_trace()
-        shader = glCreateShader(type)
+        shader = pygl.glCreateShader(type)
         status = c_int(-1)
-        glShaderSource(shader, 1, cast(pointer(c_char_p(source)), POINTER(POINTER(c_char))), None)
-        glCompileShader(shader)
-        glGetShaderiv(shader, GL_COMPILE_STATUS, byref(status))
+        pygl.glShaderSource(shader, 1, cast(pointer(c_char_p(source)), POINTER(POINTER(c_char))), None)
+        pygl.glCompileShader(shader)
+        pygl.glGetShaderiv(shader, pygl.GL_COMPILE_STATUS, byref(status))
         if status.value == 0:
             raise self._error(shader, type=COMPILE)
         self._compiled.append(shader)
@@ -137,14 +139,14 @@ class Shader(object):
     def _build(self):
         # Each Shader has its own OpenGL rendering program and you need to switch between them.
         # Compile fragment and vertex shaders and build the program.
-        program = glCreateProgram()
+        program = pygl.glCreateProgram()
         status  = c_int(-1)
         if self._vertex:
-            glAttachShader(program, self._compile(self._vertex, GL_VERTEX_SHADER))
+            pygl.glAttachShader(program, self._compile(self._vertex, pygl.GL_VERTEX_SHADER))
         if self._fragment:
-            glAttachShader(program, self._compile(self._fragment, GL_FRAGMENT_SHADER))
-        glLinkProgram(program)
-        glGetProgramiv(program, GL_LINK_STATUS, byref(status))
+            pygl.glAttachShader(program, self._compile(self._fragment, pygl.GL_FRAGMENT_SHADER))
+        pygl.glLinkProgram(program)
+        pygl.glGetProgramiv(program, pygl.GL_LINK_STATUS, byref(status))
         if status.value == 0:
             raise self._error(program, type=BUILD)
         self._program = program
@@ -153,10 +155,10 @@ class Shader(object):
         # Get the info for the failed glCompileShader() or glLinkProgram(),
         # delete the failed shader or program,
         # return a ShaderError with the error message.
-        f1 = type==COMPILE and glGetShaderiv      or glGetProgramiv
-        f2 = type==COMPILE and glGetShaderInfoLog or glGetProgramInfoLog
-        f3 = type==COMPILE and glDeleteShader     or glDeleteProgram
-        length = c_int(); f1(obj, GL_INFO_LOG_LENGTH, byref(length))  
+        f1 = type==COMPILE and pygl.glGetShaderiv      or pygl.glGetProgramiv
+        f2 = type==COMPILE and pygl.glGetShaderInfoLog or pygl.glGetProgramInfoLog
+        f3 = type==COMPILE and pygl.glDeleteShader     or pygl.glDeleteProgram
+        length = c_int(); f1(obj, pygl.GL_INFO_LOG_LENGTH, byref(length))  
         msg = ""     
         if length.value > 0:
             msg = create_string_buffer(length.value); f2(obj, length, byref(length), msg)
@@ -180,7 +182,7 @@ class Shader(object):
     
     def _set(self, name, value):
         try:
-            address = glGetUniformLocation(self._program, name)
+            address = pygl.glGetUniformLocation(self._program, name)
         except Exception as e:
             print("name:", name)
             print(e)
@@ -188,25 +190,25 @@ class Shader(object):
         # A vector with 2, 3 or 4 floats representing vec2, vec3 or vec4.
         if isinstance(value, vector):
             if len(value) == 2:
-                glUniform2f(address, value[0], value[1])
+                pygl.glUniform2f(address, value[0], value[1])
             elif len(value) == 3:
-                glUniform3f(address, value[0], value[1], value[2])
+                pygl.glUniform3f(address, value[0], value[1], value[2])
             elif len(value) == 4:
-                glUniform4f(address, value[0], value[1], value[2], value[3])
+                pygl.glUniform4f(address, value[0], value[1], value[2], value[3])
         # A list representing an array of ints or floats.
         elif isinstance(value, (list, tuple)):
             if next((v for v in value if isinstance(v, float))) is not None:
                 array = c_float * len(value)
-                glUniform1fv(address, len(value), array(*value))
+                pygl.glUniform1fv(address, len(value), array(*value))
             else:
                 array = c_int * len(value)
-                glUniform1iv(address, len(value), array(*value))
+                pygl.glUniform1iv(address, len(value), array(*value))
         # Single float value.
         elif isinstance(value, float):
-            glUniform1f(address, value)
+            pygl.glUniform1f(address, value)
         # Single int value or named texture.
         elif isinstance(value, int):
-            glUniform1i(address, value)
+            pygl.glUniform1i(address, value)
         else:
             ShaderError, "don't know how to handle variable %s" % value.__class__
     
@@ -218,7 +220,7 @@ class Shader(object):
             draw the path in an offscreen buffer, render it, and apply to effect to the render.
         """
         self._active = True
-        glUseProgram(self._program)
+        pygl.glUseProgram(self._program)
         for k, v in self.variables.items():
             # print("push kv:", repr(k), repr(v))
             if type(k) in (str,):
@@ -229,7 +231,7 @@ class Shader(object):
         # Note that shaders can't be nested since they all have their own program,
         # pop() just removes any active program.
         if self._active == True:
-            glUseProgram(0)
+            pygl.glUseProgram(0)
             self._active = False
 
     @property
@@ -243,12 +245,12 @@ class Shader(object):
     def __del__(self):
         try:
             for shader in self._compiled:
-                if glDetachShader and self._program:
-                    glDetachShader(self._program, shader)
-                if glDeleteShader: 
-                    glDeleteShader(shader)
-            if glDeleteProgram: 
-                glDeleteProgram(self._program)
+                if pygl.glDetachShader and self._program:
+                    pygl.glDetachShader(self._program, shader)
+                if pygl.glDeleteShader: 
+                    pygl.glDeleteShader(shader)
+            if pygl.glDeleteProgram: 
+                pygl.glDeleteProgram(self._program)
         except:
             pass
 
@@ -719,11 +721,11 @@ class Compositing(Filter):
         h2 = float(ceil2(h))
         dx = float(self.dx) / w
         dy = float(self.dy) / h
-        glActiveTexture(GL_TEXTURE0)
-        glBindTexture(self.texture.target, self.texture.id)        
-        glActiveTexture(GL_TEXTURE1)
-        glBindTexture(self.blend.target, self.blend.id)
-        glActiveTexture(GL_TEXTURE0)
+        pygl.glActiveTexture( pygl.GL_TEXTURE0 )
+        pygl.glBindTexture(self.texture.target, self.texture.id)        
+        pygl.glActiveTexture( pygl.GL_TEXTURE1 )
+        pygl.glBindTexture(self.blend.target, self.blend.id)
+        pygl.glActiveTexture( pygl.GL_TEXTURE0 )
         self.shader.set("src1", 0)
         self.shader.set("src2", 1)
         self.shader.set("extent", vec2(w/w2, h/h2)) # Blend extent.
@@ -970,12 +972,12 @@ def glCurrentViewport(x=None, y=None, width=None, height=None):
     # The canvas could be 256x256 while an offscreen buffer could be 1024x1024.
     # Without switching the viewport, information from the buffer would be lost.
     if x is not None and y is not None and width is not None and height is not None:
-        glViewport(x, y, width, height)
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
-        glOrtho(x, width, y, height, -1, 1)
-        glMatrixMode(GL_MODELVIEW)
-    xywh = (GLint*4)(); glGetIntegerv(GL_VIEWPORT, xywh)
+        pygl.glViewport(x, y, width, height)
+        pygl.glMatrixMode( pygl.GL_PROJECTION )
+        pygl.glLoadIdentity()
+        pygl.glOrtho(x, width, y, height, -1, 1)
+        pygl.glMatrixMode( pygl.GL_MODELVIEW )
+    xywh = (pygl.GLint*4)(); pygl.glGetIntegerv( pygl.GL_VIEWPORT, xywh)
     return tuple(xywh)
 
 # The FBO stack keeps track of nested FBO's.
@@ -995,7 +997,8 @@ class OffscreenBuffer(object):
             since each shader has its own program and we can only install one program at a time.
         """
         self.id = c_uint(_uid())
-        try: glGenFramebuffersEXT(1, byref(self.id))
+        try:
+            pygl.glGenFramebuffersEXT(1, byref(self.id))
         except:
             raise OffscreenBufferError( "offscreen buffer not supported."  )
         self.texture   = None
@@ -1025,11 +1028,11 @@ class OffscreenBuffer(object):
             so any translate(), rotate() etc. does not affect the onscreen canvas.
         """
         _FBO_STACK.append(self)
-        glBindTexture(self.texture.target, self.texture.id)
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, self.id.value)      
-        glFramebufferTexture2DEXT(
-            GL_FRAMEBUFFER_EXT, 
-            GL_COLOR_ATTACHMENT0_EXT, 
+        pygl.glBindTexture(self.texture.target, self.texture.id)
+        pygl.glBindFramebufferEXT( pygl.GL_FRAMEBUFFER_EXT, self.id.value)      
+        pygl.glFramebufferTexture2DEXT(
+            pygl.GL_FRAMEBUFFER_EXT, 
+            pygl.GL_COLOR_ATTACHMENT0_EXT, 
             self.texture.target, 
             self.texture.id, 
             self.texture.level
@@ -1037,30 +1040,33 @@ class OffscreenBuffer(object):
         # FBO's can fail when not supported by the graphics hardware,
         # or when supplied an image of size 0 or unequal width/height.
         # Check after glBindFramebufferEXT() and glFramebufferTexture2DEXT().
-        if glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE_EXT:
+        if pygl.glCheckFramebufferStatusEXT( pygl.GL_FRAMEBUFFER_EXT) != pygl.GL_FRAMEBUFFER_COMPLETE_EXT:
             msg = self.texture.width == self.texture.height == 0 and "width=0, height=0." or ""
             raise OffscreenBufferError( msg )
         # Separate the offscreen from the onscreen transform state.
         # Separate the offscreen from the onscreen canvas size.
         self._viewport = glCurrentViewport()
-        glPushMatrix()
-        glLoadIdentity()
+        pygl.glPushMatrix()
+        pygl.glLoadIdentity()
         glCurrentViewport(0, 0, self.texture.width, self.texture.height)
-        glColor4f(1.0,1.0,1.0,1.0)
+        pygl.glColor4f(1.0,1.0,1.0,1.0)
         # FBO's work with a simple GL_LINE_SMOOTH anti-aliasing.
         # The instructions on how to enable framebuffer multisampling are pretty clear:
         # (http://www.opengl.org/wiki/GL_EXT_framebuffer_multisample)
         # but glRenderbufferStorageMultisampleEXT doesn't appear to work (yet),
         # plus there is a performance drop.
-        glEnable(GL_LINE_SMOOTH)
+        pygl.glEnable( pygl.GL_LINE_SMOOTH )
         # Blending transparent images in a transparent FBO is a bit tricky
         # because alpha is premultiplied, an image with 50% transparency
         # will come out 25% transparency with glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA).
         # http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=257630
         # http://www.openframeworks.cc/forum/viewtopic.php?f=9&t=2215
         # This blend mode gives better results:
-        glEnable(GL_BLEND)
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+        pygl.glEnable( pygl.GL_BLEND )
+        pygl.glBlendFuncSeparate( pygl.GL_SRC_ALPHA,
+                                  pygl.GL_ONE_MINUS_SRC_ALPHA,
+                                  pygl.GL_ONE,
+                                  pygl.GL_ONE_MINUS_SRC_ALPHA)
         self._active = True
     
     def pop(self):
@@ -1072,9 +1078,12 @@ class OffscreenBuffer(object):
         # Reset to the normal blending mode.
         _FBO_STACK.pop(-1)
         glCurrentViewport(*self._viewport)
-        glPopMatrix()
-        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, _FBO_STACK and _FBO_STACK[-1].id or 0)
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+        pygl.glPopMatrix()
+        pygl.glBindFramebufferEXT( pygl.GL_FRAMEBUFFER_EXT, _FBO_STACK and _FBO_STACK[-1].id or 0)
+        pygl.glBlendFuncSeparate( pygl.GL_SRC_ALPHA,
+                                  pygl.GL_ONE_MINUS_SRC_ALPHA,
+                                  pygl.GL_ONE,
+                                  pygl.GL_ONE_MINUS_SRC_ALPHA)
         #glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         self._active = False
     
@@ -1110,28 +1119,28 @@ class OffscreenBuffer(object):
         self._init(width, height)
         
     def clear(self):
-        glClear(GL_COLOR_BUFFER_BIT)
-        glClear(GL_DEPTH_BUFFER_BIT)
-        glClear(GL_STENCIL_BUFFER_BIT)
+        pygl.glClear( pygl.GL_COLOR_BUFFER_BIT )
+        pygl.glClear( pygl.GL_DEPTH_BUFFER_BIT )
+        pygl.glClear( pygl.GL_STENCIL_BUFFER_BIT )
 
     def _init_depthbuffer(self):
         self._depthbuffer = c_uint(_uid())
-        glGenRenderbuffersEXT(1, byref(self._depthbuffer))
-        glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, self._depthbuffer)
-        glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT, self.width, self.height)
-        glFramebufferRenderbufferEXT(
-            GL_FRAMEBUFFER_EXT,
-            GL_DEPTH_ATTACHMENT_EXT,
-            GL_RENDERBUFFER_EXT,
+        pygl.glGenRenderbuffersEXT(1, byref(self._depthbuffer))
+        pygl.glBindRenderbufferEXT( pygl.GL_RENDERBUFFER_EXT, self._depthbuffer)
+        pygl.glRenderbufferStorageEXT( pygl.GL_RENDERBUFFER_EXT, pygl.GL_DEPTH_COMPONENT, self.width, self.height)
+        pygl.glFramebufferRenderbufferEXT(
+            pygl.GL_FRAMEBUFFER_EXT,
+            pygl.GL_DEPTH_ATTACHMENT_EXT,
+            pygl.GL_RENDERBUFFER_EXT,
             self._depthbuffer
         )
     
     def __del__(self):
         try:
-            if glDeleteFramebuffersEXT:
-                glDeleteFramebuffersEXT(1, self.id)
-            if glDeleteRenderbuffersEXT and hasattr(self, "_depthbuffer"):
-                glDeleteRenderbuffersEXT(1, self._depthbuffer)
+            if pygl.glDeleteFramebuffersEXT:
+                pygl.glDeleteFramebuffersEXT(1, self.id)
+            if pygl.glDeleteRenderbuffersEXT and hasattr(self, "_depthbuffer"):
+                pygl.glDeleteRenderbuffersEXT(1, self._depthbuffer)
         except:
             pass
 
@@ -1173,7 +1182,10 @@ def filter(img, filter=None, clear=True):
         filter.texture = img.texture # Register the current texture with the filter.
         filter.push()
     # This blend mode gives better results for transparent images:
-    glBlendFuncSeparate(GL_ONE, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+    pygl.glBlendFuncSeparate( pygl.GL_ONE,
+                              pygl.GL_ONE_MINUS_SRC_ALPHA,
+                              pygl.GL_ONE,
+                              pygl.GL_ONE_MINUS_SRC_ALPHA)
     # Note: Image.alpha and Image.color attributes won't work here,
     # because the shader overrides the default drawing behavior.
     # Instead, add the transparent() and colorize() filters to the chain.
@@ -1189,9 +1201,9 @@ class RenderedImage(Image):
         # Textures rendered in the FBO look slightly washed out.
         # The render() command yields a RenderedImage object,
         # which draw() method uses a blending trick to correct the colors:
-        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+        pygl.glBlendFunc( pygl.GL_ONE, pygl.GL_ONE_MINUS_SRC_ALPHA)
         Image.draw(self, *args, **kwargs)
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+        pygl.glBlendFuncSeparate( pygl.GL_SRC_ALPHA, pygl.GL_ONE_MINUS_SRC_ALPHA, pygl.GL_ONE, pygl.GL_ONE_MINUS_SRC_ALPHA)
     
     def save(self, path):
         # XXX Colors will appear washed out in the exported image.
@@ -1308,17 +1320,31 @@ def blur(img, kernel=5, scale=1.0, amount=1, cumulative=False):
     #                       is only a view in pyglet
     #
     
+    #
+    # Still todo: 2026-10-20    patched things up with imgparam construct - search imgparam & img.texture
+    #                           need to look at image & texture usage
+    #                           what is the use of TextureRegion?
+    #
+    
+    try:
+        imgparam = img.texture
+    except AttributeError as err:
+        imgparam = img
     for i in range(amount):
         clear = i==0 or not cumulative
-        img = filter(img, HorizontalBlur(img.texture, kernel, scale), clear=clear)
-        img = filter(img, VerticalBlur(img.texture, kernel, scale), clear=clear)
+        img = filter(img, HorizontalBlur(imgparam, kernel, scale), clear=clear)
+        img = filter(img, VerticalBlur(imgparam, kernel, scale), clear=clear)
     return img
 
 def transparent(img, alpha=1.0):
     """ Returns a transparent version of the image.
         - alpha: the percentage of the original opacity of the image (0.0-1.0).
     """
-    return filter(img, AlphaTransparency(img.texture, alpha))
+    try:
+        imgparam = img.texture
+    except AttributeError as err:
+        imgparam = img
+    return filter(img, AlphaTransparency(imgparam, alpha))
 
 def _q(img):
     # For images functioning as masks or blend layers,
@@ -1495,7 +1521,11 @@ def stretch(img, dx=0.5, dy=0.5, **kwargs):
         - zoom: the amount to zoom in (0.0-2.0, where 1.0 means 1x zoomed in, or 200%).
     """
     dx, dy, m, i = distortion_mixin(STRETCH, dx, dy, **kwargs)
-    return filter(img, filter=Distortion(STRETCH, img.texture, dx-0.5, dy-0.5, m, i))
+    try:
+        imgparam = img.texture
+    except AttributeError as err:
+        imgparam = img
+    return filter(img, filter=Distortion(STRETCH, imgparam, dx-0.5, dy-0.5, m, i))
 
 #def mirror(img, dx=0.5, dy=0.5, horizontal=True, vertical=True)
 def mirror(img, dx=0.5, dy=0.5, **kwargs):
@@ -1556,3 +1586,4 @@ def blended(mode, img, alpha=1.0, dx=0, dy=0):
 def distorted(type, dx=0.5, dy=0.5, **kwargs):
     dx, dy, m, i = distortion_mixin(type, dx, dy, **kwargs)
     return Distortion(type, None, dx-0.5, dy-0.5, m, i)
+
